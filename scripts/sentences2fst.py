@@ -88,7 +88,7 @@ def parse_args(arguments):
     Returns a pair: a list of the fst output types and a list of any other args.
     
     >>> parse_args(['words', 'anew', './foo', './bar'])
-    (['words', 'anew'], ['./foo', './bar'])    
+    (['words', 'anew'], ['./foo', './bar'])
     '''
     fst_types = []
     other_args = []
@@ -146,13 +146,11 @@ def read_agree_sents(filename, pos_directory):
                 
     return result
 
-
 def pos_tag_sentence(sent_dict):
     '''
     Creates part of speech tags for each word in the sentence.
     
-    >>> sent = {'words' : ['So', 'the', 'father', 'gave', 'him', 'his', 
-    'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']
+    >>> sent = {'words' : ['So', 'the', 'father', 'gave', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']}
     >>> pos_tag_sentence(sent)
     >>> sent['pos']
     ('IN', 'DT', 'NN', 'VBD', 'PRP', 'PRP$', 'NN', ',', 'CC', 'IN', 'JJ', 'NN', 'VBD', 'NN', 'IN', 'PRP', '.')
@@ -170,11 +168,12 @@ def lemmatize_sentence(sent_dict):
     until it finds one that creates a new lemma.
     
     >>> sent = {'words': ['So', 'the', 'father', 'gave', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']}
-    >>> sf.lemmatize_sentence(sent)
+    >>> lemmatize_sentence(sent)
     >>> sent['lemmas']
     ['So', 'the', 'father', 'give', 'him', 'his', 'bless', ',', 'and', 'with', 'great', 'sorrow', 'take', 'leave', 'of', 'him', '.']
     
     >>> sent = {'pos': ('IN', 'DT', 'NN', 'VBD', 'PRP', 'PRP$', 'NN', ',', 'CC', 'IN', 'JJ', 'NN', 'VBD', 'NN', 'IN', 'PRP', '.'), 'words': ['So', 'the', 'father', 'gave', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']}
+    >>> lemmatize_sentence(sent)
     >>> sent['lemmas']
     ['So', 'the', 'father', 'give', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'take', 'leave', 'of', 'him', '.']
     '''
@@ -183,10 +182,34 @@ def lemmatize_sentence(sent_dict):
         lemmas = []
         for word, pos in zip(sent_dict['words'], sent_dict['pos']):
             lemmas.append(lemmatize_word(word, pos))
-        
+            
         sent_dict['lemmas'] = lemmas
     else:
         sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
+
+def read_sentiwordnet(path):
+    '''
+    Returns a dictionary keyed by the pair (POS, offset). Each value is also
+    a dictionary with three keys: 'pos', 'neg', 'terms'.
+    
+    >>> swn = read_sentiwordnet('/Users/bpg/cslu/affect/word_data/SentiWordNet_1.0.1.txt')
+    >>> swn[('a', 1005286)]
+    {'neg': 0.125, 'terms': ['forlorn#a#1', 'godforsaken#a#2', 'lorn#a#1', 'desolate#a#2'], 'pos': 0.25}
+    '''
+    sentiwordnet = {}
+    
+    for line in open(path):
+        if not line.startswith('#') and line.strip() != '':
+            fields = line.split()
+            
+            key = (fields[0], int(fields[1]))
+            
+            sentiwordnet[key] = { 'pos' : float(fields[2]),
+                                  'neg' : float(fields[3]),
+                                  'terms' : fields[4:]
+                                }
+    
+    return sentiwordnet
 
 def read_pos_sentence(sentence_id, story, pos_directory):
     '''
@@ -389,4 +412,8 @@ def write_svm_input(sentence_dicts, train_percentage=0.8):
     all_file.close()
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1] == 'test':
+        import doctest
+        doctest.testmod(verbose=False)
+    else:
+        main()
