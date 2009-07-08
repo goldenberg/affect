@@ -24,6 +24,8 @@ LOG_LEVELS = {'debug': logging.DEBUG,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
 
+FST_TYPES = ('pos', 'words', 'lemmas', 'senti', 'anew')
+
 # punctuation that is worth parsing as a separate token. all other punctuation
 # is ignored. ellipses would be nice to parse as a token, but I couldn't figure
 # out how to escape them.
@@ -62,13 +64,13 @@ def main():
     
     log.setLevel(LOG_LEVELS[options.log_level])
     
-    sentence_directory = arguments[0]
-    symbol_filename = options.symbol_table
-    sentence_dicts = []
+    fst_types, other_args = parse_args(arguments)
     
-    for sent_filename in os.listdir(sentence_directory):
-        full_path = os.path.join(sentence_directory, sent_filename)
-        sentence_dicts.extend(read_agree_sents(full_path, options.pos_directory))
+    sentence_directory = other_args[0]
+    symbol_filename = options.symbol_table
+    
+    sentence_dicts = read_agree_sentence_directory(sentence_directory)
+    
     
     create_symbol_table(sentence_dicts, options.symbol_table)
     
@@ -80,6 +82,148 @@ def main():
     
     write_fst_list(sentence_dicts)
     write_svm_input(sentence_dicts)
+
+def parse_args(arguments):
+    '''
+    Returns a pair: a list of the fst output types and a list of any other args.
+    
+    >>> parse_args(['words', 'anew', './foo', './bar'])
+    (['words', 'anew'], ['./foo', './bar'])    
+    '''
+    fst_types = []
+    other_args = []
+    
+    for arg in arguments:
+        if arg in FST_TYPES:
+            fst_types.append(arg)
+        else:
+            other_args.append(arg)
+    
+    return fst_types, other_args
+
+def read_agree_sentence_directory(sentence_directory):
+    '''
+    Reads a directory of high agree sentences into sentence dicts.
+    '''
+    sentence_dicts = []
+    
+    for sent_filename in os.listdir(sentence_directory):
+        full_path = os.path.join(sentence_directory, sent_filename)
+        sentence_dicts.extend(read_agree_sents(full_path, options.pos_directory))
+    
+    return sentence_dicts
+
+def read_agree_sents(filename, pos_directory):
+    '''
+    Returns a list of dictionaries with 4 keys:
+    
+    1) 'id' : sentence id (int)
+    2) 'emotion' : emotion id (int)
+    3) 'words' : the parsed words and interesting punctuation (list of strings)
+    4) 'pos'
+    '''
+    
+    result = []
+    story_name = os.path.splitext(os.path.basename(filename))[0]
+    
+    for line in open(filename):
+        if line.strip() != '':
+            fields = line.split('@')
+            if len(fields) == 3:
+                sentence_id = int(fields[0])
+                emotion = int(fields[1])
+                words = nltk.word_tokenize(fields[2])
+                
+                sent_dict = {      'id' : sentence_id,
+                              'emotion' : emotion,
+                                'words' : words
+                            }
+                
+                result.append(sent_dict)
+            else:
+                log.error('This line did not have 3 fields as expected: %s' % line)
+                
+                
+    return result
+
+
+def pos_tag_sentence(sent_dict):
+    '''
+    Creates part of speech tags for each word in the sentence.
+    
+    >>> sent = {'words' : ['So', 'the', 'father', 'gave', 'him', 'his', 
+    'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']
+    >>> pos_tag_sentence(sent)
+    >>> sent['pos']
+    ('IN', 'DT', 'NN', 'VBD', 'PRP', 'PRP$', 'NN', ',', 'CC', 'IN', 'JJ', 'NN', 'VBD', 'NN', 'IN', 'PRP', '.')
+    '''
+    
+    word_tag_pairs = nltk.pos_tag(sent_dict['words'])
+    
+    # unzip the pairs using zip(*)
+    sent_dict['pos'] = zip(*word_tag_pairs)[1]
+
+def lemmatize_sentence(sent_dict):
+    '''
+    Adds lemmas to the sent_dict using the WordNet lemmatizer. It will be
+    more accurate if pos tags also exist. If they don't, it will try them all
+    until it finds one that creates a new lemma.
+    
+    >>> sent = {'words': ['So', 'the', 'father', 'gave', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']}
+    >>> sf.lemmatize_sentence(sent)
+    >>> sent['lemmas']
+    ['So', 'the', 'father', 'give', 'him', 'his', 'bless', ',', 'and', 'with', 'great', 'sorrow', 'take', 'leave', 'of', 'him', '.']
+    
+    >>> sent = {'pos': ('IN', 'DT', 'NN', 'VBD', 'PRP', 'PRP$', 'NN', ',', 'CC', 'IN', 'JJ', 'NN', 'VBD', 'NN', 'IN', 'PRP', '.'), 'words': ['So', 'the', 'father', 'gave', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'took', 'leave', 'of', 'him', '.']}
+    >>> sent['lemmas']
+    ['So', 'the', 'father', 'give', 'him', 'his', 'blessing', ',', 'and', 'with', 'great', 'sorrow', 'take', 'leave', 'of', 'him', '.']
+    '''
+    if 'pos' in sent_dict:
+        # use the POS tags
+        lemmas = []
+        for word, pos in zip(sent_dict['words'], sent_dict['pos']):
+            lemmas.append(lemmatize_word(word, pos))
+        
+        sent_dict['lemmas'] = lemmas
+    else:
+        sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
+
+def read_pos_sentence(sentence_id, story, pos_directory):
+    '''
+    Reads the parts of speech and the words for a specified sentence in a
+    given story. The sentence_id is a 0-indexed int from the *.agree files.
+    Returns a dictionary with two keys:
+    
+    words: a list of stemmed words
+    pos: a list of parts of speech (as defined in the original corpus)
+    
+    words and pos should be the same length (so, they can easily be zipped together)
+    '''
+    word_list = []
+    pos_list  = []
+    
+    filename = os.path.join(pos_directory, '%s.sent.okpuncs.props.pos' % story)
+    
+    line = linecache.getline(filename, sentence_id+1)
+    
+    for token in re.findall('\(.*?\)', line):
+        # each token will be of the form (POS Word) (e.g. (RB Long))
+        fields = token.split()
+        pos = fields[0][1:]
+        word = fields[1][:-1]
+        
+        if word.isalpha():
+            word = lemmatize_word(word, pos)
+            word_list.append(word.upper())
+            pos_list.append(pos)
+        else:
+            if word in SPECIAL_PUNCTUATION:
+                word_list.append(word)
+                pos_list.append('.')
+                
+    assert len(word_list) == len(pos_list)
+    
+    return {'words' : word_list, 'pos' : pos_list}
 
 def create_symbol_table(sentence_dicts, filename):
     '''
@@ -129,7 +273,7 @@ def write_fst(sent_dict, symbol_path, fst_path):
     # write arcs with each pos
     last_state = state
     last_pos = sent_dict['pos'][-1]
-
+    
     # write the first pos arc (originating from state 1)
     first_pos = sent_dict['pos'][0]
     state += 1
@@ -159,73 +303,6 @@ def write_fst(sent_dict, symbol_path, fst_path):
 def write_arc(f, start_state, end_state, input_label, output_label):
     arc_fields = [str(start_state), str(end_state), input_label, output_label]
     f.write('\t'.join(arc_fields) + '\n')
-
-def read_agree_sents(filename, pos_directory):
-    '''
-    Returns a list of dictionaries with 4 keys:
-
-    1) 'id' : sentence id (string)
-    2) 'emotion' : emotion id (string)
-    3) 'words' : the parsed words and interesting punctuation (list of strings)
-    4) 'pos'
-    '''
-
-    result = []
-    story_name = os.path.splitext(os.path.basename(filename))[0]
-    
-    for line in open(filename):
-        if line.strip() != '':
-            fields = line.split('@')
-            if len(fields) == 3:
-                sentence_id = int(fields[0])
-                emotion = fields[1]
-                sent_dict = read_pos_sentence(sentence_id, story_name, pos_directory)
-                
-                sent_dict['emotion'] = emotion
-                sent_dict['id'] = sentence_id
-                
-                result.append(sent_dict)
-            else:
-                log.error('This line did not have 3 fields as expected: %s' % line)
-
-    return result
-
-def read_pos_sentence(sentence_id, story, pos_directory):
-    '''
-    Reads the parts of speech and the words for a specified sentence in a
-    given story. The sentence_id is a 0-indexed int from the *.agree files.
-    Returns a dictionary with two keys:
-    
-    words: a list of stemmed words
-    pos: a list of parts of speech (as defined in the original corpus)
-    
-    words and pos should be the same length (so, they can easily be zipped together)
-    '''
-    word_list = []
-    pos_list  = []
-    
-    filename = os.path.join(pos_directory, '%s.sent.okpuncs.props.pos' % story)
-    
-    line = linecache.getline(filename, sentence_id+1)
-    
-    for token in re.findall('\(.*?\)', line):
-        # each token will be of the form (POS Word) (e.g. (RB Long))
-        fields = token.split()
-        pos = fields[0][1:]
-        word = fields[1][:-1]
-        
-        if word.isalpha():
-            word = lemmatize_word(word, pos)
-            word_list.append(word.upper())
-            pos_list.append(pos)
-        else:
-            if word in SPECIAL_PUNCTUATION:
-                word_list.append(word)
-                pos_list.append('.')
-    
-    assert len(word_list) == len(pos_list)
-    
-    return {'words' : word_list, 'pos' : pos_list}
 
 def lemmatize_word(word, pos=None):
     '''
@@ -310,5 +387,6 @@ def write_svm_input(sentence_dicts, train_percentage=0.8):
     train_file.close()
     test_file.close()
     all_file.close()
+
 if __name__ == "__main__":
     main()
