@@ -86,7 +86,7 @@ def main():
             svm_filename = os.path.splitext(wav_filename)[0] + '.svmin'
             write_svm_output(stage_dicts, wav_filename, svm_filename)
 
-def parse_entire_file(log_file, ip_address, wav_time, delays={}, classes={}):
+def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True, delays={}, classes={}):
     '''
     Parses the rest of the file and returns a list of dictionaries which each
     represent one stage. Each dictionary has 3 required keys: "name",
@@ -108,18 +108,20 @@ def parse_entire_file(log_file, ip_address, wav_time, delays={}, classes={}):
                 last_request = request
                 continue
             else:
-                (last_stage, last_time, last_duration) = parse_request(last_request, delays=delays)
-                (current_stage, current_time, current_duration) = parse_request(request, delays=delays)
+                last_request_dict = parse_request(last_request, delays=delays)
+                current_request_dict = parse_request(request, delays=delays)
                 
-                start_time = current_time - last_duration - wav_time
-                end_time = current_time - wav_time
+                start_time = current_request_dict['time'] - last_request_dict['duration'] - wav_time
+                end_time = current_request_dict['time'] - wav_time
                 
-                stage_dict = { "name" : last_stage, 
+                stage_dict = { "name" : last_request_dict['name'], 
                                "start_time" : start_time,
                                "end_time" : end_time }
                 
-                if last_stage in classes:
-                    stage_dict["class"] = classes[last_stage]
+                if 'rating' in last_request_dict and use_rating_parameter:
+                    stage_dict['class'] = last_request_dict['rating']
+                elif last_request_dict['name'] in classes:
+                    stage_dict["class"] = classes[last_request_dict['name']]
                 
                 output_dicts.append(stage_dict)
                 
@@ -127,17 +129,21 @@ def parse_entire_file(log_file, ip_address, wav_time, delays={}, classes={}):
     
     # deal with last request, which should be the video recall stage
     # assume that the request is served instantly
-    current_stage, current_time, current_duration = parse_request(last_request, delays=delays)
+    final_request_dict = parse_request(last_request, delays=delays)
     
-    start_time = current_time - wav_time
-    end_time = current_time - wav_time + current_duration
+    start_time = final_request_dict['time'] - wav_time
+    end_time = final_request_dict['time'] - wav_time + final_request_dict['duration']
     
-    fields = [current_stage, format_timedelta(start_time), format_timedelta(end_time)]
-    stage_dict = { "name"       : current_stage, 
+    fields = [final_request_dict['name'], format_timedelta(start_time), format_timedelta(end_time)]
+    
+    stage_dict = { "name"       : final_request_dict['name'], 
                    "start_time" : start_time,
                    "end_time"   : end_time }
-    if current_stage in classes:
-        stage_dict["class"] = classes[current_stage]
+    
+    if 'rating' in last_request_dict and use_rating_parameter:
+        stage_dict['class'] = last_request_dict['rating']
+    if final_request_dict['name'] in classes:
+        stage_dict["class"] = classes[final_request_dict['name']]
     
     output_dicts.append(stage_dict)
     
@@ -229,11 +235,12 @@ def parse_line(line):
 
 def parse_request(request, delays={}, date=None):
     '''
-    Returns a tuple:
+    Returns a dictionary:
     
-    1) the stage name. e.g. recall, slide7009, rating
-    2) the client time as a datetime object. the date portion is a dummy date
-    3) the stage duration (from the show_param parameter) as a timedelta object
+    'name'     : the stage name. e.g. recall, slide7009, rating
+    'time'     : the client time as a datetime object. the date portion is a dummy date
+    'duration' : the stage duration (from the show_param parameter) as a timedelta object
+    'rating'   : the rating parameter (as an int, if present)
     
     The datetime object will represent a time on Jan 1, 1990.
     
@@ -244,6 +251,8 @@ def parse_request(request, delays={}, date=None):
     if request.strip() == '':
         logging.error("Trying to parse an empty request.")
         return
+    
+    result = {}
     
     logging.debug("The request is: %s" % request)
     url_components = urlparse.urlparse(request.split(' ')[1])
@@ -259,16 +268,23 @@ def parse_request(request, delays={}, date=None):
     else:
         stage_name = 'slide' + pagename
     
+    result['name'] = stage_name
+    
+    
     query_params = urlparse.parse_qs(url_components.query)
     
-    client_datetime = datetime.strptime(query_params['client_time'][0], '%H:%M:%S:%f')
+    result['time'] = datetime.strptime(query_params['client_time'][0], '%H:%M:%S:%f')
     
     if pagename in delays:
-        stage_duration = delays[pagename]
+        result['duration'] = delays[pagename]
     else:
-        stage_duration = timedelta(seconds=int(query_params['show_param'][0]))
+        result['duration'] = timedelta(seconds=int(query_params['show_param'][0]))
     
-    return stage_name, client_datetime, stage_duration
+    if 'rating' in query_params:
+        logging.debug('The rating query param is %s' % query_params['rating'])
+        result['rating'] = int(query_params['rating'][0])
+    
+    return result
 
 def write_stage_output(stage_dicts, out_filename):
     '''
