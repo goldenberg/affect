@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-untitled.py
+sentences2fst.py
 
 Created by Benjamin Goldenberg on 2009-06-17.
 Copyright (c) 2009 __MyCompanyName__. All rights reserved.
@@ -14,7 +14,8 @@ import subprocess
 import random
 import os
 import re
-
+import nltk
+import linecache
 import pdb
 
 LOG_LEVELS = {'debug': logging.DEBUG,
@@ -29,8 +30,15 @@ LOG_LEVELS = {'debug': logging.DEBUG,
 
 SPECIAL_PUNCTUATION = ['?', '!', '&']
 
+WORDNET_POS = { 'a' : ['JJ', 'JJR', 'JJS'], #adjectives
+                'r' : ['RB', 'RBR', 'RBS'],
+                'n' : ['NN', 'NNS', 'NNP', 'NNPS'],
+                'v' : ['VB', 'VBD', 'VBG', 'VBN', 'VBZ']
+}
+
 logging.basicConfig()
 log = logging.getLogger("sentences2fst")
+
 
 def main():
     usage = """%prog [options] SENTENCE_DIRECTORY 
@@ -46,6 +54,10 @@ def main():
                        default='symbol_table.tsv', dest='symbol_table',
                        help='Filename to store the word symbol table.')
     
+    opt_parser.add_option("-p", "--pos_directory", action='store', 
+                        help="A directory of POS files to be read. Creates"
+                        "a parallel path in the FST")
+    
     options, arguments = opt_parser.parse_args()
     
     log.setLevel(LOG_LEVELS[options.log_level])
@@ -56,7 +68,7 @@ def main():
     
     for sent_filename in os.listdir(sentence_directory):
         full_path = os.path.join(sentence_directory, sent_filename)
-        sentence_dicts.extend(read_agree_sent(full_path))
+        sentence_dicts.extend(read_agree_sents(full_path, options.pos_directory))
     
     create_symbol_table(sentence_dicts, options.symbol_table)
     
@@ -73,17 +85,28 @@ def create_symbol_table(sentence_dicts, filename):
     '''
     Writes a symbol table in the AT&T format to the specified filename.
     '''
-    words = set()
+    symbols = set()
+    
     counter = 1
         
     f = open(filename, 'w')
     
+    # write words
     for sent_dict in sentence_dicts:
         for word in sent_dict['words']:
-            if word not in words:
+            if word not in symbols:
                 f.write('%s\t%i\n' % (word, counter))
                 
-                words.add(word)
+                symbols.add(word)
+                counter += 1
+    
+    # write pos
+    for sent_dict in sentence_dicts:
+        for pos in sent_dict['pos']:
+            if pos not in symbols:
+                f.write('%s\t%i\n' % (pos, counter))
+                
+                symbols.add(pos)
                 counter += 1
     
     f.close()
@@ -96,15 +119,31 @@ def write_fst(sent_dict, symbol_path, fst_path):
     '''
     f = open(fst_path + ".txt", "w")
     
-    # write arcs with each 
+    # write arcs with each word
+    state = 1
     state = 1
     for word in sent_dict['words']:
-        arc_fields = [str(state), str(state+1), word, word]
-        f.write('\t'.join(arc_fields) + '\n')
+        write_arc(f, state, state+1, word, word)
         state += 1
     
+    # write arcs with each pos
+    last_state = state
+    last_pos = sent_dict['pos'][-1]
+
+    # write the first pos arc (originating from state 1)
+    first_pos = sent_dict['pos'][0]
+    state += 1
+    write_arc(f, 1, state, first_pos, first_pos)
+    
+    for pos in sent_dict['pos'][1:-1]:
+        write_arc(f, state, state+1, pos, pos)
+        state += 1
+    
+    # write last pos arc (ending at same ending state)
+    write_arc(f, state, last_state, last_pos, last_pos)
+    
     # write final state
-    f.write(str(state))
+    f.write(str(last_state))
     f.close()
     
     parameters = [ "fstcompile", 
@@ -117,33 +156,122 @@ def write_fst(sent_dict, symbol_path, fst_path):
     
     subprocess.call(parameters)
 
-def read_agree_sent(filename):
+def write_arc(f, start_state, end_state, input_label, output_label):
+    arc_fields = [str(start_state), str(end_state), input_label, output_label]
+    f.write('\t'.join(arc_fields) + '\n')
+
+def read_agree_sents(filename, pos_directory):
     '''
-    Returns a list of dictionaries with 3 keys:
+    Returns a list of dictionaries with 4 keys:
 
     1) 'id' : sentence id (string)
     2) 'emotion' : emotion id (string)
     3) 'words' : the parsed words and interesting punctuation (list of strings)
+    4) 'pos'
     '''
 
     result = []
-
-    regex = re.compile(r"[\w']+|[%s]" % ''.join(SPECIAL_PUNCTUATION))
-
+    story_name = os.path.splitext(os.path.basename(filename))[0]
+    
     for line in open(filename):
         if line.strip() != '':
             fields = line.split('@')
             if len(fields) == 3:
-                words = [word.upper() for word in regex.findall(fields[2])]
-                sent_dict = { 'id' : fields[0],
-                              'emotion' : fields[1],
-                              'words' : words }
-
+                sentence_id = int(fields[0])
+                emotion = fields[1]
+                sent_dict = read_pos_sentence(sentence_id, story_name, pos_directory)
+                
+                sent_dict['emotion'] = emotion
+                sent_dict['id'] = sentence_id
+                
                 result.append(sent_dict)
             else:
                 log.error('This line did not have 3 fields as expected: %s' % line)
 
     return result
+
+def read_pos_sentence(sentence_id, story, pos_directory):
+    '''
+    Reads the parts of speech and the words for a specified sentence in a
+    given story. The sentence_id is a 0-indexed int from the *.agree files.
+    Returns a dictionary with two keys:
+    
+    words: a list of stemmed words
+    pos: a list of parts of speech (as defined in the original corpus)
+    
+    words and pos should be the same length (so, they can easily be zipped together)
+    '''
+    word_list = []
+    pos_list  = []
+    
+    filename = os.path.join(pos_directory, '%s.sent.okpuncs.props.pos' % story)
+    
+    line = linecache.getline(filename, sentence_id+1)
+    
+    for token in re.findall('\(.*?\)', line):
+        # each token will be of the form (POS Word) (e.g. (RB Long))
+        fields = token.split()
+        pos = fields[0][1:]
+        word = fields[1][:-1]
+        
+        if word.isalpha():
+            word = lemmatize_word(word, pos)
+            word_list.append(word.upper())
+            pos_list.append(pos)
+        else:
+            if word in SPECIAL_PUNCTUATION:
+                word_list.append(word)
+                pos_list.append('.')
+    
+    assert len(word_list) == len(pos_list)
+    
+    return {'words' : word_list, 'pos' : pos_list}
+
+def lemmatize_word(word, pos=None):
+    '''
+    Tries to lemmatize a word. If a POS is specified, it uses the corresponding 
+    Wordnet tag, if possible. If a POS is not specified, all the tags are tried
+    until a different word is returned. If nothing is found, return the original
+    word.
+    
+    >>> lemmatize_word('youngest', 'JJS')
+    'young'
+    >>> lemmatize_word('brought', 'VBD')
+    'bring'
+    
+    '''
+    lemmatizer = nltk.stem.WordNetLemmatizer()
+    
+    
+    if pos:
+        wordnet_pos_tag = wordnet_pos(pos)
+    else:
+        wordnet_pos_tag = None
+    
+    if wordnet_pos_tag:
+        return lemmatizer.lemmatize(word, wordnet_pos_tag)
+    else:
+        for tag in ['a', 'r', 'n', 'v']:
+            root = lemmatizer.lemmatize(word, tag)
+            if root != word:
+                return root
+    
+    # if we haven't found anything by here, just return the word.
+    return word
+
+def wordnet_pos(pos_tag):
+    '''
+    Returns 'a', 'r', 'n', or 'v' corresponding to adjective, adverb, noun
+    and verb, respectively. Return None if there's no match
+    '''
+    
+    prefixes = { 'JJ' : 'a',
+                 'NN' : 'n',
+                 'RB' : 'r',
+                 'VB' : 'v'
+    }
+    
+    return prefixes.get(pos_tag[:2])
 
 def write_fst_list(sentence_dicts):
     """
