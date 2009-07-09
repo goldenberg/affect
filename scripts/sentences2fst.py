@@ -15,8 +15,10 @@ import random
 import os
 import re
 import nltk
+from nltk.corpus import wordnet
 import linecache
 import pdb
+from decimal import Decimal
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
@@ -109,11 +111,11 @@ def read_agree_sentence_directory(sentence_directory):
     
     for sent_filename in os.listdir(sentence_directory):
         full_path = os.path.join(sentence_directory, sent_filename)
-        sentence_dicts.extend(read_agree_sents(full_path, options.pos_directory))
+        sentence_dicts.extend(read_agree_sents(full_path))
     
     return sentence_dicts
 
-def read_agree_sents(filename, pos_directory):
+def read_agree_sents(filename):
     '''
     Returns a list of dictionaries with 4 keys:
     
@@ -187,14 +189,52 @@ def lemmatize_sentence(sent_dict):
     else:
         sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
 
+def tag_swn_sentence(sent_dict, sentiwordnet):
+    '''
+    Looks up each lemma in SentiWordNet, by using the first synset for each
+    lemma. If the word cannot be found, scores of 0 will be assigned. In order
+    to look up each word in SentiWordnet, the words will be lemmatized and
+    POS-tagged if they haven't been yet.
+    '''
+    
+    if 'pos' not in sent_dict:
+        pos_tag_sentence(sent_dict)
+    
+    if 'lemmas' not in sent_dict:
+        lemmatize_sentence(sent_dict)
+    
+    pos_swn = []
+    neg_swn = []
+    
+    for lemma, pos in zip(sent_dict['lemmas'], sent_dict['pos']):
+        synsets = wordnet.synsets(lemma, wordnet_pos(pos))
+        print synsets
+        if synsets != []:
+            first_synset_pair = (synsets[0].pos, synsets[0].offset)
+            
+            if first_synset_pair in sentiwordnet:
+                swn_values = sentiwordnet[first_synset_pair]
+                
+                pos_value = swn_values['pos']
+                neg_value = swn_values['neg']
+            else:
+                pos_value = neg_value = 0.0
+        else:
+            pos_value = neg_value = 0.0
+        
+        pos_swn.append(pos_value)
+        neg_swn.append(neg_value)
+    
+    sent_dict['senti'] = {'pos' : pos_swn, 'neg' : neg_swn}
+
 def read_sentiwordnet(path):
     '''
     Returns a dictionary keyed by the pair (POS, offset). Each value is also
     a dictionary with three keys: 'pos', 'neg', 'terms'.
     
     >>> swn = read_sentiwordnet('/Users/bpg/cslu/affect/word_data/SentiWordNet_1.0.1.txt')
-    >>> swn[('a', 1005286)]
-    {'neg': 0.125, 'terms': ['forlorn#a#1', 'godforsaken#a#2', 'lorn#a#1', 'desolate#a#2'], 'pos': 0.25}
+    >>> swn[('a', 1005286)] == {'neg': 0.125, 'terms': ['forlorn#a#1', 'godforsaken#a#2', 'lorn#a#1', 'desolate#a#2'], 'pos': 0.25}
+    True
     '''
     sentiwordnet = {}
     
@@ -210,6 +250,50 @@ def read_sentiwordnet(path):
                                 }
     
     return sentiwordnet
+
+def read_anew_db(path):
+    '''
+    Reads the ANEW.txt file into a dictionary keyed by word. Each value is
+    also a dictionary with the following structure:
+    
+    {'abduction' : { 'word_num' : 621,
+                    'frequency' : 1,
+                      'valence' : { 'mean' : 2.76,
+                                   'stdev' : 2.06},
+                      'arousal' : { 'mean' : 5.53,
+                                   'stdev' : 2.43},
+                    'dominance' : { 'mean' : 3.49,
+                                   'stdev' : 2.38}
+                   }
+    }
+    
+    >>> anew = read_anew_db('/Users/bpg/cslu/affect/word_data/anew_all.txt')
+    >>> anew['village'] == {'arousal': {'stdev': Decimal('1.87'), 'mean': Decimal('4.08')}, 'word_num': 477, 'valence': {'stdev': Decimal('1.34'), 'mean': Decimal('5.92')}, 'frequency': 72, 'dominance': {'stdev': Decimal('1.74'), 'mean': Decimal('4.94')}}
+    True
+    '''
+    anew_dict = {}
+    for line in open(path):
+        fields = line.split('\t')
+        
+        if len(fields) == 9 and fields[1] != 'WdNum':
+            if fields[8].startswith('.'):
+                frequency = 0
+            else:
+                frequency = int(fields[8])
+            
+            word_dict = {  'word_num' : int(fields[1]),
+                            'valence' : { 'mean' : Decimal(fields[2]),
+                                         'stdev' : Decimal(fields[3])},
+                            'arousal' : { 'mean' : Decimal(fields[4]),
+                                         'stdev' : Decimal(fields[5])},
+                          'dominance' : { 'mean' : Decimal(fields[6]),
+                                         'stdev' : Decimal(fields[7])},
+                          'frequency' : frequency         
+            }
+            
+            anew_dict[fields[0]] = word_dict
+    
+    return anew_dict
 
 def read_pos_sentence(sentence_id, story, pos_directory):
     '''
