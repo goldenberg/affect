@@ -29,7 +29,7 @@ LOG_LEVELS = {'debug': logging.DEBUG,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
 
-FST_TYPES = ('pos', 'words', 'lemmas', 'senti', 'anew')
+FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastem', 'senti', 'anew')
 
 # punctuation that is worth parsing as a separate token. all other punctuation
 # is ignored. ellipses would be nice to parse as a token, but I couldn't figure
@@ -77,7 +77,7 @@ def main():
     sentence_dicts = read_agree_sentence_directory(sentence_directory)
     
     for fst_type in fst_types:
-        if fst_type in ('words', 'lemmas', 'pos'):
+        if fst_type in ('words', 'lemmas', 'pos', 'lemmastem'):
             tag_sentences(sentence_dicts, fst_type)
             write_many_simple_fsts(sentence_dicts, fst_type)
 
@@ -130,7 +130,7 @@ def read_agree_sents(filename):
             if len(fields) == 3:
                 sentence_id = int(fields[0])
                 emotion = int(fields[1])
-                words = nltk.word_tokenize(fields[2])
+                words = tokenize_sentence(fields[2])
                 
                 sent_dict = {      'id' : sentence_id,
                               'emotion' : emotion,
@@ -144,6 +144,30 @@ def read_agree_sents(filename):
                 
     return result
 
+def tokenize_sentence(sentence):
+    '''
+    Uses the default NLTK tokenizer, which as of July 2009 is the Penn
+    TreeBank tokenizer which splits contractions. Also, strips off extra
+    periods that might show up mid-sentence.
+    
+    >>> tokenize_sentence("""One day, I went to the store where a man said "Don't buy the milk"!""")
+    ['one', 'day', ',', 'i', 'went', 'to', 'the', 'store', 'where', 'a', 'man', 'said', '"', 'do', "n't", 'buy', 'the', 'milk', '"', '!']
+    >>> tokenize_sentence("""He said, "I am hungry." And then he went home.""")
+    ['he', 'said', ',', '"', 'i', 'am', 'hungry', '.', '"', 'and', 'then', 'he', 'went', 'home', '.']
+    
+    '''
+    words = [word.lower() for word in nltk.word_tokenize(sentence)]
+    stripped_words = []
+    
+    # strip periods that the tokenizer left on
+    for word in words:
+        if word[-1] in ('.', ',') and len(word) > 1:
+            stripped_words.extend([word[:-1], word[-1]])
+        else:
+            stripped_words.append(word)
+    
+    return stripped_words
+
 def tag_sentences(sentence_dicts, tag_type):
     # check if it's already been tagged
     if tag_type in sentence_dicts[0]:
@@ -152,8 +176,12 @@ def tag_sentences(sentence_dicts, tag_type):
     if tag_type == 'pos':
         [pos_tag_sentence(sent) for sent in sentence_dicts]
     elif tag_type == 'lemmas':
+        log.debug('lemmatizing words')
         tag_sentences(sentence_dicts, 'pos')
         [lemmatize_sentence(sent) for sent in sentence_dicts]
+    elif tag_type == 'lemmastem':
+        tag_sentences(sentence_dicts, 'lemmas')
+        [lemmastem_sentence(sent) for sent in sentence_dicts]
     elif tag_type == 'words':
         # do nothing for words
         pass
@@ -197,8 +225,24 @@ def lemmatize_sentence(sent_dict):
             lemmas.append(lemmatize_word(word, pos))
             
         sent_dict['lemmas'] = lemmas
+        
     else:
         sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
+
+def lemmastem_sentence(sent_dict):
+    '''
+    Applies the Porter stemmer to the lemmas.
+    
+    >>> sent = {'words' : ['I', 'am', 'not', 'lying', 'that', 'I', 'brought', 'things', 'to', 'be', 'helpful']} 
+    >>> sf.lemmastem_sentence(sent)
+    >>> sent['lemmastems']
+    ['I', 'be', 'not', 'lie', 'that', 'I', 'bring', 'thing', 'to', 'be', 'help']
+    '''
+    
+    if 'lemmas' not in sent_dict:
+        lemmatize_sentence(sent_dict)
+    
+    sent_dict['lemmastems'] =  [stem_word(word) for word in sent_dict['lemmas']]
 
 def tag_swn_sentence(sent_dict, sentiwordnet):
     '''
@@ -382,7 +426,7 @@ def write_many_simple_fsts(sent_dicts, key, basepath='./fsts_'):
     create_symbol_table(sent_dicts, key, symbol_path)
     
     for sent_no, sent_dict in enumerate(sent_dicts):
-        fst_basepath = os.path.join(fst_directory, str(sent_no))
+        fst_basepath = os.path.join(fst_directory, str(sent_no+1))
         
         write_simple_fst(sent_dict[key], symbol_path, fst_basepath)
         
@@ -435,7 +479,6 @@ def lemmatize_word(word, pos=None):
     '''
     lemmatizer = nltk.stem.WordNetLemmatizer()
     
-    
     if pos:
         wordnet_pos_tag = wordnet_pos(pos)
     else:
@@ -452,16 +495,31 @@ def lemmatize_word(word, pos=None):
     # if we haven't found anything by here, just return the word.
     return word
 
+def stem_word(word):
+    '''
+    Applies the Porter Stemmer to a word.
+    
+    >>> sf.stem_word('lying')
+    'lie'
+    >>> sf.stem_word('helpful')
+    'help'
+    >>> sf.stem_word('really')
+    'realli'
+    '''
+    porter = nltk.PorterStemmer()
+    
+    return porter.stem(word)
+    
 def wordnet_pos(pos_tag):
     '''
     Returns 'a', 'r', 'n', or 'v' corresponding to adjective, adverb, noun
     and verb, respectively. Return None if there's no match
     '''
     
-    prefixes = { 'JJ' : 'a',
-                 'NN' : 'n',
-                 'RB' : 'r',
-                 'VB' : 'v'
+    prefixes = { 'JJ' : wordnet.ADJ,
+                 'NN' : wordnet.NOUN,
+                 'RB' : wordnet.ADJ,
+                 'VB' : wordnet.VERB
     }
     
     return prefixes.get(pos_tag[:2])
