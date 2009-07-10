@@ -17,8 +17,11 @@ import re
 import nltk
 from nltk.corpus import wordnet
 import linecache
-import pdb
 from decimal import Decimal
+import shutil
+
+import pdb
+
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
@@ -73,17 +76,10 @@ def main():
     
     sentence_dicts = read_agree_sentence_directory(sentence_directory)
     
-    
-    create_symbol_table(sentence_dicts, options.symbol_table)
-    
-    if not os.path.exists('data'):
-        os.mkdir('data')
-    
-    for index, sent_dict in enumerate(sentence_dicts):
-        write_fst(sent_dict, symbol_filename, 'data/%i' % (index + 1))
-    
-    write_fst_list(sentence_dicts)
-    write_svm_input(sentence_dicts)
+    for fst_type in fst_types:
+        if fst_type in ('words', 'lemmas', 'pos'):
+            tag_sentences(sentence_dicts, fst_type)
+            write_many_simple_fsts(sentence_dicts, fst_type)
 
 def parse_args(arguments):
     '''
@@ -147,6 +143,21 @@ def read_agree_sents(filename):
                 
                 
     return result
+
+def tag_sentences(sentence_dicts, tag_type):
+    # check if it's already been tagged
+    if tag_type in sentence_dicts[0]:
+        return
+    
+    if tag_type == 'pos':
+        [pos_tag_sentence(sent) for sent in sentence_dicts]
+    elif tag_type == 'lemmas':
+        tag_sentences(sentence_dicts, 'pos')
+        [lemmatize_sentence(sent) for sent in sentence_dicts]
+    elif tag_type == 'words':
+        # do nothing for words
+        pass
+
 
 def pos_tag_sentence(sent_dict):
     '''
@@ -332,7 +343,7 @@ def read_pos_sentence(sentence_id, story, pos_directory):
     
     return {'words' : word_list, 'pos' : pos_list}
 
-def create_symbol_table(sentence_dicts, filename):
+def create_symbol_table(sentence_dicts, key, filename):
     '''
     Writes a symbol table in the AT&T format to the specified filename.
     '''
@@ -344,66 +355,64 @@ def create_symbol_table(sentence_dicts, filename):
     
     # write words
     for sent_dict in sentence_dicts:
-        for word in sent_dict['words']:
+        for word in sent_dict[key]:
             if word not in symbols:
                 f.write('%s\t%i\n' % (word, counter))
                 
                 symbols.add(word)
                 counter += 1
     
-    # write pos
-    for sent_dict in sentence_dicts:
-        for pos in sent_dict['pos']:
-            if pos not in symbols:
-                f.write('%s\t%i\n' % (pos, counter))
-                
-                symbols.add(pos)
-                counter += 1
-    
     f.close()
 
-def write_fst(sent_dict, symbol_path, fst_path):
+def write_many_simple_fsts(sent_dicts, key, basepath='./fsts_'):
     '''
-    Converts a sentence to an fst and writes it to emotion_id/sent_id.txt.
-    Then compiles the FST using fstcompile. fst_path should be the basename
-    without an extension.
+    Writes a list of fsts to a directory. First creates a directory by
+    appending key to basepath and writes over any existing directory.
+    Then, writes a symbol file. Then, calls write_simple_fst for each 
+    sentence. Finally creates an FST list file.
     '''
-    f = open(fst_path + ".txt", "w")
+    fst_directory = basepath + key
+    symbol_path = os.path.join(fst_directory, "symbol_table.tsv")
+    
+    if os.path.exists(fst_directory):
+        shutil.rmtree(fst_directory)
+        
+    os.mkdir(fst_directory)
+    
+    create_symbol_table(sent_dicts, key, symbol_path)
+    
+    for sent_no, sent_dict in enumerate(sent_dicts):
+        fst_basepath = os.path.join(fst_directory, str(sent_no))
+        
+        write_simple_fst(sent_dict[key], symbol_path, fst_basepath)
+        
+    write_fst_list(sent_dicts, fst_directory)
+    write_svm_input(sent_dicts, fst_directory)
+
+def write_simple_fst(symbols, symbol_path, fst_basepath):
+    '''
+    Writes a simple fst containing a single path of symbols with no weights.
+    A text representation of the FST is written to fst_path + ".txt" and then
+    it is compile into a binary using fstcompile.
+    '''
+    fst = open(fst_basepath + ".txt", "w")
     
     # write arcs with each word
     state = 1
-    state = 1
-    for word in sent_dict['words']:
-        write_arc(f, state, state+1, word, word)
+    for symbol in symbols:
+        write_arc(fst, state, state+1, symbol, symbol)
         state += 1
-    
-    # write arcs with each pos
-    last_state = state
-    last_pos = sent_dict['pos'][-1]
-    
-    # write the first pos arc (originating from state 1)
-    first_pos = sent_dict['pos'][0]
-    state += 1
-    write_arc(f, 1, state, first_pos, first_pos)
-    
-    for pos in sent_dict['pos'][1:-1]:
-        write_arc(f, state, state+1, pos, pos)
-        state += 1
-    
-    # write last pos arc (ending at same ending state)
-    write_arc(f, state, last_state, last_pos, last_pos)
     
     # write final state
-    f.write(str(last_state))
-    f.close()
+    fst.write(str(state))
+    fst.close()
     
     parameters = [ "fstcompile", 
                    "--arc_type=log",
                    "--isymbols=%s" % symbol_path, 
                    "--osymbols=%s" % symbol_path, 
-                   fst_path + ".txt", 
-                   fst_path + ".fst"]
-    #log.debug('fst parameters: %s' % ' '.join(parameters))
+                   fst_basepath + ".txt", 
+                   fst_basepath + ".fst"]
     
     subprocess.call(parameters)
 
@@ -457,31 +466,38 @@ def wordnet_pos(pos_tag):
     
     return prefixes.get(pos_tag[:2])
 
-def write_fst_list(sentence_dicts):
+def write_fst_list(sentence_dicts, fst_directory):
     """
-    Writes an fst list for all of the sentences. Line numbers should 
-    correspond to sentence 
+    Writes an fst list file inside fst_directory for all of the sentences. 
+    Line numbers should correspond to sentence indices in list of dicts. 
     """
+    list_file_path = os.path.join(fst_directory, 'fst.list')
     
-    # dictionary of file objects, keyed by emotion id (string)
-    f = open('list.fst', 'w')
+    f = open(list_file_path, 'w')
     
     for index in range(1, len(sentence_dicts)+1):
-        f.write('data/%i.fst\n' % index)
+        f.write('%i.fst\n' % index)
     
     f.close()
 
-def write_svm_input(sentence_dicts, train_percentage=0.8):
+def write_svm_input(sentence_dicts, fst_directory, train_percentage=0.8):
     '''
     Writes test and train files for input to LIBSVM. Also writes a file 
     containing all of the sentences
     '''
+    train_path = os.path.join(fst_directory, 'sentences.train')
+    test_path = os.path.join(fst_directory, 'sentences.test')
+    all_path = os.path.join(fst_directory, 'sentences.all')
+    
+    
     training_size = int(round(train_percentage*len(sentence_dicts)))
     train_list = random.sample(sentence_dicts, training_size)
     
-    train_file = open('sentences.train', 'w')
-    test_file  = open('sentences.test', 'w')
-    all_file = open('sentences.all', 'w')
+    
+    train_file = open(train_path, 'w')
+    test_file  = open(test_path, 'w')
+    all_file = open(all_path, 'w')
+    
     for index, sent_dict in enumerate(sentence_dicts):
         line = '%s %i:1.0\n' % (sent_dict['emotion'], index+1)
         if sent_dict in train_list:
@@ -494,6 +510,7 @@ def write_svm_input(sentence_dicts, train_percentage=0.8):
     train_file.close()
     test_file.close()
     all_file.close()
+
 
 if __name__ == "__main__":
     if sys.argv[1] == 'test':
