@@ -29,7 +29,11 @@ LOG_LEVELS = {'debug': logging.DEBUG,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
 
-FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastem', 'senti', 'anew')
+# all the possible FST options. Simple options are those that output a single
+# unweighted output path.
+
+FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastems', 'senti', 'anew')
+SIMPLE_FST_TYPES = ('words', 'lemmas', 'pos', 'lemmastems')
 
 # punctuation that is worth parsing as a separate token. all other punctuation
 # is ignored. ellipses would be nice to parse as a token, but I couldn't figure
@@ -77,9 +81,13 @@ def main():
     sentence_dicts = read_agree_sentence_directory(sentence_directory)
     
     for fst_type in fst_types:
-        if fst_type in ('words', 'lemmas', 'pos', 'lemmastem'):
+        if fst_type in SIMPLE_FST_TYPES:
             tag_sentences(sentence_dicts, fst_type)
             write_many_simple_fsts(sentence_dicts, fst_type)
+        else:
+            tag_sentences(sentence_dicts, fst_type)
+            if fst_type == 'senti':
+                write_many_multipath_fsts(sentence_dicts, fst_type)
 
 def parse_args(arguments):
     '''
@@ -144,6 +152,7 @@ def read_agree_sents(filename):
                 
     return result
 
+
 def tokenize_sentence(sentence):
     '''
     Uses the default NLTK tokenizer, which as of July 2009 is the Penn
@@ -179,9 +188,14 @@ def tag_sentences(sentence_dicts, tag_type):
         log.debug('lemmatizing words')
         tag_sentences(sentence_dicts, 'pos')
         [lemmatize_sentence(sent) for sent in sentence_dicts]
-    elif tag_type == 'lemmastem':
+    elif tag_type == 'lemmastems':
         tag_sentences(sentence_dicts, 'lemmas')
         [lemmastem_sentence(sent) for sent in sentence_dicts]
+    elif tag_type == 'anew':
+        anew = read_anew_db('/Users/bpg/cslu/affect/word_data/anew_all.txt')
+    elif tag_type == 'senti':
+        sentiwordnet = read_sentiwordnet('/Users/bpg/cslu/affect/word_data/SentiWordNet_1.0.1.txt')
+        [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
     elif tag_type == 'words':
         # do nothing for words
         pass
@@ -234,7 +248,7 @@ def lemmastem_sentence(sent_dict):
     Applies the Porter stemmer to the lemmas.
     
     >>> sent = {'words' : ['I', 'am', 'not', 'lying', 'that', 'I', 'brought', 'things', 'to', 'be', 'helpful']} 
-    >>> sf.lemmastem_sentence(sent)
+    >>> lemmastem_sentence(sent)
     >>> sent['lemmastems']
     ['I', 'be', 'not', 'lie', 'that', 'I', 'bring', 'thing', 'to', 'be', 'help']
     '''
@@ -251,6 +265,8 @@ def tag_swn_sentence(sent_dict, sentiwordnet):
     to look up each word in SentiWordnet, the words will be lemmatized and
     POS-tagged if they haven't been yet.
     '''
+    # weights for matching synsets
+    synset_weights = [1., 0.8, 0.6, 0.4, 0.2]
     
     if 'pos' not in sent_dict:
         pos_tag_sentence(sent_dict)
@@ -263,25 +279,34 @@ def tag_swn_sentence(sent_dict, sentiwordnet):
     
     for lemma, pos in zip(sent_dict['lemmas'], sent_dict['pos']):
         synsets = wordnet.synsets(lemma, wordnet_pos(pos))
-        print synsets
+        
+        pos_value = 0.0
+        neg_value = 0.0
+        
         if synsets != []:
-            first_synset_pair = (synsets[0].pos, synsets[0].offset)
+            for synset, weight in zip(synsets, synset_weights):
+                synset_pair = (synset.pos, synset.offset)
             
-            if first_synset_pair in sentiwordnet:
-                swn_values = sentiwordnet[first_synset_pair]
-                
-                pos_value = swn_values['pos']
-                neg_value = swn_values['neg']
-            else:
-                pos_value = neg_value = 0.0
-        else:
-            pos_value = neg_value = 0.0
+                if synset_pair in sentiwordnet:
+                    swn_values = sentiwordnet[synset_pair]
+                    
+                    pos_value += weight * swn_values['pos']
+                    neg_value += weight * swn_values['neg']
         
         pos_swn.append(pos_value)
         neg_swn.append(neg_value)
     
     sent_dict['senti'] = {'pos' : pos_swn, 'neg' : neg_swn}
 
+def tag_anew_sentence(sent_dict, anew):
+    '''
+    Attempts to tag the words in a sentence with their corresponding ANEW mean
+    scores. For each word, it first looks up the word in ANEW and then if it
+    is not found, looks up its lemma, if possible. If neither is found, it
+    assigns a score of 5, the middle value on the ANEW score range.
+    '''
+    
+    
 def read_sentiwordnet(path):
     '''
     Returns a dictionary keyed by the pair (POS, offset). Each value is also
@@ -310,18 +335,16 @@ def read_anew_db(path):
     '''
     Reads the ANEW.txt file into a dictionary keyed by word. Each value is
     also a dictionary with the following structure:
-    
     {'abduction' : { 'word_num' : 621,
-                    'frequency' : 1,
-                      'valence' : { 'mean' : 2.76,
-                                   'stdev' : 2.06},
-                      'arousal' : { 'mean' : 5.53,
-                                   'stdev' : 2.43},
-                    'dominance' : { 'mean' : 3.49,
-                                   'stdev' : 2.38}
-                   }
+    'frequency' : 1,
+    'valence' : { 'mean' : 2.76,
+    'stdev' : 2.06},
+    'arousal' : { 'mean' : 5.53,
+    'stdev' : 2.43},
+    'dominance' : { 'mean' : 3.49,
+    'stdev' : 2.38}
     }
-    
+    }
     >>> anew = read_anew_db('/Users/bpg/cslu/affect/word_data/anew_all.txt')
     >>> anew['village'] == {'arousal': {'stdev': Decimal('1.87'), 'mean': Decimal('4.08')}, 'word_num': 477, 'valence': {'stdev': Decimal('1.34'), 'mean': Decimal('5.92')}, 'frequency': 72, 'dominance': {'stdev': Decimal('1.74'), 'mean': Decimal('4.94')}}
     True
@@ -335,20 +358,21 @@ def read_anew_db(path):
                 frequency = 0
             else:
                 frequency = int(fields[8])
-            
-            word_dict = {  'word_num' : int(fields[1]),
+                
+            word_dict = { 'word_num' : int(fields[1]),
                             'valence' : { 'mean' : Decimal(fields[2]),
                                          'stdev' : Decimal(fields[3])},
                             'arousal' : { 'mean' : Decimal(fields[4]),
                                          'stdev' : Decimal(fields[5])},
                           'dominance' : { 'mean' : Decimal(fields[6]),
                                          'stdev' : Decimal(fields[7])},
-                          'frequency' : frequency         
+                          'frequency' : frequency
             }
             
             anew_dict[fields[0]] = word_dict
-    
+            
     return anew_dict
+
 
 def read_pos_sentence(sentence_id, story, pos_directory):
     '''
@@ -408,6 +432,15 @@ def create_symbol_table(sentence_dicts, key, filename):
     
     f.close()
 
+def write_simple_symbol_table(symbols, filename):
+    f = open(filename, 'w')
+    symbol_set = set(symbols)
+    for index, symbol in enumerate(symbol_set):
+        f.write('%s\t%i\n' % (symbol, index))
+        
+    
+    f.close()
+
 def write_many_simple_fsts(sent_dicts, key, basepath='./fsts_'):
     '''
     Writes a list of fsts to a directory. First creates a directory by
@@ -451,6 +484,91 @@ def write_simple_fst(symbols, symbol_path, fst_basepath):
     fst.write(str(state))
     fst.close()
     
+    compile_fst(fst_basepath, symbol_path)
+
+def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=False, basepath='./fsts_'):
+    '''
+    Writes a list of fsts to a directory. First creates a directory by
+    appending key to basepath and writes over any existing directory.
+    Then, writes a symbol file. Then, calls write_simple_fst for each 
+    sentence. Finally creates an FST list file.
+    '''
+    fst_directory = basepath + key
+    symbol_path = os.path.join(fst_directory, "symbol_table.tsv")
+    
+    if os.path.exists(fst_directory):
+        shutil.rmtree(fst_directory)
+        
+    os.mkdir(fst_directory)
+    
+    if split_values:
+        log.error('split_values not implemented yet')
+    else:
+        symbols = sent_dicts[0][key].keys()
+        write_simple_symbol_table(symbols, symbol_path)
+    
+        for sent_no, sent_dict in enumerate(sent_dicts):
+            fst_basepath = os.path.join(fst_directory, str(sent_no+1))
+            
+            write_multipath_fst(sent_dict[key], fst_basepath, symbol_path)
+            
+        write_fst_list(sent_dicts, fst_directory)
+        write_svm_input(sent_dicts, fst_directory)
+
+def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, split_values=False):
+    '''
+    
+    '''
+    first_state = 1
+    last_state = 0
+    current_state = 1
+    
+    fst = open(fst_basepath + ".txt", "w")
+    
+    for path_name, path in paths.iteritems():
+        for index, value in enumerate(path):
+            if split_values:
+                midpoint = float(sum(weight_range)) / 2
+                
+                if value < midpoint:
+                    label = '%s_neg' % path_name
+                else:
+                    label = '%s_pos' % path_name
+                
+                weight = abs(value - midpoint)
+            else:
+                weight = value
+                label = path_name
+            
+            if index == len(path) - 1:
+                # if it's the last arc, connect to the last_state, instead of
+                # state + 1
+                write_arc(fst, current_state, last_state, label, label, weight=weight)
+            elif index == 0:
+                # write the first arc
+                write_arc(fst, first_state, current_state+1, label, label, weight=weight)
+            else:
+                write_arc(fst, current_state, current_state+1, label, label, weight=weight)
+            
+            current_state += 1
+        
+    fst.write(str(last_state))
+    fst.close()
+    
+    compile_fst(fst_basepath, symbol_path)
+
+def write_arc(f, start_state, end_state, input_label, output_label, weight=None):
+    arc_fields = [str(start_state), str(end_state), input_label, output_label]
+    
+    if weight:
+        arc_fields.append(str(weight))
+    
+    f.write('\t'.join(arc_fields) + '\n')
+
+def compile_fst(fst_basepath, symbol_path):
+    '''
+    Calls fstcompile using the specified symbol table.
+    '''
     parameters = [ "fstcompile", 
                    "--arc_type=log",
                    "--isymbols=%s" % symbol_path, 
@@ -459,10 +577,6 @@ def write_simple_fst(symbols, symbol_path, fst_basepath):
                    fst_basepath + ".fst"]
     
     subprocess.call(parameters)
-
-def write_arc(f, start_state, end_state, input_label, output_label):
-    arc_fields = [str(start_state), str(end_state), input_label, output_label]
-    f.write('\t'.join(arc_fields) + '\n')
 
 def lemmatize_word(word, pos=None):
     '''
@@ -499,11 +613,11 @@ def stem_word(word):
     '''
     Applies the Porter Stemmer to a word.
     
-    >>> sf.stem_word('lying')
+    >>> stem_word('lying')
     'lie'
-    >>> sf.stem_word('helpful')
+    >>> stem_word('helpful')
     'help'
-    >>> sf.stem_word('really')
+    >>> stem_word('really')
     'realli'
     '''
     porter = nltk.PorterStemmer()
