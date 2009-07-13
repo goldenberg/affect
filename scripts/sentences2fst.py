@@ -571,7 +571,7 @@ def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, spl
                 elif value > midpoint:
                     label = '%s_pos' % path_name
                 else:
-                    label = '%s_neutral'
+                    label = '%s_neutral' % path_name
                 
                 weight = abs(Decimal(str(value)) - Decimal(str(midpoint)))
             else:
