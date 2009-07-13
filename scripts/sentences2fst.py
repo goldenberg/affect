@@ -88,7 +88,9 @@ def main():
             tag_sentences(sentence_dicts, fst_type)
             if fst_type == 'senti':
                 write_many_multipath_fsts(sentence_dicts, fst_type)
-
+            else:
+                write_many_multipath_fsts(sentence_dicts, fst_type, weight_range=[1,9], split_values=True)
+                
 def parse_args(arguments):
     '''
     Returns a pair: a list of the fst output types and a list of any other args.
@@ -193,6 +195,7 @@ def tag_sentences(sentence_dicts, tag_type):
         [lemmastem_sentence(sent) for sent in sentence_dicts]
     elif tag_type == 'anew':
         anew = read_anew_db('/Users/bpg/cslu/affect/word_data/anew_all.txt')
+        [tag_anew_sentence(sent, anew) for sent in sentence_dicts]
     elif tag_type == 'senti':
         sentiwordnet = read_sentiwordnet('/Users/bpg/cslu/affect/word_data/SentiWordNet_1.0.1.txt')
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
@@ -305,8 +308,32 @@ def tag_anew_sentence(sent_dict, anew):
     is not found, looks up its lemma, if possible. If neither is found, it
     assigns a score of 5, the middle value on the ANEW score range.
     '''
+    valence_list = []
+    arousal_list = []
+    dominance_list = []
     
+    if 'lemmas' not in sent_dict:
+        lemmatize_sentence(sent_dict)
     
+    for word, lemma in zip(sent_dict['words'], sent_dict['lemmas']):
+        valence = arousal = dominance = Decimal('5.')
+        if word in anew:
+            valence = anew[word]['valence']['mean']
+            arousal = anew[word]['arousal']['mean']
+            dominance = anew[word]['dominance']['mean']
+        elif lemma in anew:
+            valence = anew[lemma]['valence']['mean']
+            arousal = anew[lemma]['arousal']['mean']
+            dominance = anew[lemma]['dominance']['mean']
+        
+        valence_list.append(valence)
+        arousal_list.append(arousal)
+        dominance_list.append(dominance)
+    
+    sent_dict['anew'] = {'valence' : valence_list,
+                         'arousal' : arousal_list,
+                         'dominance' : dominance_list}
+
 def read_sentiwordnet(path):
     '''
     Returns a dictionary keyed by the pair (POS, offset). Each value is also
@@ -501,19 +528,28 @@ def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=F
         
     os.mkdir(fst_directory)
     
-    if split_values:
-        log.error('split_values not implemented yet')
-    else:
-        symbols = sent_dicts[0][key].keys()
-        write_simple_symbol_table(symbols, symbol_path)
     
-        for sent_no, sent_dict in enumerate(sent_dicts):
-            fst_basepath = os.path.join(fst_directory, str(sent_no+1))
-            
-            write_multipath_fst(sent_dict[key], fst_basepath, symbol_path)
-            
-        write_fst_list(sent_dicts, fst_directory)
-        write_svm_input(sent_dicts, fst_directory)
+    symbols = sent_dicts[0][key].keys()
+    
+    if split_values:
+        split_symbols = set()
+        for symbol in symbols:
+            split_symbols.add('%s_pos' % symbol)
+            split_symbols.add('%s_neg' % symbol)
+            split_symbols.add('%s_neutral' % symbol)
+        
+        write_simple_symbol_table(split_symbols, symbol_path)
+    else:
+        write_simple_symbol_table(symbols, symbol_path)
+
+    for sent_no, sent_dict in enumerate(sent_dicts):
+        fst_basepath = os.path.join(fst_directory, str(sent_no+1))
+        
+        write_multipath_fst(sent_dict[key], fst_basepath, symbol_path, 
+                    weight_range=weight_range, split_values=split_values)
+        
+    write_fst_list(sent_dicts, fst_directory)
+    write_svm_input(sent_dicts, fst_directory)
 
 def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, split_values=False):
     '''
@@ -532,10 +568,12 @@ def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, spl
                 
                 if value < midpoint:
                     label = '%s_neg' % path_name
-                else:
+                elif value > midpoint:
                     label = '%s_pos' % path_name
+                else:
+                    label = '%s_neutral'
                 
-                weight = abs(value - midpoint)
+                weight = abs(Decimal(str(value)) - Decimal(str(midpoint)))
             else:
                 weight = value
                 label = path_name
