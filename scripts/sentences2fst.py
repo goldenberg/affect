@@ -316,13 +316,15 @@ def tag_anew_sentence(sent_dict, anew):
         lemmatize_sentence(sent_dict)
     
     for word, lemma in zip(sent_dict['words'], sent_dict['lemmas']):
-        valence = arousal = dominance = Decimal('5.')
+        valence = Decimal('5.')
+        arousal = Decimal('0')
+        dominance = Decimal('0')
         if word in anew:
-            valence = anew[word]['valence']['mean']
-            arousal = anew[word]['arousal']['mean']
-            dominance = anew[word]['dominance']['mean']
+            valence = anew[word]['valence']['mean'] - Decimal('5.')
+            arousal = anew[word]['arousal']['mean'] / Decimal('8.')
+            dominance = anew[word]['dominance']['mean'] / Decimal('8.')
         elif lemma in anew:
-            valence = anew[lemma]['valence']['mean']
+            valence = anew[lemma]['valence']['mean'] - Decimal('5.')
             arousal = anew[lemma]['arousal']['mean']
             dominance = anew[lemma]['dominance']['mean']
         
