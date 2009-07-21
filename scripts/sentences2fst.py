@@ -89,7 +89,7 @@ def main():
             if fst_type == 'senti':
                 write_many_multipath_fsts(sentence_dicts, fst_type)
             else:
-                write_many_multipath_fsts(sentence_dicts, fst_type, weight_range=[1,9], split_values=True)
+                write_many_multipath_fsts(sentence_dicts, fst_type)
                 
 def parse_args(arguments):
     '''
@@ -320,13 +320,17 @@ def tag_anew_sentence(sent_dict, anew):
         arousal = Decimal('0')
         dominance = Decimal('0')
         if word in anew:
-            valence = anew[word]['valence']['mean'] - Decimal('5.')
-            arousal = anew[word]['arousal']['mean'] / Decimal('8.')
-            dominance = anew[word]['dominance']['mean'] / Decimal('8.')
+            valence = anew[word]['valence']['mean']
+            arousal = anew[word]['arousal']['mean']
+            dominance = anew[word]['dominance']['mean']
         elif lemma in anew:
-            valence = anew[lemma]['valence']['mean'] - Decimal('5.')
+            valence = anew[lemma]['valence']['mean']
             arousal = anew[lemma]['arousal']['mean']
             dominance = anew[lemma]['dominance']['mean']
+        
+        valence = (valence - Decimal('5.')) / Decimal('4.')
+        arousal /= Decimal('8.')
+        dominance /= Decimal('8.')
         
         valence_list.append(valence)
         arousal_list.append(arousal)
@@ -532,6 +536,9 @@ def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=F
     
     
     symbols = sent_dicts[0][key].keys()
+    # add negative values for all symbols, even though they might not all be used
+    neg_symbols = ['neg_%s' % symbol for symbol in symbols]
+    symbols.extend(neg_symbols)
     
     if split_values:
         split_symbols = set()
@@ -543,7 +550,7 @@ def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=F
         write_simple_symbol_table(split_symbols, symbol_path)
     else:
         write_simple_symbol_table(symbols, symbol_path)
-
+    
     for sent_no, sent_dict in enumerate(sent_dicts):
         fst_basepath = os.path.join(fst_directory, str(sent_no+1))
         
@@ -577,8 +584,12 @@ def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, spl
                 
                 weight = abs(Decimal(str(value)) - Decimal(str(midpoint)))
             else:
-                weight = value
-                label = path_name
+                if value < 0:
+                    weight = abs(value)
+                    label = 'neg_%s' % path_name
+                else:
+                    weight = value
+                    label = path_name
             
             if index == len(path) - 1:
                 # if it's the last arc, connect to the last_state, instead of
@@ -598,9 +609,14 @@ def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, spl
     compile_fst(fst_basepath, symbol_path)
 
 def write_arc(f, start_state, end_state, input_label, output_label, weight=None):
+    '''
+    Writes a line to the text FST file with a weight if specified.
+    '''
     arc_fields = [str(start_state), str(end_state), input_label, output_label]
     
-    if weight:
+    if weight == 0:
+        arc_fields.append('-100')
+    elif weight != None:
         arc_fields.append(str(weight))
     
     f.write('\t'.join(arc_fields) + '\n')
@@ -613,7 +629,7 @@ def compile_fst(fst_basepath, symbol_path):
                    "--arc_type=log",
                    "--isymbols=%s" % symbol_path, 
                    "--osymbols=%s" % symbol_path, 
-                   fst_basepath + ".txt", 
+                   fst_basepath + ".txt",
                    fst_basepath + ".fst"]
     
     subprocess.call(parameters)
@@ -688,7 +704,8 @@ def write_fst_list(sentence_dicts, fst_directory):
     f = open(list_file_path, 'w')
     
     for index in range(1, len(sentence_dicts)+1):
-        f.write('%i.fst\n' % index)
+        filename = os.path.join(fst_directory, index + '.fst')
+        f.write('%s\n' % filename)
     
     f.close()
 
@@ -701,7 +718,6 @@ def write_svm_input(sentence_dicts, fst_directory, train_percentage=0.8):
     test_path = os.path.join(fst_directory, 'sentences.test')
     all_path = os.path.join(fst_directory, 'sentences.all')
     
-    
     training_size = int(round(train_percentage*len(sentence_dicts)))
     train_list = random.sample(sentence_dicts, training_size)
     
@@ -710,7 +726,7 @@ def write_svm_input(sentence_dicts, fst_directory, train_percentage=0.8):
     test_file  = open(test_path, 'w')
     all_file = open(all_path, 'w')
     
-    for index, sent_dict in enumerate(sentence_dicts):
+    for index, sent_dict in enumerate(sentence_dicts): 
         line = '%s %i:1.0\n' % (sent_dict['emotion'], index+1)
         if sent_dict in train_list:
             train_file.write(line)
