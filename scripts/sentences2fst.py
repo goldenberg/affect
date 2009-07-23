@@ -474,20 +474,20 @@ def write_simple_symbol_table(symbols, filename):
     
     f.close()
 
-def write_many_simple_fsts(sent_dicts, key, basepath='./fsts_'):
+def write_many_simple_fsts(sent_dicts, key, basepath='./'):
     '''
     Writes a list of fsts to a directory. First creates a directory by
     appending key to basepath and writes over any existing directory.
     Then, writes a symbol file. Then, calls write_simple_fst for each 
     sentence. Finally creates an FST list file.
     '''
-    fst_directory = basepath + key
+    fst_directory = os.path.join(basepath + key, 'fsts')
     symbol_path = os.path.join(fst_directory, "symbol_table.tsv")
     
     if os.path.exists(fst_directory):
         shutil.rmtree(fst_directory)
         
-    os.mkdir(fst_directory)
+    os.makedirs(fst_directory)
     
     create_symbol_table(sent_dicts, key, symbol_path)
     
@@ -496,7 +496,7 @@ def write_many_simple_fsts(sent_dicts, key, basepath='./fsts_'):
         
         write_simple_fst(sent_dict[key], symbol_path, fst_basepath)
         
-    write_fst_list(sent_dicts, fst_directory)
+    write_fst_list(sent_dicts, fst_directory, key)
     write_svm_input(sent_dicts, fst_directory)
 
 def write_simple_fst(symbols, symbol_path, fst_basepath):
@@ -519,20 +519,20 @@ def write_simple_fst(symbols, symbol_path, fst_basepath):
     
     compile_fst(fst_basepath, symbol_path)
 
-def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=False, basepath='./fsts_'):
+def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=False, basepath='./'):
     '''
     Writes a list of fsts to a directory. First creates a directory by
     appending key to basepath and writes over any existing directory.
     Then, writes a symbol file. Then, calls write_simple_fst for each 
     sentence. Finally creates an FST list file.
     '''
-    fst_directory = basepath + key
+    fst_directory = os.path.join(basepath + key, 'fsts')
     symbol_path = os.path.join(fst_directory, "symbol_table.tsv")
     
     if os.path.exists(fst_directory):
         shutil.rmtree(fst_directory)
         
-    os.mkdir(fst_directory)
+    os.makedirs(fst_directory)
     
     
     symbols = sent_dicts[0][key].keys()
@@ -557,7 +557,7 @@ def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=F
         write_multipath_fst(sent_dict[key], fst_basepath, symbol_path, 
                     weight_range=weight_range, split_values=split_values)
         
-    write_fst_list(sent_dicts, fst_directory)
+    write_fst_list(sent_dicts, fst_directory, key)
     write_svm_input(sent_dicts, fst_directory)
 
 def write_multipath_fst(paths, fst_basepath, symbol_path, weight_range=None, split_values=False):
@@ -694,18 +694,18 @@ def wordnet_pos(pos_tag):
     
     return prefixes.get(pos_tag[:2])
 
-def write_fst_list(sentence_dicts, fst_directory):
+def write_fst_list(sentence_dicts, fst_directory, key):
     """
-    Writes an fst list file inside fst_directory for all of the sentences. 
+    Writes an fst list file one level above fst_directory for all of the sentences. 
     Line numbers should correspond to sentence indices in list of dicts. 
     """
-    list_file_path = os.path.join(fst_directory, 'fst.list')
+    list_file_path = os.path.join(fst_directory, '..', key + '.fstlist')
     
     f = open(list_file_path, 'w')
     
     for index in range(1, len(sentence_dicts)+1):
-        filename = os.path.join(fst_directory, index + '.fst')
-        f.write('%s\n' % filename)
+        filename = os.path.join(fst_directory, str(index) + '.fst')
+        f.write('%s\n' % os.path.realpath(filename))
     
     f.close()
 
