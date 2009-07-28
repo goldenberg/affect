@@ -61,7 +61,7 @@ def create_kernel(alphabet_size, order, fstlist):
     Creates an n-gram using klngram with specified alphabet size and order.
     '''
     kernel_path = os.path.join( os.path.dirname(fstlist), '%i-gram.kar' % order)
-    kernel_file = open(kernel_path, 'w')
+    kernel_file = open(kernel_path, 'wb')
     
     arguments = ['klngram', 
                  '--sigma=%i' % alphabet_size,
@@ -72,6 +72,24 @@ def create_kernel(alphabet_size, order, fstlist):
     subprocess.call(arguments, stdout=kernel_file, stderr=open('/dev/null', 'w'))
     
     kernel_file.close()
+
+def compile_kernel(kernel_filename):
+    '''
+    Compiles a kernel into a libsvm compatible matrix .kar file using kleval.
+    '''
+    matrix_filename = os.path.splitext(kernel_filename)[0] + '.matrix.kar'
+    matrix_file = open(matrix_filename, 'wb')
+    
+    arguments = ['kleval',
+                 '--libsvm',
+                 '--kar',
+                 kernel_filename]
+    
+    log.info(' '.join(arguments))
+    
+    subprocess.call(arguments, stdout=matrix_file, stderr=open('/dev/null', 'w'))
+    
+    matrix_file.close()
 
 def determine_alphabet_size(symbol_filename):
     '''
