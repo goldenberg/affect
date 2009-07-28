@@ -11,6 +11,7 @@ import sys
 import optparse
 import logging
 import numpy as np
+import pylab
 import subprocess
 import pdb
 
@@ -20,23 +21,38 @@ LOG_LEVELS = {'debug': logging.DEBUG,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
 
-log = logging.getLogger(__name__)
+log = logging.getLogger('vary_c')
 
 def main():
-    usage = """%prog C_BEGIN C_END C_STEP SVM_ARGS [options]
+    usage = """%prog C_BEGIN C_END C_STEP OUTPUT_FILE SVM_ARGS [options]
             """
     
     c_begin = float(sys.argv[1])
     c_end = float(sys.argv[2])
     c_step = float(sys.argv[3])
+    output_basename = sys.argv[4]
     
-    svm_args = sys.argv[4:]
-        
-    for c in np.arange(c_begin, c_end, c_step):
+    svm_args = sys.argv[5:]
+    
+    run_svms(c_begin, c_end, c_step, svm_args, output_basename)
+
+def run_svms(c_begin, c_end, c_step, svm_args, output_basename):
+    accuracies = []
+    c_values = np.arange(c_begin, c_end, c_step)
+    for c in c_values:
         output = run_svmtrain(svm_args, c)
         accuracy = find_cv_accuracy(output)
-        print 'c = %.3f, accuracy = %.2f' % (c, accuracy)
+        accuracies.append(accuracy)
+        print 'accuracy = %.2f when c = %.3f' % (accuracy, c)
     
+    max_accuracy, max_c = max(zip(accuracies, c_values))
+    print 'best accuracy = %.2f when c = %.3f' % (max_accuracy, max_c)
+    
+    plot_accuracies(c_values, accuracies, output_basename)
+    save_accuracies(c_values, accuracies, output_basename)
+    
+    return max_c, max_accuracy
+
 def run_svmtrain(svm_args, c):
     '''
     Runs svm-train with all the specified arguments and c. Returns the output
@@ -44,7 +60,7 @@ def run_svmtrain(svm_args, c):
     '''
     arguments = ["svm-train", "-c", "%f" % c]
     arguments.extend(svm_args)
-    process = subprocess.Popen(arguments, stdout=subprocess.PIPE, 
+    process = subprocess.Popen(arguments, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
     (stdout, stderr) = process.communicate()
     return stdout
@@ -57,6 +73,26 @@ def find_cv_accuracy(output):
     for line in output.split('\n'):
         if line.startswith('Cross Validation Accuracy'):
             return float(line.split(' ')[-1][:-1])
+
+def plot_accuracies(c_values, accuracies, basename):
+    '''
+    Plots the c-values v. accuracies and saves the figure to basename + .pdf
+    '''
+    fig = pylab.figure()
+    pylab.xlabel('$c$ (SVM cost parameter)')
+    pylab.ylabel('% accuracy')
+    pylab.plot(c_values, accuracies)
+    pylab.savefig(basename + '.pdf')
+
+def save_accuracies(c_values, accuracies, basename):
+    '''
+    Saves a TSV of all accuracies.
+    '''
+    output = open(basename + '.tsv', 'w')
+    for c, accuracy in zip(c_values, accuracies):
+        output.write('%.3f\t%.3f\n' % (c, accuracy))
+    
+    output.close()
 
 if __name__ == "__main__":
     main()
