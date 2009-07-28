@@ -615,7 +615,7 @@ def write_arc(f, start_state, end_state, input_label, output_label, weight=None)
     arc_fields = [str(start_state), str(end_state), input_label, output_label]
     
     if weight == 0:
-        arc_fields.append('-100')
+        arc_fields.append('0')
     elif weight != None:
         arc_fields.append(str(weight))
     
