@@ -311,6 +311,7 @@ def tag_anew_sentence(sent_dict, anew):
     valence_list = []
     arousal_list = []
     dominance_list = []
+    valence_arousal_list = []
     
     if 'lemmas' not in sent_dict:
         lemmatize_sentence(sent_dict)
