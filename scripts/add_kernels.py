@@ -11,8 +11,11 @@ import sys
 import optparse
 import logging
 import vary_c
-import make-ngram
+import make_kernels
 import numpy
+import os
+import subprocess
+import shutil
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
@@ -25,7 +28,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
 log = logging.getLogger(__name__)
 
 def main():
-    usage = """%prog KERNEL1 KERNEL2 [options]
+    usage = """%prog KERNEL1 KERNEL2 OUTPUT_BASENAME [options]
             """
     
     opt_parser = optparse.OptionParser(usage=usage)
@@ -37,14 +40,34 @@ def main():
     
     log.setLevel(LOG_LEVELS[options.log_level])
     
+    run_svms(arguments[0], arguments[1], arguments[2])
 
 def run_svms(kernel1, kernel2, basename):
     weight1 = 1
     
-    for weight2 in numpy.arange(0, 1, 0.1):
-        output_filename = basename + str(weight2) + '.kar'
-        add_kernels(kernel1, kernel2, )
+    if os.path.exists(basename):
+        shutil.rmtree(basename)
     
+    os.makedirs(basename)
+    
+    data_points = []
+    for weight2 in numpy.arange(0, 1, 0.3):
+        kernel_filename = os.path.join(basename, str(weight2) + '.kar')
+        add_kernels(kernel1, kernel2, kernel_filename)
+        matrix_filename = make_kernels.compile_kernel(kernel_filename)
+        
+        svm_args = ['-k', 'openkernel', '-K', matrix_filename, '-v', '10', 'sentences.all']
+        c, accuracy = vary_c.run_svms(0.1, 5, 1, svm_args, basename)
+        
+        data_points.append( { 'weight1' : weight1, 
+                             'weight2' : weight2, 
+                             'accuracy' : accuracy,
+                             'c' : c,
+                            } )
+    
+    save_accuracies(data_points, basename)
+    plot_accuracies(data_points, basename)
+
 def plot_accuracies(data_points, basename):
     '''
     Plot the ratio of weight1 to weight2 versus the SVM accuracy for the 
@@ -81,11 +104,11 @@ def add_kernels(kernel1, kernel2, output_filename, weight1=1, weight2=1):
     log.info('%.2f * %s + %.2f * %s' % (weight1, os.path.basename(kernel1), 
                                         weight2, os.path.basename(kernel2)))
     
-    arguments = ['klsum', '--alpha1', '%.3f' % weight1,
-                          '--alpha2', '%.3f' % weight2, 
+    arguments = ['klsum', '--alpha1=%.3f' % weight1,
+                          '--alpha2=%.3f' % weight2, 
                           kernel1, kernel2]
     
-    subprocess.call(arguments, stdout=output_file)
+    subprocess.call(arguments, stdout=output_file, stderr=open('/dev/null'))
     
     output_file.close()
 
