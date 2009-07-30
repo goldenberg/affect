@@ -11,7 +11,6 @@ import sys
 import optparse
 import logging
 import numpy as np
-import pylab
 import subprocess
 import pdb
 
@@ -60,8 +59,8 @@ def run_svmtrain(svm_args, c):
     '''
     arguments = ["svm-train", "-c", "%f" % c]
     arguments.extend(svm_args)
-    process = subprocess.Popen(arguments, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+    process = subprocess.Popen(arguments, stdout=subprocess.PIPE)
+                                #stderr=subprocess.PIPE)
     (stdout, stderr) = process.communicate()
     return stdout
 
@@ -78,6 +77,12 @@ def plot_accuracies(c_values, accuracies, basename):
     '''
     Plots the c-values v. accuracies and saves the figure to basename + .pdf
     '''
+    try:
+        import pylab
+    except ImportError, e:
+        log.error('pylab is unavailable on this machine. The accuracies will not be plotted.')
+        return
+    
     fig = pylab.figure()
     pylab.xlabel('$c$ (SVM cost parameter)')
     pylab.ylabel('% accuracy')
