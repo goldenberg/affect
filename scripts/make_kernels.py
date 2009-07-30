@@ -12,6 +12,7 @@ import optparse
 import logging
 import subprocess
 import os
+import pdb
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
@@ -43,35 +44,45 @@ def walk_directory(top_directory):
     found, creates a 1 and 2-gram kernel and assumes there is a symbol file
     at *.fstlist/../fsts/symbol_table.tsv
     '''
+    top_directory = os.path.realpath(top_directory)
+    log.debug('starting walk of %s' % top_directory)
+    
     for (dirpath, dirnames, filenames) in os.walk(top_directory):
         for filename in filenames:
             if filename.endswith('.fstlist'):
+                log.debug('found %s' % filename)
                 symbol_path = os.path.join(dirpath , 'fsts', 'symbol_table.tsv')
                 
                 if not os.path.exists(symbol_path):
                     log.error('There is not a symbol file at %s' % symbol_path)
                 else:
+                    log.debug('now in %s' % dirpath)
                     sigma = determine_alphabet_size(symbol_path)
                     fstlist = os.path.join(dirpath, filename)
-                    create_kernel(sigma, 1, fstlist)
-                    create_kernel(sigma, 2, fstlist)
+                    create_ngram_kernel(sigma, 1, fstlist)
+                    create_ngram_kernel(sigma, 2, fstlist)
     
 def create_ngram_kernel(alphabet_size, order, fstlist):
     '''
     Creates an n-gram using klngram with specified alphabet size and order.
     '''
+    
     kernel_path = os.path.join( os.path.dirname(fstlist), '%i-gram.kar' % order)
     kernel_file = open(kernel_path, 'wb')
+    
     
     arguments = ['klngram', 
                  '--sigma=%i' % alphabet_size,
                  '--order=%i' % order,
+                 '--fst_compat_symbols=false',
                  fstlist]
     
     log.info(' '.join(arguments))
-    subprocess.call(arguments, stdout=kernel_file, stderr=open('/dev/null', 'w'))
+    subprocess.call(arguments, stdout=kernel_file) #stderr=open('/dev/null', 'w'))
     
     kernel_file.close()
+    
+    compile_kernel(kernel_path)
 
 def compile_kernel(kernel_filename):
     '''
@@ -83,6 +94,7 @@ def compile_kernel(kernel_filename):
     arguments = ['kleval',
                  '--libsvm',
                  '--kar',
+                 '--fst_compat_symbols=false',
                  kernel_filename]
     
     log.info(' '.join(arguments))
@@ -90,6 +102,8 @@ def compile_kernel(kernel_filename):
     subprocess.call(arguments, stdout=matrix_file, stderr=open('/dev/null', 'w'))
     
     matrix_file.close()
+    
+    return matrix_filename
 
 def determine_alphabet_size(symbol_filename):
     '''
