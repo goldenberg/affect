@@ -331,14 +331,17 @@ def tag_anew_sentence(sent_dict, anew):
         valence = (valence - Decimal('5.')) / Decimal('4.')
         arousal /= Decimal('8.')
         dominance /= Decimal('8.')
+        valence_arousal = valence * arousal
         
         valence_list.append(valence)
         arousal_list.append(arousal)
         dominance_list.append(dominance)
+        valence_arousal_list.append(valence_arousal)
     
     sent_dict['anew'] = {'valence' : valence_list,
                          'arousal' : arousal_list,
-                         'dominance' : dominance_list}
+                         'dominance' : dominance_list,
+                         'valence*arousal' : valence_arousal_list}
 
 def read_sentiwordnet(path):
     '''
@@ -706,7 +709,9 @@ def write_fst_list(sentence_dicts, fst_directory, key):
     for index in range(1, len(sentence_dicts)+1):
         filename = os.path.join(fst_directory, str(index) + '.fst')
         f.write('%s\n' % os.path.realpath(filename))
-    
+        
+        #f.write('./fsts/%i.fst\n' % index)
+        
     f.close()
 
 def write_svm_input(sentence_dicts, fst_directory, train_percentage=0.8):
