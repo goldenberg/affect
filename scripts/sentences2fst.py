@@ -194,10 +194,10 @@ def tag_sentences(sentence_dicts, tag_type):
         tag_sentences(sentence_dicts, 'lemmas')
         [lemmastem_sentence(sent) for sent in sentence_dicts]
     elif tag_type == 'anew':
-        anew = read_anew_db('../word_data/anew_all.txt')
+        anew = read_anew_db('~/affect/word_data/anew_all.txt')
         [tag_anew_sentence(sent, anew) for sent in sentence_dicts]
     elif tag_type == 'senti':
-        sentiwordnet = read_sentiwordnet('../word_data/SentiWordNet_1.0.1.txt')
+        sentiwordnet = read_sentiwordnet('~/affect/word_data/SentiWordNet_1.0.1.txt')
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
     elif tag_type == 'words':
         # do nothing for words
