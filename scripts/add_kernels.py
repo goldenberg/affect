@@ -112,6 +112,9 @@ def add_kernels(kernel1, kernel2, output_filename, weight1=1, weight2=1):
                           '--alpha2=%.3f' % weight2, 
                           kernel1, kernel2]
     
+    assert os.path.exists(kernel1)
+    assert os.path.exists(kernel2)
+    
     popen = subprocess.Popen(arguments, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
     stdout, stderr = popen.communicate()
