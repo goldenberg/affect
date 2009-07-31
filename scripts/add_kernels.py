@@ -112,9 +112,16 @@ def add_kernels(kernel1, kernel2, output_filename, weight1=1, weight2=1):
                           '--alpha2=%.3f' % weight2, 
                           kernel1, kernel2]
     
-    subprocess.call(arguments, stdout=output_file, stderr=open('/dev/null'))
+    popen = subprocess.Popen(arguments, stdout=output_file, stderr=subprocess.PIPE)
+    
+    stdout, stderr = popen.communicate()
+    
+    log.info('klsum: ' + stdout)
+    for line in stderr.split('\n'):
+        log.error('klsum: ' + stderr)
     
     output_file.close()
+
 
 if __name__ == "__main__":
     main()
