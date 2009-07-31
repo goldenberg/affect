@@ -29,6 +29,9 @@ LOG_LEVELS = {'debug': logging.DEBUG,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
 
+ANEW_DB = os.path.expanduser('~/affect/word_data/anew_all.txt')
+SENTI_DB = os.path.expanduser('~/affect/word_data/SentiWordNet_1.0.1.txt')
+
 # all the possible FST options. Simple options are those that output a single
 # unweighted output path.
 
@@ -194,10 +197,10 @@ def tag_sentences(sentence_dicts, tag_type):
         tag_sentences(sentence_dicts, 'lemmas')
         [lemmastem_sentence(sent) for sent in sentence_dicts]
     elif tag_type == 'anew':
-        anew = read_anew_db('~/affect/word_data/anew_all.txt')
+        anew = read_anew_db(ANEW_DB)
         [tag_anew_sentence(sent, anew) for sent in sentence_dicts]
     elif tag_type == 'senti':
-        sentiwordnet = read_sentiwordnet('~/affect/word_data/SentiWordNet_1.0.1.txt')
+        sentiwordnet = read_sentiwordnet(SENTI_DB)
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
     elif tag_type == 'words':
         # do nothing for words
