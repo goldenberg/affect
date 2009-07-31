@@ -42,18 +42,16 @@ def main():
     
     run_svms(arguments[0], arguments[1], arguments[2])
 
-def run_svms(kernel1, kernel2, basename):
-    weight1 = 1
-    
+def run_svms(kernel1, kernel2, basename):    
     if os.path.exists(basename):
         shutil.rmtree(basename)
     
     os.makedirs(basename)
     
     data_points = []
-    for weight2 in numpy.arange(0, 1, 0.3):
-        kernel_filename = os.path.join(basename, str(weight2) + '.kar')
-        add_kernels(kernel1, kernel2, kernel_filename)
+    for weight in numpy.arange(0, 1, 0.1):
+        kernel_filename = os.path.join(basename, str(weight) + '.kar')
+        add_kernels(kernel1, kernel2, kernel_filename, weight1=1-weight, weight2=weight)
         matrix_filename = make_kernels.compile_kernel(kernel_filename)
         
         svm_args = ['-k', 'openkernel', '-K', matrix_filename, '-v', '10', 'sentences.all']
@@ -73,11 +71,17 @@ def plot_accuracies(data_points, basename):
     Plot the ratio of weight1 to weight2 versus the SVM accuracy for the 
     summed kernel.
     '''
+    try:
+        import pylab
+    except ImportError, e:
+        log.error('pylab cannot be loaded. The data will not be plotted.')
+        return
+    
     ratios = [point['weight1'] / point['weight2'] for point in data_points]
     accuracies = [point['accuracy'] for point in data_points]
     
     fig = pylab.figure()
-    pylab.xlabel('$\alpha1 / \alpha2$ (weight ratio)')
+    pylab.xlabel('$\alpha1$ / $\alpha2$ (weight ratio)')
     pylab.ylabel('% accuracy')
     pylab.plot(ratios, accuracies)
     pylab.savefig(basename + '.pdf')
