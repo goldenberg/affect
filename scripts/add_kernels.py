@@ -17,6 +17,8 @@ import os
 import subprocess
 import shutil
 
+import drmaa
+
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
             'warning': logging.WARNING,
@@ -25,7 +27,7 @@ LOG_LEVELS = {'debug': logging.DEBUG,
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%H:%M:%S')
-log = logging.getLogger(__name__)
+log = logging.getLogger('add_kernels')
 
 def main():
     usage = """%prog KERNEL1 KERNEL2 OUTPUT_BASENAME [options]
@@ -48,23 +50,31 @@ def run_svms(kernel1, kernel2, basename):
     
     os.makedirs(basename)
     
+    c_values = numpy.arange(0.1, 5, 1)
+    
+    svmin_path = os.path.realpath('sentences.all')
+    
     data_points = []
     for weight in numpy.arange(0, 1, 0.1):
         kernel_filename = os.path.join(basename, str(weight) + '.kar')
         add_kernels(kernel1, kernel2, kernel_filename, weight1=1-weight, weight2=weight)
-        matrix_filename = make_kernels.compile_kernel(kernel_filename)
+        matrix_filename = os.path.realpath(make_kernels.compile_kernel(kernel_filename))
         
-        svm_args = ['-k', 'openkernel', '-K', matrix_filename, '-v', '10', 'sentences.all']
-        c, accuracy = vary_c.run_svms(0.1, 5, 1, svm_args, basename)
+        weight_folder = os.path.join(basename, 'weight=%s' % str(weight))
+        os.mkdir(weight_folder)
         
-        data_points.append( { 'weight1' : weight1, 
-                             'weight2' : weight2, 
-                             'accuracy' : accuracy,
-                             'c' : c,
-                            } )
+        job_templates = vary_c.init_drmaa_job_templates(session, 'svm-train', 
+                                    c_values, matrix_filename, svmin_path, weight_folder)
+        
+        
+        #data_points.append( {'weight1' : 1-weight, 
+        #                     'weight2' : weight, 
+        #                     'accuracy' : accuracy,
+        #                     'c' : c,
+        #                    } )
     
-    save_accuracies(data_points, basename)
-    plot_accuracies(data_points, basename)
+    #save_accuracies(data_points, basename)
+    #plot_accuracies(data_points, basename)
 
 def plot_accuracies(data_points, basename):
     '''
