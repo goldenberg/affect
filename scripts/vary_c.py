@@ -59,10 +59,24 @@ def run_svmtrain(svm_args, c):
     '''
     arguments = ["svm-train", "-c", "%f" % c]
     arguments.extend(svm_args)
+    
     process = subprocess.Popen(arguments, stdout=subprocess.PIPE)
-                                #stderr=subprocess.PIPE)
     (stdout, stderr) = process.communicate()
+    
     return stdout
+
+def init_drmaa_job_templates(session, svmtrain_path, c_values, kernel_path, svmin_path, output_folder):    
+    templates = []
+    
+    for c in c_values:
+        job_template = session.createJobTemplate()
+        job_template.remoteCommand = svmtrain_path
+        job_template.args = ['-c', '%f' % c, '-k', 'openkernel', '-K', kernel_path, svmin_path]
+        job_template.outputPath = os.path.join(output_folder, 'c=%s.svmout' % str(c))
+        job_template.environment = {'LD_LIBRARY_PATH': '/data/x86_64/OpenKernel/kernel/plugin/:/data/x86_64/OpenFst/lib/'}
+        templates.append(job_template)
+    
+    return templates
 
 def find_cv_accuracy(output):
     '''
