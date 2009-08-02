@@ -13,6 +13,7 @@ import logging
 import numpy as np
 import subprocess
 import pdb
+import os
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
