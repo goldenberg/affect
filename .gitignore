@@ -1,0 +1,3 @@
+*.pyc
+/data/*
+/alm_data/consolidated-stemmed
