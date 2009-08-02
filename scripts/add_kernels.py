@@ -72,6 +72,9 @@ def run_svms(kernel1, kernel2, basename):
         job_ids = [session.runJob(jt) for jt in job_templates]
         
         log.info('weight=%2f, job ids: %s' % (weight, job_ids))
+        
+        session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
+        
         #data_points.append( {'weight1' : 1-weight, 
         #                     'weight2' : weight, 
         #                     'accuracy' : accuracy,
