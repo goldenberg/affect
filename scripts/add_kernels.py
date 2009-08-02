@@ -55,6 +55,9 @@ def run_svms(kernel1, kernel2, basename):
     svmin_path = os.path.realpath('sentences.all')
     
     data_points = []
+    
+    session = drmaa.Session()
+    
     for weight in numpy.arange(0, 1, 0.1):
         kernel_filename = os.path.join(basename, str(weight) + '.kar')
         add_kernels(kernel1, kernel2, kernel_filename, weight1=1-weight, weight2=weight)
@@ -66,7 +69,9 @@ def run_svms(kernel1, kernel2, basename):
         job_templates = vary_c.init_drmaa_job_templates(session, 'svm-train', 
                                     c_values, matrix_filename, svmin_path, weight_folder)
         
+        job_ids = [session.runJob(jt) for jt in job_templates]
         
+        log.info('weight=%2f, job ids: %s' % (weight, job_ids))
         #data_points.append( {'weight1' : 1-weight, 
         #                     'weight2' : weight, 
         #                     'accuracy' : accuracy,
