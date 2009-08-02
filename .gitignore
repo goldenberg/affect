@@ -1,3 +1,11 @@
 *.pyc
 /data/*
 /alm_data/consolidated-stemmed
+/alm_data/consolidated-pos
+/alm_data/consolidated/*
+PYSMELLTAGS
+/alm_data/Grimms
+/alm_data/HCAndersen
+/alm_data/potter
+!/alm_data/consolidated/sentences.all
+!/alm_data/consolidated/sent-agree
