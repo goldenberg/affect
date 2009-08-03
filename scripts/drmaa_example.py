@@ -10,7 +10,7 @@ JOB_CHUNK = 3
 OPATH=":"+drmaa.JobTemplate.WORKING_DIRECTORY+'/DRMAA_JOB_OUT'
 
 def init_job_template(jt, path, args, as_bulk_job):
-    jt.workingDirectory = drmaa.JobTemplate.HOME_DIRECTORY
+    jt.workingDirectory = os.getcwd()
     jt.environment = {'LD_LIBRARY_PATH': '/data/x86_64/OpenKernel/kernel/plugin/:/data/x86_64/OpenFst/lib/'}
     jt.remoteCommand = path
     jt.args = args
