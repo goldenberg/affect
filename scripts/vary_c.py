@@ -71,7 +71,10 @@ def init_drmaa_job_templates(session, svmtrain_path, c_values, kernel_path, svmi
     Returns a list of DRMAA job templates with varying c-parameter. Outputs
     will be stored a c=%s.svmout file
     '''
-    
+    try:
+        import drmaa
+    except ImportError, e:
+        log.error('unable to import drmaa. jobs must be run locally.')
     templates = []
     
     for c in c_values:
