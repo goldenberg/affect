@@ -67,7 +67,7 @@ def run_svms(kernel1, kernel2, basename):
         os.mkdir(weight_folder)
         
         job_templates = vary_c.init_drmaa_job_templates(session, 'svm-train', 
-                                    c_values, matrix_filename, svmin_path, weight_folder)
+                                    c_values, matrix_filename, svmin_path, 'weight=' + str(weight))
         
         job_ids = [session.runJob(jt) for jt in job_templates]
         

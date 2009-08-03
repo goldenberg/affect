@@ -81,7 +81,7 @@ def init_drmaa_job_templates(session, svmtrain_path, c_values, kernel_path, svmi
         job_template = session.createJobTemplate()
         job_template.remoteCommand = svmtrain_path
         job_template.args = ['-c', '%f' % c, '-k', 'openkernel', '-K', '-v', '10', kernel_path, svmin_path]
-        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, 'c=%s.svmout' % str(c))
+        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, weight_folder, 'c=%s.svmout' % str(c))
         job_template.environment = {'LD_LIBRARY_PATH': '/data/x86_64/OpenKernel/kernel/plugin/:/data/x86_64/OpenFst/lib/'}
         templates.append(job_template)
     

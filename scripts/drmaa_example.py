@@ -7,7 +7,7 @@ from pprint import pprint
 NBULKS = 1
 JOB_CHUNK = 3
 
-OPATH=":"+drmaa.JobTemplate.HOME_DIRECTORY+'/DRMAA_JOB_OUT'
+OPATH=":"+drmaa.JobTemplate.WORKING_DIRECTORY+'/DRMAA_JOB_OUT'
 
 def init_job_template(jt, path, args, as_bulk_job):
     jt.workingDirectory = drmaa.JobTemplate.HOME_DIRECTORY
