@@ -45,6 +45,13 @@ def main():
     run_svms(arguments[0], arguments[1], arguments[2])
 
 def run_svms(kernel1, kernel2, basename):    
+    '''
+    Runs distributed SVMs across a DRMAA cluster. JobTemplates are created by
+    vary_c.init_drmaa_job_templates. The following directory structure is used:
+    
+    ./weight=0.xx/c=x.xx.svmout
+                 /c=x.xx.svmerr
+    '''
     if os.path.exists(basename):
         shutil.rmtree(basename)
     
@@ -63,11 +70,11 @@ def run_svms(kernel1, kernel2, basename):
         add_kernels(kernel1, kernel2, kernel_filename, weight1=1-weight, weight2=weight)
         matrix_filename = os.path.realpath(make_kernels.compile_kernel(kernel_filename))
         
-        weight_folder = os.path.join(basename, 'weight=%s' % str(weight))
-        os.mkdir(weight_folder)
+        weight_foldername = os.path.join(basename, 'weight=%s' % str(weight))
+        os.mkdir(weight_foldername)
         
         job_templates = vary_c.init_drmaa_job_templates(session, 'svm-train', 
-                                    c_values, matrix_filename, svmin_path, 'weight=' + str(weight))
+                                    c_values, matrix_filename, svmin_path, weight_foldername)
         
         job_ids = [session.runJob(jt) for jt in job_templates]
         
