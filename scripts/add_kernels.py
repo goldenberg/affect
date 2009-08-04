@@ -12,18 +12,24 @@ import optparse
 import logging
 import vary_c
 import make_kernels
-import numpy
+from decimal import Decimal
 import os
 import subprocess
 import shutil
 
 import drmaa
 
+import pdb
+
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
             'warning': logging.WARNING,
               'error': logging.ERROR,
            'critical': logging.CRITICAL}
+
+CLUSTER_ENVIRONMENT = {'LD_LIBRARY_PATH': '/g/reu09/goldenbe/OpenKernel/kernel/lib'
+                                          ':/data/x86_64/OpenFst/lib/'
+                                          ':/g/reu09/goldenbe/OpenKernel/kernel/plugin'}
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%H:%M:%S')
@@ -36,15 +42,30 @@ def main():
     opt_parser = optparse.OptionParser(usage=usage)
     
     opt_parser.add_option("-l", "--log_level", action="store", 
-                       default='warning', dest="log_level")
+                       default='debug', dest="log_level")
     
     options, arguments = opt_parser.parse_args()
     
+    kernel1 = arguments[0]
+    kernel2 = arguments[1]
+    
+    # create output folder
+    output_basename = arguments[2]
+    if os.path.exists(output_basename):
+        shutil.rmtree(output_basename)
+    
+    os.makedirs(output_basename)
+    
     log.setLevel(LOG_LEVELS[options.log_level])
     
-    run_svms(arguments[0], arguments[1], arguments[2])
+    weight_range = drange(Decimal('0.0'), Decimal('1.0'), Decimal('0.1'))
+    drmaa_session = drmaa.Session()
+    
+    sum_all_kernels(drmaa_session, kernel1, kernel2, weight_range, output_basename)
+    run_svms(drmaa_session, output_basename, '/g/reu09/goldenbe/affect/alm_data/consolidated/sentences.all')
+    
 
-def run_svms(kernel1, kernel2, basename):    
+def run_svms(session, kernel_directory, svmin_path):    
     '''
     Runs distributed SVMs across a DRMAA cluster. JobTemplates are created by
     vary_c.init_drmaa_job_templates. The following directory structure is used:
@@ -52,42 +73,42 @@ def run_svms(kernel1, kernel2, basename):
     ./weight=0.xx/c=x.xx.svmout
                  /c=x.xx.svmerr
     '''
-    if os.path.exists(basename):
-        shutil.rmtree(basename)
     
-    os.makedirs(basename)
-    
-    c_values = numpy.arange(0.1, 5, 1)
-    
-    svmin_path = os.path.realpath('sentences.all')
+    c_values = drange(Decimal('0.1'), Decimal('5'), Decimal('1'))
     
     data_points = []
     
-    session = drmaa.Session()
+    svm_train = '/g/reu09/goldenbe/OpenKernel/libsvm-2.82/svm-train'
     
-    for weight in numpy.arange(0, 1, 0.1):
-        kernel_filename = os.path.join(basename, str(weight) + '.kar')
-        add_kernels(kernel1, kernel2, kernel_filename, weight1=1-weight, weight2=weight)
-        matrix_filename = os.path.realpath(make_kernels.compile_kernel(kernel_filename))
+    all_job_templates = []
+    for kernel_filename in os.listdir(kernel_directory):
+        if not kernel_filename.endswith('.matrix.kar'):
+            continue
         
-        weight_foldername = os.path.join(basename, 'weight=%s' % str(weight))
-        os.mkdir(weight_foldername)
+        # directory at same level as kernel to store svm outputs
+        output_directory = os.path.join(kernel_directory, os.path.splitext(os.path.realpath(kernel_filename))[0])
+        os.mkdir(output_directory)
         
-        job_templates = vary_c.init_drmaa_job_templates(session, 'svm-train', 
-                                    c_values, matrix_filename, svmin_path, weight_foldername)
         
-        job_ids = [session.runJob(jt) for jt in job_templates]
+        job_templates = vary_c.init_drmaa_job_templates(session, svm_train, 
+                                    c_values, kernel_filename, svmin_path, output_directory)
         
-        log.info('weight=%2f, job ids: %s' % (weight, job_ids))
-        
-        session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
-        
-        #data_points.append( {'weight1' : 1-weight, 
-        #                     'weight2' : weight, 
-        #                     'accuracy' : accuracy,
-        #                     'c' : c,
-        #                    } )
+        all_job_templates.extend(job_templates)
     
+    job_ids = [session.runJob(jt) for jt in all_job_templates]
+    
+    log.error('submitted all jobs')
+    
+    session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
+    
+    log.error('all jobs run')
+    
+            #data_points.append( {'weight1' : 1-weight, 
+            #                     'weight2' : weight, 
+            #                     'accuracy' : accuracy,
+            #                     'c' : c,
+            #                    } )
+
     #save_accuracies(data_points, basename)
     #plot_accuracies(data_points, basename)
 
@@ -147,10 +168,58 @@ def add_kernels(kernel1, kernel2, output_filename, weight1=1, weight2=1):
     output_file.write(stdout)
     
     for line in stderr.split('\n'):
-        log.error('klsum: ' + stderr)
+        if line.strip() != '':
+            log.error('klsum: ' + line)
     
     output_file.close()
 
+
+def sum_all_kernels(session, kernel1, kernel2, weight_range, output_folder):
+    '''
+    Submits jobs to the DRMAA session to add and compile the two kernels.
+    Waits to synchronize all jobs.
+    '''
+    KLSUM_PATH = '/g/reu09/goldenbe/OpenKernel/kernel/bin/klsum'
+    
+    summed_kernel_path = ':' + drmaa.JobTemplate.WORKING_DIRECTORY + os.path.join(output_folder, 'weight%s.kar') 
+    kernel1_path = os.path.realpath( kernel1 )
+    kernel2_path = os.path.realpath(kernel2)
+    
+    job_templates = []
+
+    
+    print kernel1_path
+    print summed_kernel_path
+    for weight in weight_range:
+        job_template = session.createJobTemplate()
+        
+        weight1 = Decimal('1') - weight
+        weight2 = weight
+        
+        job_template.remoteCommand = KLSUM_PATH
+        job_template.arguments = [ 
+                                   kernel1_path, kernel2_path ]
+        
+        job_template.environment = CLUSTER_ENVIRONMENT
+                
+        job_template.workingDirectory = os.getcwd()
+        job_template.outputPath = summed_kernel_path % weight
+        job_template.errorPath  = (summed_kernel_path + '.err') % weight
+        
+        job_template.nativeSpecification = '-q penguin.q'
+        
+        job_templates.append(job_template)
+        
+    job_ids = [session.runJob(jt) for jt in job_templates]
+    
+    log.info('summing jobs started. ids: %s' % job_ids)
+    session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
+
+def drange(start, stop, step):
+     r = start
+     while r < stop:
+        yield r
+        r += step
 
 if __name__ == "__main__":
     main()
