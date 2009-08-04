@@ -8,6 +8,7 @@ NBULKS = 1
 JOB_CHUNK = 3
 
 OPATH=":"+drmaa.JobTemplate.WORKING_DIRECTORY+'/DRMAA_JOB_OUT'
+EPATH=":"+drmaa.JobTemplate.WORKING_DIRECTORY+'/DRMAA_JOB_ERR'
 
 def init_job_template(jt, path, args, as_bulk_job):
     jt.workingDirectory = os.getcwd()
@@ -17,8 +18,10 @@ def init_job_template(jt, path, args, as_bulk_job):
     jt.joinFiles=True
     if as_bulk_job:
         jt.outputPath=OPATH+'.'+drmaa.JobTemplate.PARAMETRIC_INDEX
+        jt.errorPath=EPATH+'.'+drmaa.JobTemplate.PARAMETRIC_INDEX
     else:
         jt.outputPath=OPATH
+        jt.errorPath=EPATH
     return jt
 
 
