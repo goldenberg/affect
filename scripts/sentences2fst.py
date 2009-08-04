@@ -255,6 +255,19 @@ def lemmatize_sentence(sent_dict):
         sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
 
 def lemmastem_sentence(sent_dict):
+    '''
+    Applies the Porter stemmer to the lemmas.
+    >>> sent = {'words' : ['I', 'am', 'not', 'lying', 'that', 'I', 'brought', 'things', 'to', 'be', 'helpful']}
+    >>> lemmastem_sentence(sent)
+    >>> sent['lemmastems']
+    ['I', 'be', 'not', 'lie', 'that', 'I', 'bring', 'thing', 'to', 'be', 'help']
+    '''
+    
+    if 'lemmas' not in sent_dict:
+        lemmatize_sentence(sent_dict)
+        
+    sent_dict['lemmastems'] = [stem_word(word) for word in sent_dict['lemmas']]
+
 def tag_swn_sentence(sent_dict, sentiwordnet):
     '''
     Looks up each lemma in SentiWordNet, by using the first synset for each
