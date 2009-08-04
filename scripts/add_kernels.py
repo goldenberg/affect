@@ -61,9 +61,11 @@ def main():
     weight_range = drange(Decimal('0.0'), Decimal('1.0'), Decimal('0.1'))
     drmaa_session = drmaa.Session()
     
-    sum_all_kernels(drmaa_session, kernel1, kernel2, weight_range, output_basename)
+    sum_all_kernels(None, kernel1, kernel2, weight_range, output_basename)
     run_svms(drmaa_session, output_basename, '/g/reu09/goldenbe/affect/alm_data/consolidated/sentences.all')
     
+    data_points = read_all_accuracies(output_basename)
+    save_accuracies(data_points, output_basename)
 
 def run_svms(session, kernel_directory, svmin_path):    
     '''
@@ -74,7 +76,7 @@ def run_svms(session, kernel_directory, svmin_path):
                  /c=x.xx.svmerr
     '''
     
-    c_values = drange(Decimal('0.1'), Decimal('5'), Decimal('1'))
+    c_values = list(drange(Decimal('0.1'), Decimal('6'), Decimal('.1')))
     
     data_points = []
     
@@ -82,26 +84,33 @@ def run_svms(session, kernel_directory, svmin_path):
     
     all_job_templates = []
     for kernel_filename in os.listdir(kernel_directory):
-        if not kernel_filename.endswith('.matrix.kar'):
+        #pdb.set_trace()
+        if not kernel_filename.endswith('.kar'):
+            log.debug('found kernel: %s' % kernel_filename)
             continue
         
+        kernel_path = os.path.realpath(os.path.join(kernel_directory, kernel_filename))
+        
         # directory at same level as kernel to store svm outputs
-        output_directory = os.path.join(kernel_directory, os.path.splitext(os.path.realpath(kernel_filename))[0])
+        output_directory = os.path.splitext(kernel_path)[0]
+        if os.path.exists(output_directory):
+            shutil.rmtree(output_directory)
+        
         os.mkdir(output_directory)
         
         
         job_templates = vary_c.init_drmaa_job_templates(session, svm_train, 
-                                    c_values, kernel_filename, svmin_path, output_directory)
+                                    c_values, kernel_path, svmin_path, output_directory)
         
         all_job_templates.extend(job_templates)
     
     job_ids = [session.runJob(jt) for jt in all_job_templates]
     
-    log.error('submitted all jobs')
+    log.info('submitted jobs with ids: %s' % job_ids)
     
     session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
     
-    log.error('all jobs run')
+    log.info('All SVM jobs have been synchronized')
     
             #data_points.append( {'weight1' : 1-weight, 
             #                     'weight2' : weight, 
@@ -111,6 +120,31 @@ def run_svms(session, kernel_directory, svmin_path):
 
     #save_accuracies(data_points, basename)
     #plot_accuracies(data_points, basename)
+
+def read_all_accuracies(root_directory):
+    '''
+    Reads a directory of the form weightX.XX/cX.X.svmout into a list of dicts
+    with keys: weight1, weight2, accuracy, c.
+    '''
+    data_points = []
+    for (dirpath, dirnames, filenames) in os.walk(root_directory):
+        dir_name = os.path.split(dirpath)[1]
+        
+        if dir_name.startswith('weight'):
+            for svmout_filename in filenames:
+                if svmout_filename.startswith('c') and svmout_filename.endswith('.svmout'):
+                    svmout_path = os.path.join(dirpath, svmout_filename)
+                    svmoutput = ''.join(open(svmout_path).readlines())
+                    accuracy = vary_c.find_cv_accuracy(svmoutput)
+                    weight = float(dir_name[6:])
+                    c = float(svmout_filename[1:-7])
+                    
+                    data_points.append( {'weight1' : 1 - weight,
+                                         'weight2' : weight,
+                                         'accuracy' : Decimal('%3f' % accuracy),
+                                         'c' : c})
+    
+    return data_points
 
 def plot_accuracies(data_points, basename):
     '''
@@ -137,7 +171,7 @@ def save_accuracies(data_points, basename):
     Saves a TSV file of all the accuracies for each ratio and their
     corresponding best c value.
     '''
-    output = open(basename + '.tsv', 'w')
+    output = open(os.path.join(basename, 'accuracy.tsv'), 'w')
     
     for point in data_points:
         fields = [point['weight1'], point['weight2'], point['c'], point['accuracy']]
@@ -177,8 +211,15 @@ def add_kernels(kernel1, kernel2, output_filename, weight1=1, weight2=1):
 def sum_all_kernels(session, kernel1, kernel2, weight_range, output_folder):
     '''
     Submits jobs to the DRMAA session to add and compile the two kernels.
-    Waits to synchronize all jobs.
+    Waits to synchronize all jobs. If session==None, sum locally. 
     '''
+    if not session:
+        for weight in weight_range:
+            kernel_filename = os.path.join(output_folder, 'weight%s.kar' % weight)
+            add_kernels(kernel1, kernel2, kernel_filename, Decimal('1') - weight, weight)
+        
+        return
+    
     KLSUM_PATH = '/g/reu09/goldenbe/OpenKernel/kernel/bin/klsum'
     
     summed_kernel_path = ':' + drmaa.JobTemplate.WORKING_DIRECTORY + os.path.join(output_folder, 'weight%s.kar') 
@@ -186,10 +227,7 @@ def sum_all_kernels(session, kernel1, kernel2, weight_range, output_folder):
     kernel2_path = os.path.realpath(kernel2)
     
     job_templates = []
-
     
-    print kernel1_path
-    print summed_kernel_path
     for weight in weight_range:
         job_template = session.createJobTemplate()
         
@@ -215,6 +253,23 @@ def sum_all_kernels(session, kernel1, kernel2, weight_range, output_folder):
     log.info('summing jobs started. ids: %s' % job_ids)
     session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
 
+
+def read_accuracies(data_points, filename):
+    '''
+    Read data points back from accuracy.tsv file.
+    '''
+    
+    data_points = []
+    
+    for line in open(filename):
+        fields = line.split(' ')
+        
+        data_points.append( {'weight1' : float(fields[0]),
+                             'weight2' : float(fields[1]),
+                             'c' : float(fields[2]),
+                             'accuracy' : Decimal(fields[3])})
+    
+    return data_points
 def drange(start, stop, step):
      r = start
      while r < stop:
