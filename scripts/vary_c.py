@@ -82,11 +82,9 @@ def init_drmaa_job_templates(session, svmtrain_path, c_values, kernel_path, svmi
         job_template.remoteCommand = svmtrain_path
         job_template.args = ['-c', '%f' % c, '-k', 'openkernel', '-K', kernel_path, '-v', '10', svmin_path]
         
-        log.error('args: %s' % job_template.args)
-        
         job_template.workingDirectory = os.getcwd()
-        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c=%s.svmout' % str(c))
-        job_template.errorPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c=%s.svmerr' % str(c))
+        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c%s.svmout' % str(c))
+        job_template.errorPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c%s.svmerr' % str(c))
         
         job_template.nativeSpecification = '-q penguin.q'
         job_template.environment = {'LD_LIBRARY_PATH': '/g/reu09/goldenbe/OpenKernel/kernel/lib'
