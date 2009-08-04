@@ -31,11 +31,12 @@ LOG_LEVELS = {'debug': logging.DEBUG,
 
 ANEW_DB = os.path.expanduser('~/affect/word_data/anew_all.txt')
 SENTI_DB = os.path.expanduser('~/affect/word_data/SentiWordNet_1.0.1.txt')
+WORD_LIST_DIR = os.path.expanduser('~/affect/word_data/lists')
 
 # all the possible FST options. Simple options are those that output a single
 # unweighted output path.
 
-FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastems', 'senti', 'anew')
+FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastems', 'senti', 'anew', 'lists')
 SIMPLE_FST_TYPES = ('words', 'lemmas', 'pos', 'lemmastems')
 
 # punctuation that is worth parsing as a separate token. all other punctuation
@@ -202,6 +203,10 @@ def tag_sentences(sentence_dicts, tag_type):
     elif tag_type == 'senti':
         sentiwordnet = read_sentiwordnet(SENTI_DB)
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
+    elif tag_type == 'lists':
+        word_lists = read_word_lists(WORD_LIST_DIR)
+        tag_sentences(sentence_dicts, 'lemmas')
+        [tag_sentence_for_lists(sent, word_lists) for sent in sentence_dicts]
     elif tag_type == 'words':
         # do nothing for words
         pass
@@ -250,20 +255,6 @@ def lemmatize_sentence(sent_dict):
         sent_dict['lemmas'] = [lemmatize_word(word) for word in sent_dict['words']]
 
 def lemmastem_sentence(sent_dict):
-    '''
-    Applies the Porter stemmer to the lemmas.
-    
-    >>> sent = {'words' : ['I', 'am', 'not', 'lying', 'that', 'I', 'brought', 'things', 'to', 'be', 'helpful']} 
-    >>> lemmastem_sentence(sent)
-    >>> sent['lemmastems']
-    ['I', 'be', 'not', 'lie', 'that', 'I', 'bring', 'thing', 'to', 'be', 'help']
-    '''
-    
-    if 'lemmas' not in sent_dict:
-        lemmatize_sentence(sent_dict)
-    
-    sent_dict['lemmastems'] =  [stem_word(word) for word in sent_dict['lemmas']]
-
 def tag_swn_sentence(sent_dict, sentiwordnet):
     '''
     Looks up each lemma in SentiWordNet, by using the first synset for each
@@ -413,6 +404,36 @@ def read_anew_db(path):
             
     return anew_dict
 
+def read_word_lists(list_directory):
+    '''
+    Reads all files with a .list extension in a specified directory. Returns
+    a dictionary keyed by words, where the values are lists of tags.
+    '''
+    words = {}
+    
+    for list_filename in os.listdir(list_directory):
+        if list_filename.endswith('.list'):
+            tag = os.path.splitext[list_filename][0]
+            for word in open(os.path.join(list_directory, list_filename)):
+                word = word.lowercase()
+                
+                if word not in words:
+                    words[word] = [tag]
+                else:
+                    words[word].append(tag)
+
+def tag_sentence_for_lists(sent_dict, lists_dict):
+    '''
+    Tries to tag sentences using the lists. If the word isn't found, look for
+    corresponding lemma.
+    '''
+    sent_dict['lists'] = []
+    for (word, lemma) in zip(sent_dict['words'], sent_dict['lemmas']):
+        if word in lists_dict:
+            sent_dict['lists'].extend(lists_dict[word])
+        elif lemma in lists_dict:
+            sent_dict['lists'].extend(lists_dict[lemma])
+    
 
 def read_pos_sentence(sentence_id, story, pos_directory):
     '''

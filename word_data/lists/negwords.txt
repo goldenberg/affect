@@ -1,0 +1,2293 @@
+ABANDON 	IAV Neg SUPV Fail Ngtv Weak |
+ABANDONMENT 	Neg Noun Fail Weak |
+ABATE 	IAV Neg SUPV Decr Psv |
+ABDICATE 	IAV Neg SUPV Finish Weak Psv Subm |
+ABHOR 	SV Neg SUPV Hostile Psv Arousal |
+ABJECT 	IPadj Neg Modif Psv Subm Weak Vice |
+ABNORMAL 	Neg Modif Vice Ngtv |
+ABOLISH 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv Power |
+ABOMINABLE 	IndAdj Neg Modif Eval Vice Strng Ovrst |
+ABRASIVE 	IPadj Neg Modif Vice Hostile Strng |
+ABRUPT 	Neg Modif Time* Ngtv |
+ABSCOND 	IAV Neg SUPV Travel Subm Weak Hostile Actv |
+ABSENCE 	Neg Noun Weak Fail |
+ABSENT 	IndAdj Neg Modif Weak Psv Fail |
+ABSENT-MINDED 	IndAdj Neg Modif Weak Psv Fail |
+ABSENTEE 	Neg Noun Hostile Weak Fail Intrel Vice |
+ABSURD 	Neg Modif Vice Ngtv Ovrst |
+ABSURDITY 	Neg Noun Vice |
+ABUSE#1 	Neg Noun Vice Ngtv Hostile Actv |
+ABUSE#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+ABYSS 	Neg Noun Ngtv PLACE Land |
+ACCIDENT 	Neg Noun Ngtv Causal Undrst | noun: An unfortunate happening, unintentionally caused and unexpected
+ACCOST 	IAV Neg SUPV Exert Hostile Actv |
+ACCURSED 	IPadj Neg Modif Vice Hostile |
+ACCUSATION 	Neg Noun Comform Hostile Intrel |
+ACCUSE#1 	Neg Modif Legal Ngtv Comform Hostile |
+ACCUSE#2 	IAV Neg SUPV Hostile Ngtv Comform |
+ACHE 	SV Neg SUPV Pain Psv |
+ACRIMONIOUS 	IPadj Neg Modif Hostile Arousal |
+ACRIMONY 	Neg Noun Hostile Psv Arousal Vice |
+ADDICT 	Neg Noun Need Weak HU |
+ADDICTION 	Neg Noun Need Weak Ovrst |
+ADMONISH 	IAV Neg SUPV Intrel Hostile Power Strng Actv |
+ADMONITION 	Neg Noun Comform Actv |
+ADULTERATE 	IAV Neg SUPV Change Exert |
+ADULTERATION 	Neg Noun Vice Change |
+ADULTERY 	Neg Noun Vice Intrel |
+ADVERSARY 	Neg Noun Intrel HU Polit Role Hostile |
+ADVERSE 	Neg Modif Vice Ngtv |
+ADVERSITY 	Neg Noun Vice |
+AFFECTATION 	Neg Noun Vice |
+AFFLICT 	IAV Neg SUPV Ngtv Strng Actv Intrel Hostile |
+AFFLICTION 	Neg Noun Ngtv Weak Vice Psv |
+AFRAID#2 	Neg LY Negate Ngtv Weak | 1% idiom: "Afraid not"
+AGAINST 	Neg PREP Ngtv | prep: In opposition to, adverse or hostile to
+AGGRAVATE 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+AGGRAVATION 	Neg Noun Hostile Ngtv Strng Actv Vice |
+AGGRESSION 	Neg Noun Hostile Ngtv Strng Actv Vice |
+AGGRESSIVE 	Neg Modif EMOT Hostile Ngtv Strng Actv PFREQ V | adjective: Characterized by aggression, tending to aggress, making the first attack, energetic, vigorous.
+AGGRESSIVENESS 	Neg Noun Hostile Ngtv Strng Actv Vice |
+AGGRESSOR 	Neg Noun HU Hostile Exert Intrel |
+AGGRIEVE 	SV Neg SUPV Hostile Actv Comform |
+AGHAST 	IPadj Neg Modif Vice Ovrst |
+AGITATE 	IAV Neg SUPV Exert Ngtv Strng Actv |
+AGITATION 	Neg Noun Ngtv Strng Actv Vice |
+AGITATOR 	Neg Noun HU Hostile Exert Intrel |
+AGONIZE 	SV Neg SUPV Pain Psv |
+AGONY 	Neg Noun Ngtv Pain |
+AIL 	SV Neg SUPV Pain Psv |
+AILMENT 	Neg Noun Pain |
+AIMLESS 	IndAdj Neg Modif Subm Psv Fail |
+ALARM#2 	IAV Neg SUPV Ngtv Actv Comform |
+ALARMING 	IndAdj Neg Modif Vice Ovrst |
+ALAS 	Neg Intrj Ovrst |
+ALIBI 	Neg Noun Comform Subm Psv Weak |
+ALIEN 	Neg Noun HU POLIT Ngtv Role |
+ALIENATE 	IAV Neg SUPV Affil Intrel Hostile Other |
+ALIENATION 	Neg Noun ABS Abs* EMOT Vice Ngtv |
+ALLEGATION 	Neg Noun COM Comform Hostile Legal Ngtv |
+ALLEGE 	IAV Neg SUPV Comform Weak Undrst |
+ALOOF 	IPadj Neg Modif Undrst Feeling Psv |
+ALTERCATION 	Neg Noun Hostile Exert Intrel |
+AMBIGUITY 	Neg Noun Undrst Ngtv Percv |
+AMBIGUOUS 	Neg Modif Percv Undrst Ngtv |
+AMBIVALENT 	Neg Modif EMOT Ngtv Weak Pain |
+AMBUSH#1 	Neg Noun Ritual Hostile Milit Ngtv Strng Actv |
+AMBUSH#2 	IAV Neg SUPV Intrel Hostile Milit Ngtv Strng Actv |
+AMISS 	Neg LY Ngtv Vice |
+AMPUTATE 	IAV Neg SUPV Decr Actv |
+ANARCHIST 	Neg Noun HU Hostile Polit Doctr |
+ANARCHY 	Neg Noun Hostile Polit Ovrst |
+ANGER#1 	Neg Noun EMOT Hostile Ngtv Actv PFREQ Arousal | 86% noun: Wrath, ire.
+ANGER#2 	IAV Neg SUPV Hostile Ngtv Arousal | 14% verb: To make angry.
+ANGRY 	Neg Modif EMOT Hostile Ngtv Actv Arousal | adjective: Feeling anger or resentment
+ANGUISH 	Neg Noun EMOT Hostile Ngtv Psv Pain |
+ANIMOSITY 	Neg Noun Hostile Intrel Vice |
+ANNIHILATE 	IAV Neg SUPV Hostile Finish Exert Actv |
+ANNIHILATION 	Neg Noun Vice Finish Hostile |
+ANNOY 	IAV Neg SUPV Actv Hostile Intrel Other |
+ANNOYANCE 	Neg Noun EMOT Hostile Ngtv Arousal |
+ANOMALOUS 	IPadj Neg Modif Rel |
+ANOMALY 	Neg Noun Rel Undrst |
+ANTAGONISM 	Neg Noun EMOT Hostile Ngtv Arousal Strng Actv |
+ANTAGONIST 	Neg Noun HU Hostile Intrel |
+ANTAGONISTIC 	Neg Modif EMOT Hostile Ngtv Strng Arousal Actv |
+ANTAGONIZE 	IAV Neg SUPV Ngtv Strng Actv Arousal Hostile |
+ANTI-SOCIAL 	IPadj Neg Modif Ovrst Intrel Vice |
+ANTIPATHY 	Neg Noun Vice Undrst Feeling |
+ANTIQUATED 	IPadj Neg Modif Weak Time |
+ANTITRUST 	IndAdj Neg Modif Polit Affil Legal |
+ANXIETY 	Neg Noun EMOT Ngtv Weak Psv Pain | noun: Mental distress or uneasiness caused by apprehension of danger or misfortune.
+ANXIOUS#2 	Neg Modif EMOT Ngtv Weak Psv Pain | 21% adjective: Apprehensive, worried
+ANXIOUS#3 	Neg Modif Ngtv Weak Psv Pain | 13% adverb: "Anxiously"--nervously, excitedly
+ANXIOUSNESS 	Neg Noun EMOT Ngtv Weak Psv Pain |
+APATHETIC 	IndAdj Neg Modif Weak Undrst Feeling Psv |
+APATHY 	Neg Noun Vice Weak Undrst Psv Feeling |
+APPALL#1 	Neg Modif Vice Ngtv |
+APPALL#2 	IAV Neg SUPV Ngtv Comform |
+APPREHENSION 	Neg Noun EMOT Pain Ngtv Strng Actv |
+APPREHENSIVE 	IPadj Neg Modif Psv Emot Pain Weak |
+ARBITRARY 	Neg Modif Vice Ngtv Undrst |
+ARDUOUS 	IndAdj Neg Modif Vice Eval |
+ARGUE#1 	IAV Neg SUPV Hostile Ngtv Actv Comform | 44% verb: To dispute, to contend in argument--'they argue a lot' (sense of animosity)
+ARGUMENT#1 	Neg Noun COM Comform Hostile Ngtv Actv | 63% noun: A (heated) discussion involving different points of view
+ARREST#1 	Neg Modif Hostile Legal Power Ngtv Strng Actv Exert | 15% noun-adj: Halting, seizure, usually by legal authority, seized, halted, stopped
+ARREST#2 	DAV Neg SUPV Stay Hostile Legal Ngtv Strng Actv | 81% verb: To halt, stop, seize by legal authority
+ARROGANCE 	Neg Noun Vice Power |
+ARROGANT 	Neg Modif Ngtv Strng Vice |
+ARTIFICIAL 	Neg Modif Vice Ngtv |
+ASHAMED 	Neg Modif EMOT Pain Ngtv Weak Psv |
+ASSAIL 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+ASSAILANT 	Neg Noun HU Hostile Exert Other |
+ASSASSIN 	Neg Noun HU Hostile Exert |
+ASSASSINATE 	IAV Neg SUPV Actv Hostile Exert Other |
+ASSAULT#1 	Neg Noun Hostile Ngtv Strng Actv Vice |
+ASSAULT#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+ASTRAY 	Neg Modif Weak Psv Fail |
+ASUNDER 	IndAdj Neg Modif Weak Psv Fail |
+ATROCIOUS 	IndAdj Neg Modif Vice Ngtv Ovrst Eval Vice |
+ATROPHY 	IAV Neg SUPV Decr Ngtv Weak Psv |
+ATTACK#1 	Neg Noun POLIT Hostile Ngtv Strng Actv Vice | 55% noun: An onslaught, assault
+ATTACK#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 34% verb: To assault (physically or figuratively)
+ATTACK#3 	Neg Noun Vice Ngtv Hostile | 10% noun: A seizure by disease, especially "heart attack"
+AUDACIOUS 	IndAdj Neg Modif Eval Vice Strng Ovrst |
+AUDACITY 	Neg Noun Vice Strng Ovrst |
+AUSTERE 	IndAdj Neg Modif Eval Hostile Strng |
+AUTOCRAT 	Neg Noun HU Polit Doctr Power Strng |
+AUTOCRATIC 	IPadj Neg Modif Polit Doctr Power Strng |
+AVARICE 	Neg Noun Vice |
+AVARICIOUS 	IPadj Neg Modif Vice |
+AVENGE 	Neg Noun Hostile Ngtv Strng Actv Vice |
+AVERSION 	Neg Noun Negate Psv Hostile Arousal |
+AVERT 	IAV Neg SUPV Intrel Hostile Weak Psv |
+AVOID 	IAV Neg SUPV Intrel Hostile Ngtv Weak Psv | verb: To keep away from, keep clear of
+AVOIDANCE 	Neg Noun Hostile Ngtv Weak Psv Intrel |
+AWFUL#1 	Neg Modif EVAL Vice Ngtv Strng Ovrst | 60% adjective-adv: Extremely bad, unpleasant, ugly; very (7)
+AWKWARD 	Neg Modif EVAL Vice Ngtv Weak |
+AWKWARDNESS 	Neg Noun Vice Weak |
+AX 	IAV Neg SUPV Power Legal Work Actv |
+BABBLE 	DAV Neg SUPV Comform Actv |
+BACKWARD 	Neg LY ECON Ngtv Weak Space |
+BACKWARDNESS 	Neg Noun ECON Ngtv Weak Vice |
+BAD 	Neg Modif EVAL Vice Ngtv Ovrst | adj: Marks negative evaluation on a dimension specified by context--not good, of poor quality, offensive, unfortunate
+BADLY 	Neg Modif EVAL Vice Ovrst Ngtv |
+BAFFLE 	IAV Neg SUPV Ngtv Undrst Solve |
+BAFFLEMENT 	Neg Noun Ngtv Undrst Know |
+BAIL 	IAV Neg SUPV Fail Weak Actv |
+BAIT 	IAV Neg SUPV Actv Other Comform |
+BALK 	IAV Neg SUPV Psv Weak Fail |
+BANAL 	IndAdj Neg Modif Vice |
+BANDIT 	Neg Noun HU Hostile Fetch |
+BANE 	Neg Noun Weak Vice Psv |
+BANISH#1 	Neg Modif Polit* Ngtv Strng Actv Intrel Power |
+BANISH#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv Power |
+BANISHMENT 	Neg Noun Power Intrel Affil Polit |
+BANKRUPT 	IndAdj Neg Modif Vice Econ Fail Quan |
+BANKRUPTCY 	Neg Noun Vice Econ Fail Quan |
+BAR#4 	DAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv | 19% verb: To obstruct or exclude
+BARBARIAN 	Neg Noun HU Hostile Vice |
+BARBAROUS 	IndAdj Neg Modif Hostile Exert Vice |
+BARREN 	IndAdj Neg Modif Psv Weak Quan |
+BARRIER 	Neg Noun Object |
+BASHFUL 	IPadj Neg Modif Emot Weak Psv Arousal |
+BASTARD 	Neg Noun HU Hostile Ngtv Role |
+BATTLE#1 	Neg Noun POLIT Ritual Milit Ngtv Strng Actv | 86% noun-adj: Contest or fight, pertaining to same
+BATTLE#2 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 14% verb: To engage in a fight
+BATTLEFIELD 	Neg Noun Hostile Place Intrel Exert |
+BEASTLY 	IndAdj Neg Modif Hostile Vice |
+BEAT#2 	IAV Neg SUPV Complt Hostile Power Strng Actv Ngtv | 88% verb: To strike repeatedly, defeat or outperform (6)
+BEAT#3 	Neg Noun Hostile Strng Ngtv Vice | 5% noun-adj: "Beating"--a whipping or thrashing, striking, throbbing (0)
+BEAT#4 	Neg Modif Vice Subm Ngtv Weak Psv | 2% adj: "Beaten"--hammered, trodden, thrashed
+BEG 	IAV Neg SUPV Intrel Subm Ngtv Weak Actv |
+BEGGAR 	Neg Noun HU Weak Econ |
+BEHEAD 	Neg Noun Hostile Exert Other Finish |
+BELATED 	IndAdj Neg Modif Time |
+BELIE 	IAV Neg SUPV Intrel Hostile Actv |
+BELITTLE 	IAV Neg SUPV Hostile Ngtv Intrel |
+BELLIGERENT 	IndAdj Neg Modif Hostile Emot Arousal |
+BELT#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+BEREAVE 	SV Neg SUPV Hostile Comform |
+BEREAVEMENT 	Neg Noun Vice Weak Psv |
+BEREFT 	Neg Noun HU Weak Role |
+BERSERK 	IndAdj Neg Modif Emot Arousal Hostile |
+BESEECH 	IAV Neg SUPV Intrel Subm Weak Actv |
+BESET 	IndAdj Neg Modif Pain Emot Arousal |
+BESIEGE 	IAV Neg SUPV Actv Hostile Exert Intrel |
+BETRAY 	IAV Neg SUPV Intrel Hostile Ngtv |
+BETRAYAL 	Neg Noun Hostile Comform Intrel |
+BEWARE 	IAV Neg SUPV Percv Ngtv Strng Hostile Undrst |
+BEWILDER 	IAV Neg SUPV Ngtv Undrst Solve |
+BEWILDERMENT 	Neg Noun Ngtv Undrst Know |
+BIT#2 	IAV Neg SUPV ED Hostile Ngtv Actv Intrel | 7% verb: Past tense of "bite"
+BITCHY 	IndAdj Neg Modif Arousal Hostile Intrel |
+BITE#1 	Neg Noun Ngtv Hostile Actv Natpro | 22% noun-adj: Act of cutting or gripping with or as with teeth, the resulting wound or amount cut off
+BITE#2 	IAV Neg SUPV Ngtv Actv Hostile Intrel | 74% verb: To grip, injure or cut off with or as with teeth
+BITE#3 	Neg Modif Hostile Ngtv Arousal | 4% adj: "Biting"--incisive, sarcastic
+BITTER 	Neg Modif EMOT EVAL Pain Ngtv Psv Hostile |
+BITTERNESS 	Neg Noun EMOT Pain Ngtv Psv |
+BIZARRE 	IndAdj Neg Modif Vice |
+BLACKMAIL 	IAV Neg SUPV Actv Power Intrel Other Econ |
+BLAH 	Neg Intrj |
+BLAME#1 	Neg Noun Vice Hostile Ngtv | 25% noun: Reproof, culpability
+BLAME#2 	IAV Neg SUPV Intrel Hostile Ngtv | 75% verb: To hold responsible for failure, to censure
+BLAND 	IndAdj Neg Modif Weak |
+BLAST#1 	Neg Noun Natpro Ngtv Strng Actv |
+BLAST#2 	IAV Neg SUPV Rise Ngtv Strng Actv |
+BLATANT 	IndAdj Neg Modif Strng Ovrst |
+BLEAK 	Neg Modif Vice Ngtv |
+BLEMISH 	Neg Noun Weak Vice |
+BLIND#1 	Neg Noun HU Ngtv Weak Role | 71% noun-adj: (those who are) without sight; without understanding or control (2)
+BLIND#2 	IAV Neg SUPV Intrel Hostile Ngtv | 10% verb: To deprive of sight
+BLIND#3 	Neg Modif Vice Ngtv Weak | 14% adv: "Blindly"
+BLIND#4 	Neg Modif Vice Ngtv Strng | 5% adj: "Blinding"--producing blindness
+BLINDNESS 	IndAdj Neg Modif Weak Vice |
+BLOCK#1 	Neg Noun Space Ngtv Psv Strng | 72% noun-adj: A barrier, solid mass, area, unit; street block (1)
+BLOCK#2 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv | 28% verb: To thwart or barricade
+BLOCKHEAD 	IndAdj Neg Modif Weak Fail Vice |
+BLOODSHED 	Neg Noun Hostile Pain Weak |
+BLOODTHIRSTY 	IPadj Neg Modif Hostile Strng Power |
+BLOODY 	Neg Modif Ngtv Natpro |
+BLOW#1 	Neg Noun Hostile Ngtv Strng Actv Exert | 24% noun: A hit or stroke, forcible effort, calamity
+BLOW#3 	IAV Neg SUPV Ngtv Strng Actv Exert | 17% verb: "Blow up," "blow out"--to explode physically or emotionally
+BLUNDER 	Neg Noun Ngtv Weak Actv Fail |
+BLUNT 	IPadj Neg Modif Qual Strng Ngtv |
+BLUR 	IAV Neg SUPV Undrst Weak Comform Actv |
+BLURT 	IAV Neg SUPV Comform Hostile Ovrst Actv |
+BOARD#7 	Neg LY Vice Ngtv | 2% idiom-adv: 'by the board'--over the side (naut.), in or into neglect or oblivion
+BOAST 	IAV Neg SUPV Comform Power Vice Actv |
+BOASTFUL 	IndAdj Neg Modif Comform Power Vice |
+BOGUS 	IndAdj Neg Modif Eval Vice |
+BOISTEROUS 	IndAdj Neg Modif Comform Strng |
+BOLT 	IAV Neg SUPV Move Actv Fail Intrel |
+BOMB#1 	Neg Noun Object POLIT Tool Hostile Milit Ngtv Strng |
+BOMB#2 	DAV Neg SUPV Intrel Hostile Milit Ngtv Strng Actv |
+BOMBARD 	IAV Neg SUPV Actv Hostile |
+BOMBARDMENT 	Neg Noun Hostile |
+BONDAGE 	Neg Noun Vice Subm Ngtv Weak Psv |
+BOOT 	IAV Neg SUPV Actv Affil Power Other |
+BORE#1 	Neg Noun Vice Ngtv | 0% noun: Someone or something that causes loss of interest
+BORE#5 	Neg Modif Vice Ngtv Psv | 50% adj: "Bored"--not interested, frustrated
+BORE#6 	Neg Modif Vice Ngtv | 13% adj: "Boring"--not interesting
+BOREDOM 	Neg Noun Vice |
+BOTHER#1 	IAV Neg SUPV Intrel Hostile Ngtv Actv PFREQ | 91% verb: To give trouble to, annoy, worry--to bewilder, confuse--to be troubled, etc.
+BOTHER#3 	Neg Noun Vice Ngtv | 2% noun: Something troublesome or annoying
+BOTHERSOME 	Neg Noun Vice Ngtv |
+BOUND#3 	Neg Modif Vice Ngtv Weak Psv | 30% adj: Limited, tied,
+BOUT 	Neg Noun Ritual Hostile Ngtv Actv |
+BOX#2 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 9% verb: To fight with fists, strike
+BRAG 	IAV Neg SUPV Actv Comform Power |
+BRANDISH 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+BRAT 	IndAdj Neg Modif Vice |
+BRAVADO 	Neg Noun Power Strng |
+BRAWL 	IAV Neg SUPV Actv Hostile Exert Intrel |
+BRAZEN 	IndAdj Neg Modif Power Strng |
+BREACH 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+BREAK#1 	DAV Neg SUPV Ngtv Strng Actv Hostile Exert | 75% verb: To fracture, split, stop or cause to stop functioning, cause a division or change, enter forcibly, escape, begin suddenly, interrupt, etc.
+BREAK#4 	IAV Neg SUPV Intrel Hostile Legal Ngtv Actv | 2% verb-idiom: "Break a law"
+BREAK#5 	IAV Neg SUPV Fail Ngtv Weak Psv | 8% verb: "Break down"--to collapse, go out of working order
+BREAKDOWN 	IAV Neg SUPV Psv Weak Fail |
+BRIBE 	IAV Neg SUPV Econ Vice |
+BRISTLE 	IAV Neg SUPV Emot Arousal Hostile Psv |
+BRITTLE 	IndAdj Neg Modif Weak |
+BROKE#3 	Neg Modif ECON Vice Econ* Ngtv | 3% adjective: Destitute
+BROKE#5 	IAV Neg SUPV ED Intrel Hostile Legal Ngtv Actv | 1% idiom-verb: "Broke (broken) a law"
+BROKE#6 	Neg Modif Vice Ngtv Psv | 5% adj: "Broken"
+BROKE#7 	IAV Neg SUPV ED Fail Ngtv Weak Psv | 3% verb: "Broke (broken) down"--collapsed, went out of working order
+BROKEN-HEARTED 	IPadj Neg Modif Weak Pain Emot Intrel |
+BROOD 	SV Neg SUPV Think Emot Pain |
+BRUISE 	Neg Noun Pain |
+BRUSQUE 	IPadj Neg Modif Comform Hostile Undrst |
+BRUTALITY 	Neg Noun Vice Hostile Ngtv Strng Actv Ovrst |
+BRUTE 	Neg Noun HU Hostile Vice |
+BRUTISH 	IndAdj Neg Modif Hostile Vice |
+BUCKLE 	IAV Neg SUPV Weak Subm Fail Psv |
+BUG#2 	IAV Neg SUPV Hostile Ngtv Comform |
+BULLET 	Neg Noun Object Tool Hostile Ngtv Strng |
+BUM 	Neg Noun Weak Econ |
+BUNGLE 	IAV Neg SUPV Undrst Weak |
+BURDEN#1 	Neg Noun Vice Ngtv Weak |
+BURDEN#2 	IAV Neg SUPV Work Ngtv Weak |
+BURDENSOME 	IPadj Neg Modif Pain Vice |
+BURGLAR 	Neg Noun HU Fetch Hostile Vice |
+BURGLARY 	Neg Noun Fetch Hostile Vice |
+BURN#1 	Neg Noun Ngtv Vice | 3% noun: An injury from fire; rarely--a brook (0)
+BURN#2 	DAV Neg SUPV Natpro Ngtv Actv PFREQ | 89% verb: To consume or injure with fire
+BURN#3 	Neg Noun Natpro Ngtv Actv | 6% noun-adj: "Burning"--on fire (3); intense (1); the state, process, sensation or effect of being on fire or subjected to intense heat (0)
+BURN#4 	Neg Modif Finish Ngtv Psv | 2% adj: "Burned," "burnt"--consumed or injured by fire
+BURY 	DAV Neg SUPV Fall Ngtv Actv | verb: To inter, immerse, conceal
+BUSYBODY 	Neg Noun HU Comform Vice |
+BUTCHERY 	Neg Noun Hostile Ngtv Strng Actv Vice |
+CALAMITY 	Neg Noun Undrst Fail |
+CALLOUS 	IPadj Neg Modif Hostile Emot |
+CANCEL 	DAV Neg SUPV Finish |
+CANCELLATION 	Neg Noun Finish |
+CANCER 	Neg Noun Vice Ngtv |
+CANNIBAL 	Neg Noun HU Vice Hostile Exert |
+CANNON 	Neg Noun Object Tool Hostile Milit Ngtv Strng |
+CAPITAL#2 	Neg Modif Vice Legal Ngtv | 3% adj: Punishable by death
+CAPITULATE 	IAV Neg SUPV Psv Subm Weak Fail |
+CAPRICIOUS 	IPadj Neg Modif Vice |
+CAPSIZE 	IAV Neg SUPV Fail |
+CAPTIVE 	IPadj Neg Modif Subm Weak Psv |
+CAPTURE#1 	Neg Modif Subm Ngtv Intrel |
+CAPTURE#2 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+CAREEN 	IAV Neg SUPV Psv Weak Travel |
+CARELESS 	Neg Modif Vice Ngtv |
+CARELESSNESS 	Neg Noun Vice |
+CASUALTY 	Neg Noun HU Natpro Finish |
+CATACLYSM 	Neg Noun Finish Hostile |
+CATASTROPHE 	Neg Noun Vice Ngtv Ovrst |
+CATCH#3 	Neg Noun Vice Ngtv | 2% noun: A reservation or qualification in an agreement.
+CAVE#2 	IAV Neg SUPV Fall Weak Psv Ngtv | 5% idiom-verb: "Cave in"--collapse
+CENSOR 	IAV Neg SUPV Actv Power Ovrst Comform |
+CENSORSHIP 	Neg Noun Power Ovrst Comform |
+CENSURE 	IAV Neg SUPV Power Actv Other Hostile Comform |
+CHAFE 	IndAdj Neg Modif Pain |
+CHALLENGE#1 	Neg Noun Ngtv Strng Means Actv | 72% noun: Confrontation, contest, difficult task, generally with a connotation of provocativeness or stimulation
+CHALLENGE#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 19% verb: To confront with a contest or problem
+CHAOS 	Neg Noun Vice Ngtv Ovrst |
+CHAOTIC 	IndAdj Neg Modif Vice EVAL Ngtv Ovrst |
+CHARGE#2 	Neg Noun COM Comform Hostile Ngtv | 15% noun: Accusation, injunction
+CHARGE#3 	IAV Neg SUPV Hostile Strng Actv Ngtv Comform | 9% verb: To accuse, enjoin, attribute
+CHARGE#6 	Neg Noun Hostile Strng Actv Ngtv Exert | 2% noun: Attack, forward rush or thrust
+CHARGE#7 	IAV Neg SUPV Travl Hostile Strng Actv Ngtv | 7% verb: To attack, to rush or thrust forward
+CHASE#1 	Neg Noun Travl Hostile Ngtv Actv | 3% noun: Swift pursuit, hunt
+CHASE#2 	DAV Neg SUPV Travl Hostile Ngtv Actv PFREQ | 97% verb: To pursue, to hunt
+CHASTISE 	IAV Neg SUPV Actv Power Other Hostile Comform |
+CHEAP 	Neg Modif EVAL ECON Vice Econ* Ngtv Weak |
+CHEAPEN 	IAV Neg SUPV Actv Decr Weak |
+CHEATER 	Neg Noun HU Vice |
+CHIDE 	IAV Neg SUPV Actv Hostile Comform Power Other |
+CHILDISH 	IndAdj Neg Modif Nonadlt Vice |
+CHOKE#1 	Neg Noun Object Tool Ngtv Weak |
+CHOKE#2 	DAV Neg SUPV Hostile Ngtv Weak Exert |
+CHORE 	Neg Noun Means Ngtv |
+CHRONIC 	Neg Modif Vice Ngtv Weak Psv Ovrst |
+CIRCLE#3 	Neg Noun Vice Ovrst Ngtv | 6% idiom: "Vicious circle"
+CLAMOR 	Neg Noun Pain Comform Vice |
+CLAMOROUS 	IndAdj Neg Modif Pain Comform |
+CLASH 	IAV Neg SUPV Actv Power Hostile Exert Intrel |
+CLATTER 	Neg Noun Pain Comform |
+CLIQUE 	Neg Noun Affil HU Ovrst |
+CLOG 	IAV Neg SUPV Psv Fail |
+CLOSE#2 	DAV Neg SUPV Finish Actv Ngtv | 17% verb: To stop or obstruct, make imperceptible, inaccessible--to shut, to come or bring t
+CLOSE#7 	Neg Modif Ngtv Psv Rel | 3% adj: "Closed"--shut, inaccessible, terminated
+CLUB#2 	Neg Noun Object Tool Hostile Milit Ngtv Strng | 8% noun: A heavy stick suitable for use as a weapon
+CLUB#3 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv | 5% verb: To beat with, or as with, a club
+CLUMSY 	IndAdj Neg Modif Vice |
+CLUTTER 	Neg Noun Vice |
+COARSE 	IndAdj Neg Modif Qual Ngtv |
+COARSENESS 	Neg Noun Vice Qual Eval |
+COCKINESS 	Neg Noun Emot Power Strng Vice |
+COCKY 	IndAdj Neg Modif Emot Power Strng |
+COERCE 	IAV Neg SUPV Actv Power Comform Intrel |
+COERCION 	Neg Noun Power Comform Intrel Vice |
+COERCIVE 	IPadj Neg Modif Power Comform Intrel |
+COLD#1 	Neg Modif Qual EVAL Ngtv Psv PFREQ | 82% noun-adj: Very cool, lacking in heat; the absence of heat (2); unfriendly, forbidding (2); absolutely, without preparation, abruptly (0)
+COLD#2 	Neg Noun Vice Ngtv | 10% noun: The common illness
+COLD#3 	Neg Noun Doctr POLIT Hostile Polit* Ngtv Ngtv | 5% idiom-noun: 'cold war'
+COLD#6 	Neg LY Comform Hostile Ngtv Ngtv | 1% adverb: "Coldly"--indifferently, in a cool manner
+COLLAPSE#1 	Neg Modif Decr Ngtv Weak Psv |
+COLLAPSE#2 	IAV Neg SUPV Fall Ngtv Weak Psv |
+COLLIDE 	IAV Neg SUPV Actv Exert Hostile |
+COLLISION 	Neg Noun Exert Intrel Hostile |
+COLLUSION 	IAV Neg SUPV Actv Affil Intrel |
+COLONY 	Neg Noun HU COLL POLIT ECON Polit* Ngtv Subm |
+COMBAT#1 	Neg Noun POLIT Ngtv Actv Strng Intrel Hostile |
+COMBAT#2 	IAV Neg SUPV Intrel Hostile Polit* Ngtv Actv Strng |
+COMBATANT 	IPadj Neg Modif Hostile Exert Intrel |
+COMMISERATION 	Neg Noun Emot Pain Vice Intrel |
+COMMIT#1 	IAV Neg SUPV Work Actv Ngtv | 71% verb: To do or perpetrate
+COMMONER 	Neg Noun HU POLIT Econ* Subm Ngtv Weak Psv Role |
+COMMONPLACE 	Neg Noun Modif Ovrst Ngtv Qual |
+COMMOTION 	Neg Noun Ngtv Actv Vice Ovrst |
+COMPEL#1 	Neg Modif Means Ngtv Strng Actv |
+COMPEL#2 	IAV Neg SUPV Intrel Power Ngtv Strng Actv Hostile |
+COMPETE 	IAV Neg SUPV Try Hostile Ngtv Strng Actv |
+COMPETITION 	Neg Noun Hostile Actv Ngtv Means |
+COMPETITIVE 	Neg Modif Hostile Ngtv Actv Virtue |
+COMPETITOR 	Neg Noun HU Hostile Intrel |
+COMPLAIN 	IAV Neg SUPV Hostile Ngtv Actv Comform | verb: To express dissatisfaction or pain
+COMPLAINT 	Neg Noun COM Comform Hostile Ngtv Actv |
+COMPLEX 	Neg Modif Know EVAL Ngtv Ovrst |
+COMPLEXITY 	Neg Noun ABS Abs* Know Ngtv Ovrst |
+COMPLICATE#1 	Neg Modif Know Ngtv |
+COMPLICATE#2 	IAV Neg SUPV Solve Ngtv |
+COMPLICATION 	Neg Noun Vice Ngtv |
+COMPLICITY 	Neg Noun Ngtv Psv Vice |
+COMPULSION 	Neg Noun Power Ngtv Strng Actv Hostile Means |
+CONCEAL 	IAV Neg SUPV Intrel Hostile Ngtv |
+CONCEIT 	Neg Noun Vice Hostile Power |
+CONCERN#1 	IAV Neg SUPV Need Ngtv Psv | 58% verb-adj: To be of interest or importance to--to trouble, worry, or disquiet, to be interested in, relevant to, or worried about
+CONCERN#2 	Neg Noun EMOT Ngtv Pain | 26% noun: Worry, solicitude, or anxiety
+CONDEMN#1 	Neg Modif Ngtv Strng Intrel Hostile |
+CONDEMN#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng |
+CONDEMNATION 	Neg Noun Vice Hostile Eval |
+CONDESCENDING 	IPadj Neg Modif Power Hostile Vice |
+CONDESCENSION 	Neg Noun Vice Power Hostile Intrel |
+CONFESS 	IAV Neg SUPV Subm Ngtv Weak Psv Comform |
+CONFESSION 	Neg Noun COM Comform Subm Ngtv Weak Psv |
+CONFINE#1 	Neg Modif Space Ngtv Strng Actv |
+CONFINE#2 	IAV Neg SUPV Intrel Power Ngtv Strng Actv |
+CONFINEMENT 	Neg Noun Vice Stay |
+CONFISCATE 	IAV Neg SUPV Actv Fetch Power |
+CONFISCATION 	Neg Noun Vice Fetch Power |
+CONFLICT#1 	Neg Noun POLIT Hostile Ngtv Actv Comform | 80% noun: Disagreement or struggle
+CONFLICT#2 	Neg Modif Pain Ngtv | 18% adj: "Conflicting"--opposed, discordant
+CONFLICT#3 	IAV Neg SUPV Intrel Hostile Ngtv Actv | 0% verb: To disagree or struggle
+CONFLICT#4 	Neg Modif Pain Ngtv Psv | 3% adj: "Conflicted"--ambivalent
+CONFOUND 	IAV Neg SUPV Ngtv Ngtv Undrst Arousal |
+CONFRONT 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | verb: To challenge, face
+CONFRONTATION 	Neg Noun POLIT Hostile Ngtv Strng Vice Actv |
+CONFUSE#1 	IAV Neg SUPV Ngtv Undrst Comform | 9% verb: To make unclear, to temporarily disturb the clear working of the mind
+CONFUSE#2 	IAV Neg SUPV Solve Weak Ngtv Undrst | 2% verb: To fail to distinguish
+CONFUSE#3 	Neg Modif Vice Ngtv Weak Psv Undrst | 82% adj: "Confused"--jumbled, disturbed, bewildered
+CONFUSE#4 	Neg Modif Vice Ngtv Undrst | 7% adj: "Confusing"--bewildering
+CONFUSION 	Neg Noun Vice Ngtv Undrst Weak |
+CONGESTED 	IndAdj Neg Modif Stay |
+CONGESTION 	Neg Noun Stay |
+CONSPIRACY 	Neg Noun HU COLL POLIT Hostile Polit* Ngtv |
+CONSPIRATOR 	Neg Noun HU Intrel Affil Conform |
+CONSPIRE 	IAV Neg SUPV Actv Affil Intrel Conform |
+CONSTERNATION 	Neg Noun Think Solve Vice |
+CONSTRAIN 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng |
+CONSTRAINT 	Neg Noun COM Comform Power Ngtv Strng |
+CONSUMPTIVE 	Neg Modif Vice Ngtv Actv Strng |
+CONTAGIOUS 	IPadj Neg Modif Move |
+CONTAMINATE 	IAV Neg SUPV Actv Change Hostile |
+CONTAMINATION 	Neg Noun Vice Change Hostile |
+CONTEMPT 	Neg Noun Hostile Intrel Emot Vice |
+CONTEMPTIBLE 	IndAdj Neg Modif Hostile Intrel Vice |
+CONTEMPTUOUS 	IndAdj Neg Modif Hostile Intrel Vice |
+CONTEND 	IAV Neg SUPV Hostile Ngtv Strng Actv Try |
+CONTRADICT 	IAV Neg SUPV Ngtv Comform Hostile |
+CONTRADICTION 	Neg Noun Comform |
+CONTRADICTORY 	Neg Noun COM Comform Negate Ngtv Ovrst |
+CONTRARY 	Neg Modif Negate Ngtv |
+CONTROVERSIAL 	Neg Noun COM Comform Ngtv Undrst |
+CONTROVERSY 	Neg Noun COM Comform POLIT Ngtv EMOT |
+CONVICT#1 	Neg Noun HU Legal Subm Ngtv Weak Psv Role |
+CONVICT#2 	IAV Neg SUPV Intrel Hostile Legal Actv Ngtv Strng |
+COOL 	IAV Neg SUPV Natpro Modif Ngtv Psv |
+COOLNESS 	Neg Noun Emot |
+CORRODE 	IAV Neg SUPV Psv Decr Change |
+CORROSION 	Neg Noun Decr Change |
+CORROSIVE 	IPadj Neg Modif Change Decr |
+CORRUPT 	IPadj Neg Modif Vice Econ |
+CORRUPTION 	Neg Noun Vice POLIT Hostile Ngtv |
+COST#1 	Neg Noun COM ECON Quan Econ* Ngtv | 67% noun-adj: Expense, outlay, sacrifice, loss, penalty
+COST#2 	DAV Neg SUPV Exch Ngtv Econ* | 33% verb: To require or result in an expenditure
+COSTLINESS 	Neg Noun Econ |
+COSTLY 	Neg LY Econ* Ngtv Vice | adj: Expensive
+COUNTERACT 	IAV Neg SUPV Ngtv Strng Actv Negate Decr |
+COUNTERACTION 	Neg Noun Ngtv Strng Actv Negate Decr |
+COUNTERFEIT 	IndAdj Neg Modif Eval Vice |
+COVERT 	IndAdj Neg Modif Vice |
+COVET 	SV Neg SUPV Psv Need Feel Weak |
+COWARD 	Neg Noun HU Subm Ngtv Weak Psv Role |
+CRAFTY 	IndAdj Neg Modif Think Solve Vice |
+CRAM 	IAV Neg SUPV Actv Think |
+CRAMP 	IAV Neg SUPV Actv Pain |
+CRANKY 	IndAdj Neg Modif Feel Hostile |
+CRASS 	IndAdj Neg Modif Vice Hostile |
+CRAVE 	SV Neg SUPV Psv Need Feel Weak |
+CRAWL#2 	IAV Neg SUPV Rel Ngtv Weak | 4% verb: To swarm with
+CRAZE 	Neg Noun Vice |
+CRAZINESS 	Neg Noun Vice |
+CRAZY 	Neg Modif EVAL EMOT Vice Ngtv |
+CREDULOUS 	IndAdj Neg Modif Weak Subm |
+CRIME 	Neg Noun Vice POLIT Legal Ngtv |
+CRIMINAL 	Neg Noun HU Modif Legal Ngtv Role Hostile |
+CRINGE 	IAV Neg SUPV Psv Feel Pain |
+CRIPPLE 	IAV Neg SUPV Actv Pain Stay Hostile Exert |
+CRISIS 	Neg Noun ECON POLIT Vice Ngtv |
+CRITIC 	Neg Noun HU Exprs Ngtv Role Hostile |
+CRITICISM 	Neg Noun COM Comform Hostile Ngtv | noun: Analysis and/or evaluation, usually censuring
+CRITICIZE 	IAV Neg SUPV Hostile Ngtv Comform |
+CROAK 	IAV Neg SUPV Psv Natpro Finish |
+CROOK 	Neg Noun HU Vice |
+CROOKED 	IndAdj Neg Modif Vice Hostile |
+CROSS#3 	IAV Neg SUPV Intrel Hostile Ngtv Actv | 3% verb: To confuse, frustrate
+CROSS#6 	Neg Modif EMOT Ngtv Hostile Actv Arousal | 9% adj: Angry
+CROSS#7 	Neg Modif Ngtv Hostile Actv Arousal | 2% adv: "Crossly"--angrily
+CRUDE 	IndAdj Neg Modif Eval Ovrst |
+CRUEL 	Neg Modif Vice EVAL Hostile Ngtv |
+CRUELTY 	Neg Noun Vice Hostile Ngtv |
+CRUMBLE 	IAV Neg SUPV Psv Finish Weak Subm |
+CRUMPLE 	IAV Neg SUPV Psv Finish Weak Subm |
+CRUSH#1 	Neg Modif Qual Ngtv Strng Actv |
+CRUSH#2 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+CRUSHING 	IndAdj Neg Modif Power Strng Hostile Exert |
+CULPABLE 	IndAdj Neg Modif Causal |
+CULPRIT 	Neg Noun Vice Causal HU |
+CUMBERSOME 	IndAdj Neg Modif Qual Eval Strng |
+CURSE#1 	Neg Noun COM Comform Hostile Ngtv |
+CURSE#2 	IAV Neg SUPV Hostile Ngtv Comform |
+CURSORY 	IndAdj Neg Modif Psv Undrst Vice |
+CURT 	Neg Modif Comform Hostile Ngtv |
+CURTAIL 	IAV Neg SUPV Actv Stay |
+CUT#1 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv PFREQ | 88% verb-adj-noun: To penetrate or divide with or as with a sharp-edged instrument; the resulting penetration or division (3); to isolate, snub, or humiliate (1); the result of such action (0)
+CUT#2 	IAV Neg SUPV Decr Ngtv Strng Actv | 8% verb-noun: To abridge, shorten, reduce, terminate; reduction, termination (1)
+CYNICAL 	Neg Modif Hostile Ngtv Vice |
+CYNICISM 	IndAdj Neg Modif Vice Ovrst |
+DAMAGE#1 	Neg Noun Vice Ngtv Strng Actv |
+DAMAGE#2 	IAV Neg SUPV Hostile Ngtv Strng Actv Exert |
+DAMN 	Neg Intj Hostile Ngtv |
+DAMNABLE 	IndAdj Neg Modif Vice Hostile Eval |
+DAMNED 	IndAdj Neg Modif Vice Hostile Eval |
+DANGER 	Neg Noun Vice Ngtv Ovrst | noun: Threat or state of exposure to harm
+DANGEROUS 	Neg Modif Vice EVAL Ngtv Ovrst | adj: Potentially harmful
+DARK 	Neg Modif Qual Ngtv | noun-adj: Night, absence of light, blackness--black, obscure, gloomy
+DARKEN 	IAV Neg SUPV Ngtv Natpro |
+DARKNESS 	Neg Noun Ngtv Qual |
+DARN 	Neg Intrj |
+DAUNTING 	IndAdj Neg Modif Stay |
+DAWDLE 	IAV Neg SUPV Actv Move |
+DAZE 	Neg Noun Undrst |
+DEAD 	Neg Modif Natpro Ngtv Weak Psv | adj: Not living; very rarely, absolute--"dead center," the heart of --"the dead of winter" (0)
+DEADLOCK 	Neg Noun Persist Ngtv Weak Hostile |
+DEADLY 	Neg Modif Vice EVAL Ngtv Strng Hostile |
+DEADWEIGHT 	Neg Noun Vice Stay |
+DEAF 	IndAdj Neg Modif Vice |
+DEAFNESS 	Neg Noun Vice |
+DEAL#6 	Neg Intj Hostile Ngtv | 1% idiom-noun: 'big deal'--sarcastic admiration
+DEARTH 	Neg Noun Weak Psv Vice |
+DEATH 	Neg Noun ABS Abs* Ngtv Weak Psv Natpro | noun-adj: End of life, and thereafter
+DEBATABLE 	IPadj Neg Modif Ovrst Comform |
+DEBTOR 	Neg Noun HU Weak Econ |
+DECADENCE 	Neg Noun Vice Need Ovrst |
+DECADENT 	IndAdj Neg Modif Vice Need Ovrst |
+DECAY#1 	Neg Noun Ngtv Weak Psv Decr |
+DECAY#2 	DAV Neg SUPV Decr Ngtv Weak Psv |
+DECEASE 	IAV Neg SUPV Actv Finish |
+DECEIT 	Neg Noun Vice Eval Hostile |
+DECEITFUL 	IPadj Neg Modif Vice Eval Hostile |
+DECEIVE#1 	Neg Modif Vice Ngtv Actv Hostile |
+DECEIVE#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+DECEPTION 	Neg Noun Hostile Ngtv Vice Actv |
+DECEPTIVE 	Neg Modif Percv Ngtv Hostile |
+DECLINE#1 	Neg Noun Ngtv Weak Psv Decr |
+DECLINE#2 	IAV Neg SUPV Decr Ngtv Weak Psv |
+DECOMPOSE 	IAV Neg SUPV Psv Natpro Decr |
+DECREASE#1 	Neg Noun Ngtv Weak Decr Psv |
+DECREASE#2 	DAV Neg SUPV Decr Ngtv Weak Psv |
+DEFAME 	IAV Neg SUPV Actv Comform |
+DEFAULT 	IAV Neg SUPV Actv Fail Econ |
+DEFEAT#1 	Neg Noun Vice POLIT Ngtv | 45% noun: A lost contest
+DEFEAT#2 	IAV Neg SUPV Hostile Ngtv Strng Actv Complt | 55% verb: To overthrow or overcome
+DEFECT 	Neg Noun Vice Ngtv Weak |
+DEFECTIVE 	Neg Modif Vice EVAL Ngtv Weak |
+DEFENDANT 	Neg Noun HU Role Weak |
+DEFENSIVE 	Neg Modif Hostile Ngtv Weak Psv Intrel |
+DEFIANCE 	Neg Noun Vice Strng Hostile |
+DEFIANT 	IPadj Neg Modif Vice Strng Hostile |
+DEFICIENCY 	Neg Noun Vice Ngtv Weak |
+DEFICIENT 	IndAdj Neg Modif Weak Vice |
+DEFICIT 	Neg Noun Vice ECON Econ* Ngtv Weak |
+DEFILE 	IAV Neg SUPV Hostile Actv Exert |
+DEFY 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+DEGENERATE 	Neg Modif Vice Ngtv Weak Psv Ovrst |
+DEGRADE 	IAV Neg SUPV Hostile Actv Comform |
+DEJECTED 	IndAdj Neg Modif Weak Emot Pain |
+DELAY#1 	Neg Noun Time* Ngtv Weak Psv |
+DELAY#2 	IAV Neg SUPV Persist Ngtv Weak Psv |
+DELINQUENCY 	Neg Noun Vice Weak Fail |
+DELINQUENT 	IndAdj Neg Modif Vice Weak Fail |
+DELIRIUM 	Neg Noun Think Weak Vice Ovrst |
+DELUGE 	Neg Noun Ovrst Strng Power |
+DELUSION 	Neg Noun Weak Think Vice |
+DEMEAN 	IAV Neg SUPV Actv Other Hostile Power |
+DEMISE 	Neg Noun Finish Ngtv Weak Psv |
+DEMOLISH 	IAV Neg SUPV Ngtv Strng Actv Exert Hostile |
+DEMON 	Neg Noun Vice Hostile |
+DEMORALIZE 	IAV Neg SUPV Intrel Hostile Ngtv Strng |
+DENIAL 	Neg Noun COM Comform Ngtv Hostile |
+DENOUNCE 	IAV Neg SUPV Actv Hostile Power Comform |
+DENT 	DAV Neg SUPV Actv Exert |
+DENY 	IAV Neg SUPV Hostile Ngtv Comform | verb: To maintain that something is not true, negate; refuse to grant, withhold
+DEPENDENT 	IPadj Neg Modif Weak Subm Psv |
+DEPLETE 	IAV Neg SUPV Decr |
+DEPLORABLE 	IndAdj Neg Modif Vice Ngtv |
+DEPLORE 	IAV Neg SUPV Hostile Ngtv Psv Comform |
+DEPOSE 	IAV Neg SUPV Comform Power Hostile Actv |
+DEPRAVED 	IndAdj Neg Modif Vice Eval |
+DEPRECIATE 	IAV Neg SUPV Decr Ngtv Weak Psv |
+DEPRECIATION 	Neg Noun ECON Ngtv Psv Decr Econ* |
+DEPRESS#1 	Neg Modif EMOT Pain Ngtv Weak Psv | 71% adj: "Depressed"--dejected, low; lower than some norm (0)
+DEPRESS#2 	Neg Modif Vice Ngtv | 17% adj: "Depressing"--discouraging, gloomy
+DEPRESS#3 	IAV Neg SUPV Ngtv Pain EMOT | 13% verb: To discourage, sadden; to lower, reduce, press down on (2)
+DEPRESSION#1 	Neg Noun EMOT Pain Ngtv Weak | 23% noun: Psychological decline; a hole or hollow (0)
+DEPRESSION#2 	Neg Noun Econ* Ngtv Weak Vice | 77% noun: Economic decline
+DEPRIVE 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+DERIDE 	IAV Neg SUPV Comform Hostile Actv |
+DERISION 	Neg Noun Vice Hostile |
+DERISIVE 	IndAdj Neg Modif Vice |
+DEROGATORY 	IndAdj Neg Modif Hostile Comform Power |
+DESERT#2 	DAV Neg SUPV Intrel Hostile Ngtv | 14% verb: To abandon, forsake
+DESERT#4 	Neg Modif Space Ngtv Weak Psv | 3% adj: "Deserted"--abandoned
+DESERTION 	Neg Noun Travel Affil Vice Ovrst |
+DESIRE#3 	Neg Modif Virtue Psv Ngtv | 4% adj: 'desired'--deemed proper or desirable, wished for, coveted
+DESOLATE 	Neg Modif Ngtv Weak Vice |
+DESOLATION 	Neg Noun Vice Power Emot |
+DESPAIR#1 	Neg Noun EMOT Ngtv Weak Psv Pain Subm |
+DESPAIR#2 	SV Neg SUPV Ngtv Weak Psv Pain |
+DESPERATE 	Neg Modif EMOT Ngtv Weak Pain |
+DESPERATION 	Neg Noun Emot Pain |
+DESPICABLE 	IndAdj Neg Modif Eval Vice |
+DESPISE#1 	Neg Modif Vice Ngtv Strng Hostile |
+DESPISE#2 	SV Neg SUPV Pain Hostile Ngtv Strng |
+DESTITUTE 	IndAdj Neg Modif Econ Pain Weak Subm |
+DESTROY 	IAV Neg SUPV Hostile Ngtv Strng Actv Exert | verb: To put an end to or reduce to useless form
+DESTRUCTION 	Neg Noun Hostile Ngtv Actv Vice Power Fail | noun: The act of destroying, fact or state of being destroyed
+DESTRUCTIVE 	Neg Modif Hostile Ngtv Strng Actv Vice |
+DETACHMENT 	Neg Noun Vice Ovrst |
+DETAIN 	IAV Neg SUPV Actv Stay Power |
+DETER 	IAV Neg SUPV Intrel Power Ngtv Strng Actv |
+DETERRENT 	Neg Noun Hostile Ngtv Strng Means |
+DETEST 	SV Neg SUPV Actv Emot Hostile |
+DETESTABLE 	IndAdj Neg Modif Vice Eval |
+DETRACT 	IAV Neg SUPV Actv Decr |
+DETRIMENTAL 	IndAdj Neg Modif Ngtv Strng Causal Vice |
+DEVASTATE 	IAV Neg SUPV Ngtv Strng Actv Hostile Exert |
+DEVASTATION 	Neg Noun Vice Hostile |
+DEVIATE 	IAV Neg SUPV Actv Change |
+DEVIATION 	Neg Noun Change |
+DEVIL 	Neg Noun HU Hostile Relig Ngtv Role | noun-adj: Evil spirit
+DEVILISH 	IndAdj Neg Modif Hostile |
+DEVIOUS 	IndAdj Neg Modif Hostile Think |
+DEVOID 	Neg Modif Know Ngtv Weak |
+DIABOLIC 	IndAdj Neg Modif Think Hostile |
+DIABOLICAL 	IndAdj Neg Modif Think Hostile |
+DICTATE 	IAV Neg SUPV Actv Power Affil Polit |
+DICTATORIAL 	IPadj Neg Modif Actv Power Affil Polit |
+DIFFER 	IAV Neg SUPV Rel Ngtv Actv |
+DIFFICULT 	Neg Modif Vice EVAL Ngtv | adjective: Not readily done, demanding, hard
+DIFFICULTY 	Neg Noun ABS Abs* Vice Ngtv | noun: The fact or condition of being difficult--a trouble or embarrassment, a cause thereof.
+DILEMMA 	Neg Noun ABS Abs* Vice Ngtv Undrst |
+DIM#1 	Neg Modif Qual Ngtv Undrst |
+DIM#2 	IAV Neg SUPV Decr Ngtv |
+DIN 	Neg Noun Comform Strng |
+DIRE 	IndAdj Neg Modif Vice Weak |
+DIRT 	Neg Noun Ngtv Object Natobj |
+DIRTY 	Neg Modif Vice Ngtv | adj: Unclean, contemptible
+DISABLE 	IAV Neg SUPV Actv Fail |
+DISADVANTAGE 	Neg Noun Vice Ngtv Weak Negate |
+DISADVANTAGEOUS 	Neg Modif EVAL Negate Ngtv Weak Vice |
+DISAGREEABLE 	Neg Modif Hostile Negate Ngtv Pain |
+DISAGREEMENT 	Neg Noun COM Comform Hostile Negate Ngtv |
+DISAPPOINT#1 	Neg Modif EMOT Ngtv Psv Pain | 76% adj: "Disappointed"--let down, displeased
+DISAPPOINT#2 	Neg Modif Vice Ngtv | 8% adj: "Disappointing"--producing letdown, displeasing
+DISAPPOINT#3 	IAV Neg SUPV Fail Ngtv | 12% verb: To displease
+DISAPPOINT#4 	Neg Modif Vice Ngtv | 4% adv: "Disappointingly"--displeasingly
+DISAPPOINTMENT 	Neg Noun EMOT Ngtv Psv Pain |
+DISAPPROVAL 	Neg Noun Vice Eval |
+DISAPPROVE 	IAV Neg SUPV Negate Hostile Comform Ngtv |
+DISARM 	IAV Neg SUPV Actv Fail |
+DISASTER 	Neg Noun Vice Ngtv Weak |
+DISASTROUS 	Neg Modif Vice EVAL Ngtv Weak |
+DISAVOW 	IAV Neg SUPV Negate Ngtv Comform Hostile |
+DISAVOWAL 	Neg Noun COM Comform Negate Ngtv Hostile |
+DISBELIEF 	Neg Noun Doctr Negate Ngtv Undrst Hostile |
+DISCHARGE#1 	Neg Noun Ngtv Strng Actv Ritual Milit Polit* Power |
+DISCHARGE#2 	IAV Neg SUPV Intrel Legal Ngtv Strng Actv Power |
+DISCLAIM 	IAV Neg SUPV Ngtv Comform |
+DISCOMFORT 	Neg Noun Negate Ngtv Pain |
+DISCONCERTED 	Neg Modif Pain Ngtv Weak Psv Undrst |
+DISCONTENT 	Neg Modif Ngtv Weak Psv Pain Negate |
+DISCORD 	Neg Modif Ngtv Weak Vice Hostile |
+DISCORDANT 	IndAdj Neg Modif Eval Hostile Comform |
+DISCOURAGE#1 	Neg Modif EMOT Pain Negate Ngtv Psv |
+DISCOURAGE#2 	IAV Neg SUPV Negate Ngtv Actv Pain Hostile |
+DISCOURAGEMENT 	Neg Noun Vice Decr Weak Subm |
+DISCREDIT 	IAV Neg SUPV Actv Comform Hostile |
+DISCREPANT 	IndAdj Neg Modif Eval Comform Hostile |
+DISCRIMINATE 	IAV Neg SUPV Actv Eval |
+DISDAIN 	Neg Noun Vice Power Eval |
+DISEASE 	Neg Noun Vice Ngtv |
+DISEASED 	IndAdj Neg Modif Vice Weak |
+DISGRACE 	Neg Noun Vice Weal Eval |
+DISGUISE 	Neg Noun Object |
+DISGUST#1 	Neg Noun EMOT Pain Ngtv Weak Psv Hostile | 16% noun: Revulsion
+DISGUST#2 	IAV Neg SUPV Ngtv Hostile Pain | 6% verb: To be revolting or abhorrent to someone
+DISGUST#3 	Neg LY Ngtv Pain Weak | 6% adv: "Disgustingly"--revoltingly
+DISGUST#4 	Neg Modif EMOT Pain Ngtv Weak Psv Hostile | 59% adj: "Disgusted"--revolted
+DISGUST#5 	Neg Modif EVAL Ngtv Pain Weak | 13% adj: "Disgusting"--revolting
+DISHEARTEN 	IndAdj Neg Modif Weak Subm Pain Emot |
+DISHONEST 	IPadj Neg Modif Weak Comform |
+DISHONOR 	IAV Neg SUPV Actv Weak Subm Pain |
+DISINGENUOUS 	IPadj Neg Modif Weak Comform |
+DISINTEREST 	Neg Noun Vice Stay |
+DISLIKE#1 	DAV Neg SUPV Negate Ngtv Psv Hostile Arousal | 71% verb: To have an aversion toward
+DISLIKE#2 	Neg Modif EMOT Ngtv Hostile Psv Arousal Negate | 29% noun: An aversion
+DISMAL 	Neg Modif EVAL Vice Ngtv Weak |
+DISMISS#1 	Neg Modif Ngtv Actv Finish Hostile |
+DISMISS#2 	IAV Neg SUPV Intrel Hostile Ngtv Actv Power |
+DISOBEDIENCE 	Neg Noun Vice Hostile |
+DISOBEDIENT 	IPadj Neg Modif Vice Hostile |
+DISORDER 	Neg Noun Negate Ngtv Weak Vice |
+DISORGANIZED 	IndAdj Neg Modif Ngtv Weak Psv Vice Negate |
+DISPEL 	IAV Neg SUPV Actv Comform Power Decr |
+DISPENSABILITY 	Neg Noun Weak Subm |
+DISPENSE 	IAV Neg SUPV Actv Decr Power |
+DISPLACE 	IAV Neg SUPV Actv Power Move |
+DISPLEASE 	IAV Neg SUPV Psv Weak |
+DISPLEASURE 	Neg Noun EMOT Hostile Pain Negate Ngtv Weak Psv |
+DISPOSAL 	Neg Noun Means Ngtv |
+DISPOSE#1 	Neg Modif Ngtv Strng Actv Arousal Hostile |
+DISPOSE#2 	IAV Neg SUPV Finish Ngtv Strng Actv |
+DISPROPORTIONATE 	IndAdj Neg Modif Quan Eval |
+DISPROVE 	IAV Neg SUPV Solve Negate Ngtv Actv |
+DISPUTABLE 	Neg Modif Hostile Legal Ngtv Undrst Vice |
+DISPUTE#1 	Neg Noun Comform Hostile POLIT Ngtv COM Negate Actv |
+DISPUTE#2 	IAV Neg SUPV Comform Hostile POLIT Ngtv COM Negate Actv |
+DISREGARD 	IAV Neg SUPV Actv Percv |
+DISRUPT 	IAV Neg SUPV Actv Hostile Other |
+DISRUPTION 	Neg Noun Hostile Vice |
+DISSATISFACTION 	Neg Noun Pain Vice |
+DISSATISFIED 	IndAdj Neg Modif Hostile Pain |
+DISSATISFY 	IAV Neg SUPV Weak Fail |
+DISSENT 	Neg Noun Vice Affil Hostile |
+DISSENTION 	Neg Noun Vice Affil Hostile |
+DISSOLUTION 	Neg Noun Think Affil Pain Percv |
+DISTORT 	IAV Neg SUPV Ngtv Hostile Comform |
+DISTORTION 	Neg Noun Percv |
+DISTRACT 	IAV Neg SUPV Actv Other |
+DISTRACTING 	IndAdj Neg Modif Ovrst |
+DISTRACTION 	Neg Noun Ovrst Vice |
+DISTRESS#1 	Neg Noun EMOT Pain Ngtv Weak Psv |
+DISTRESS#2 	IAV Neg SUPV Ngtv Weak Psv Pain |
+DISTRUSTFUL 	IPadj Neg Modif Percv Pain |
+DISTURB#1 	IAV Neg SUPV Hostile Ngtv Actv Comform | 44% verb: To disquiet, to interrupt
+DISTURB#2 	Neg Modif Vice Ngtv Actv | 22% adj: "Disturbing"--disquieting
+DISTURB#3 	Neg Modif EMOT Pain Ngtv Psv | 33% adj: "Disturbed"--upset, disrupted
+DISTURBANCE 	Neg Noun Hostile Ngtv Actv Vice |
+DIVERSION 	Neg Noun Percv Ovrst |
+DIVERT 	IAV Neg SUPV Actv Vary Move |
+DIVIDE#1 	DAV Neg SUPV Solve Ngtv Strng Actv PFREQ | 83% verb: Separate, classify, parcel out
+DIVIDE#2 	Neg Modif Space Ngtv Weak Psv | 14% adj: "Divided"--separated
+DIVISION 	Neg Noun HU COLL POLIT Ngtv Weak |
+DIVORCE#1 	Neg Noun Hostile Kin* Legal Ngtv Vice | 84% noun: A legal marital separation
+DIVORCE#2 	DAV Neg SUPV Intrel Hostile Kin* Legal Ngtv Actv | 14% verb: To separate, usually to dissolve a marriage
+DIVORCE#3 	Neg Modif Hostile Kin* Legal Ngtv Intrel | 3% adj: "Divorced"--legally separated from a spouse
+DIZZY 	IndAdj Neg Modif Pain |
+DOLDRUMS 	Neg Noun Pain Vice |
+DOMINATE#1 	IAV Neg SUPV Intrel Power Ngtv Strng Actv PFREQ | 92% verb: To control
+DOMINATE#2 	Neg Modif Power Ngtv Strng Actv Intrel | 4% adj: "Dominating"--imperious
+DOMINATE#3 	Neg Modif Power Ngtv Strng Actv Intrel | 4% adv: "Dominatingly"--imperiously
+DOMINATION 	Neg Noun ECON POLIT Power Ngtv Strng Actv Vice |
+DOOM#1 	Neg Noun Ngtv Weak Psv Vice |
+DOOM#2 	IAV Neg SUPV Finish Ngtv Weak Psv |
+DOOMSDAY 	Neg Noun Finish |
+DOPE 	Neg Noun HU Vice |
+DOUBLE#3 	Neg Noun COM Comform Hostile Ngtv | 3% idiom-noun: 'double talk'--deceiving speech
+DOUBLE#4 	Neg Noun Hostile Ngtv Vice | 0% idiom-noun: 'double cross'--treachery
+DOUBT#1 	Neg Noun Means EMOT Undrst Ngtv Psv | 49% noun: Uncertainty, question
+DOUBT#2 	SV Neg SUPV Ngtv Psv Undrst Comform | 41% verb: To question, be uncertain about
+DOUBT#4 	Neg Modif Means Ngtv Psv | 2% adj: "Doubting"--questionning, uncertain, unbelieving
+DOUBTFUL 	IndAdj Neg Modif Undrst Ngtv Weak Vice Percv |
+DOWNCAST 	IndAdj Neg Modif Pain |
+DOWNFALL 	Neg Noun Finish Pain |
+DOWNHEARTED 	IndAdj Neg Modif Pain Emot |
+DRAB 	IndAdj Neg Modif Vice |
+DRAG 	DAV Neg SUPV Exert Hostile Actv Ngtv |
+DREAD 	SV Neg SUPV Psv Emot Pain |
+DREADFUL 	Neg Modif Vice Ovrst Ngtv Weak Psv |
+DREARY 	IndAdj Neg Modif Vice |
+DRIVE#2 	IAV Neg SUPV Intrel Hostile Ngtv Actv Strng | 20% verb: To force, impel or push into some psychological or other state, generally negative--"he is driving me crazy"
+DROOP 	DAV Neg SUPV Psv Weak Fail |
+DROP#1 	Neg Noun Ngtv Weak Psv Fall | 5% noun: Fall or decline
+DROP#3 	DAV Neg SUPV Fall Ngtv Weak Psv | 32% verb: To fall--intransitive
+DROP#4 	DAV Neg SUPV Fail Ngtv Weak Actv | 56% verb: To let fall, give up--transitive
+DROUGHT 	Neg Noun Quan Fail |
+DROWN#1 	Neg Noun Natpro Ngtv Weak Psv | 0% noun-adj: A suffocation by water--killed by such an act--"the drowned child"
+DROWN#2 	DAV Neg SUPV Ngtv Weak Psv Natpro | verb: To die by suffocation in water, generally by accident
+DROWSINESS 	Neg Noun Psv Natpro |
+DROWSY 	IndAdj Neg Modif Psv Natpro |
+DRUNK#1 	Neg Modif Vice Ngtv Weak Psv PFREQ | 83% adjective: Intoxicated
+DRUNK#2 	Neg Noun HU Ngtv Weak Psv Role | 4% noun: An intoxicated person, one perpetually so
+DRUNKARD 	Neg Noun HU Vice Weak |
+DRUNKEN 	IndAdj Neg Modif Weak Psv Vice |
+DUBIOUS 	Neg Modif Undrst Ngtv Vice |
+DULL 	Neg Modif Qual EVAL Ngtv Weak Psv |
+DUMB 	Neg Modif Comform Ngtv Weak Psv |
+DUMP#1 	Neg Noun PLACE Social Ngtv |
+DUMP#2 	IAV Neg SUPV Exert Hostile Ngtv Actv |
+DUNCE 	Neg Noun HU Vice |
+DUNGEON 	Neg Noun Place |
+DUTY 	Neg Noun ABS Abs* Virtue Subm Ngtv Strng | noun: Obligation
+DWINDLE 	IAV Neg SUPV Decr |
+DYING#1 	SV Neg SUPV ING Natpro Ngtv Weak Psv PFREQ | 87% verb: Ceasing to live or exist; eager (with "to") (1)
+DYING#2 	IndAdj Neg Modif Natpro Ngtv Weak Psv | 13% noun-adj: The process of ceasing to live, in this process
+ECCENTRIC 	IndAdj Neg Modif Ovrst Eval Qual |
+ECCENTRICITY 	Neg Noun Ovrst Eval Qual |
+EDGE#4 	Neg Modif EMOT Pain Ngtv Weak | 0% idiom-adj: "On edge"--nervous, irritable, keyed up
+EGOTISTICAL 	IndAdj Neg Modif Vice Power Hostile |
+ELIMINATE 	IAV Neg SUPV Ngtv Strng Actv Finish |
+ELIMINATION 	Neg Noun Ngtv Actv Finish Strng |
+EMBARRASS 	IAV Neg SUPV Other Actv |
+EMBARRASSMENT 	Neg Noun Weak Vice |
+EMERGENCY 	Neg Noun Vice Ngtv | noun-adj: An unexpected dangerous situation
+EMPTY#1 	Neg Modif Ngtv Weak PFREQ Quan | 96% adj: Devoid of content
+EMPTY#2 	DAV Neg SUPV Decr Ngtv Actv | 4% verb: To void
+ENCROACH 	IAV Neg SUPV Move Power |
+ENCROACHMENT 	Neg Noun Move Power |
+ENDANGER 	IAV Neg SUPV Intrel Hostile Ngtv |
+ENEMY 	Neg Noun HU POLIT Hostile Ngtv Role | noun adjective: Foe, antagonist
+ENFORCE 	IAV Neg SUPV Intrel Power Ngtv Strng Actv Hostile |
+ENGULF 	IAV Neg SUPV Strng Actv Decr Hostile Ovrst Ngtv |
+ENRAGE 	IAV Neg SUPV Hostile Emot Other |
+ENSLAVE 	IAV Neg SUPV Other Power Polit |
+ENTANGLE 	IAV Neg SUPV Other Power Polit |
+ENTANGLEMENT 	Neg Noun Polit Hostile |
+ENTREAT 	IAV Neg SUPV Subm Weak Intrel |
+ENVIOUS 	IPadj Neg Modif Vice Other Need |
+ENVY 	Neg Noun Vice Need Other |
+EPIDEMIC 	Neg Noun Natpro Qual |
+EPITHET 	Neg Noun COM Comform Hostile Ngtv |
+EQUIVOCAL 	Neg Modif Undrst Ngtv Weak Vice |
+ERADICATE 	IAV Neg SUPV Actv Finish Decr Power |
+ERASE 	DAV Neg SUPV Finish Decr Actv |
+ERODE 	DAV Neg SUPV Psv Decr |
+EROSION 	Neg Noun Decr |
+ERR 	IAV Neg SUPV Actv Fail Weak |
+ERRONEOUS 	IndAdj Neg Modif Fail Weak |
+ERROR 	Neg Noun Vice Ngtv |
+ESOTERIC 	IndAdj Neg Modif Affil Think Power |
+ESTRANGED 	IPadj Neg Modif Intrel Pain |
+EVADE 	IAV Neg SUPV Actv Move |
+EVASION 	Neg Noun Move |
+EVEN#3 	IAV Neg SUPV Intrel Hostile Ngtv | 2% idiom-verb: "Get even"--to have one's revenge, square accounts
+EVICT 	IAV Neg SUPV Power Legal Exert |
+EVIL#1 	Neg Noun Vice Ngtv | 55% noun: Wickedness
+EVIL#2 	Neg Modif EVAL Vice Ngtv | 45% adj: Wicked
+EXAGGERATION 	Neg Noun Ovrst Eval Comform |
+EXASPERATE 	IAV Neg SUPV Decr |
+EXASPERATION 	Neg Noun Emot Pain |
+EXCEPTION#2 	IAV Neg SUPV Hostile Ngtv Comform | 9% idiom-verb: Make an objection- 'take exception'
+EXCESS 	Neg Noun Ovrst Ngtv Quan |
+EXCESSIVE 	Neg Modif Vice EVAL Ngtv Ovrst |
+EXCLUDE 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+EXCLUSION 	Neg Noun Hostile Ngtv Strng Actv Intrel Power |
+EXCOMMUNICATION 	Neg Noun Hostile Legal Affil |
+EXECUTE 	IAV Neg SUPV Finish Work Hostile |
+EXEMPT 	IndAdj Neg Modif Qual Ovrst |
+EXHAUST 	IAV Neg SUPV Decr |
+EXHAUSTION 	IndAdj Neg Modif Emot Pain Work |
+EXILE 	IAV Neg SUPV Hostile Exert Affil Travel Actv |
+EXIT 	IAV Neg SUPV Travel |
+EXPEDIENT 	Neg Modif Means Ngtv |
+EXPEL 	IAV Neg SUPV Hostile Exert Affil Travel Actv |
+EXPENSE#1 	Neg Noun COM Comform ECON Econ* Ngtv PFREQ | 90% noun: Cost, price of exchange
+EXPENSE#2 	Neg Noun Means Ngtv | 10% idiom: 'at the expense of'--to the detriment or sacrifice of
+EXPENSIVE 	Neg Modif ECON Econ* Ngtv Vice |
+EXPLODE 	IAV Neg SUPV Psv Exert Finish |
+EXPLOIT#2 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+EXPLOSION 	Neg Noun Natpro Ngtv Actv Strng |
+EXPLOSIVE 	Neg Modif Natpro Ngtv Actv Strng |
+EXPOSE 	IAV Neg SUPV Percv Actv Comform |
+EXTERMINATE 	IAV Neg SUPV Actv Finish Decr Power |
+EXTERMINATION 	Neg Noun Finish Decr Power |
+EXTINCT 	IndAdj Neg Modif Qual Quan Finish |
+EXTINGUISH 	IAV Neg SUPV Finish Ngtv Strng Actv |
+EXTRAVAGANT 	Neg Modif Vice EVAL Econ* Ngtv Ovrst |
+FABRICATE 	IAV Neg SUPV Actv Comform |
+FABRICATION 	Neg Noun Vice Comform |
+FAIL#1 	IAV Neg SUPV Fail Ngtv Weak Psv | 56% verb: To be unsuccessful or lose strength
+FAIL#2 	IAV Neg SUPV Fail Ngtv Weak Psv | 39% verb: To neglect, omit, or fall short of - "fail to"
+FAIL#3 	IAV Neg SUPV Hostile Ngtv Weak Psv Fail | 2% verb: To disappoint or be inadequate for
+FAIL#4 	Neg Noun Vice Ngtv Weak Psv | 4% noun-adj: "Failing"--a fault or failure, unsatisfactory
+FAILURE 	Neg Noun Vice Ngtv Weak Psv | noun: A general instance of proving unsuccessful, one who or that which proves unsuccessful or fails to perform something expected or required
+FAINT 	Neg Modif Percv Ngtv Weak Psv Undrst |
+FAKE 	IndAdj Neg Modif Eval Qual |
+FALL#7 	IAV Neg SUPV Decr Ngtv Weak Psv | 5% verb-idiom: 'fall apart'--disintegrate
+FALLACY 	Neg Noun Eval Qual |
+FALLOUT 	Neg Noun Natpro POLIT Hostile Ngtv |
+FALSE 	Neg Modif Vice EVAL Ngtv |
+FALSEHOOD 	Neg Noun Eval Qual |
+FALTER 	IAV Neg SUPV Ngtv Weak Undrst Decr |
+FAMINE 	Neg Noun Weak Need Pain |
+FAMISHED 	IndAdj Neg Modif Natpro Need |
+FANATIC 	Neg Noun HU Need Vice |
+FANATICAL 	IndAdj Neg Modif Need Vice |
+FARCE 	Neg Noun Comform |
+FASCIST 	IndAdj Neg Modif Polit Affil Doctr |
+FAT#1 	Neg Modif EVAL DIM Space Ngtv PFREQ | 97% adjective-noun: Excess of adipose tissue, sometimes figuratively used to indicate various derogatory attributes of excess or luxury
+FAT#2 	Neg Modif EVAL DIM Space Ngtv | 2% adj: "Fatter"--comparative
+FAT#3 	Neg Modif EVAL DIM Space Ngtv | 2% adj: "Fattest"--superlative
+FATAL 	IndAdj Neg Modif Finish Natpro |
+FATALISTIC 	IndAdj Neg Modif Think Finish |
+FATIGUE 	Neg Noun Pain Ngtv Weak Psv |
+FAULT 	Neg Noun Vice Ngtv Weak |
+FEAR#1 	Neg Noun EMOT Pain Ngtv Weak Psv Subm | 67% noun-adj: Anxiety, dread, fright
+FEAR#2 	SV Neg SUPV Ngtv Weak Psv Subm Pain | 33% verb: To be afraid of
+FEAR#3 	Neg Modif Ngtv Pain Strng | 0% adj: "Feared" - arousing fear
+FEARFUL 	Neg Modif EMOT Subm Pain Ngtv Weak Psv |
+FEARSOME 	IndAdj Neg Modif Emot Pain |
+FED#2 	Neg Modif EMOT Pain Hostile Ngtv Psv | 28% idiom-adj-adv: "Fed up" - disgusted
+FEEBLE 	Neg Modif Vice Ngtv Weak Psv Undrst |
+FEIGN 	IAV Neg SUPV Actv Comform |
+FEINT 	IAV Neg SUPV Actv Comform |
+FEROCIOUS 	IndAdj Neg Modif Emot Hostile |
+FEROCITY 	Neg Noun Hostile |
+FEUD 	Neg Noun Hostile Intrel |
+FEUDAL 	IndAdj Neg Modif Polit Doctr |
+FEVER 	Neg Noun Ngtv Weak Psv Vice |
+FEVERISH 	Neg Modif Ngtv Weak Psv |
+FIASCO 	Neg Noun Weak Fail Ovrst |
+FICKLE 	IndAdj Neg Modif Emot Weak Subm |
+FIDGET 	IAV Neg SUPV Actv Weak Move |
+FIEND 	Neg Noun HU Hostile |
+FIERCE 	IndAdj Neg Modif Hostile Emot |
+FIGHT#1 	Neg Noun Ritual Hostile Milit Ngtv Strng Actv | 24% noun: Conflict
+FIGHT#2 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 67% verb: To engage in conflict
+FIGHT#3 	Neg Modif Hostile Ngtv Strng Actv Vice | 8% noun-adj: "Fighting"--engaging in conflict
+FIGHTER 	Neg Noun HU Hostile Ngtv Strng Actv Role |
+FILTH 	Neg Noun Vice |
+FILTHY 	IndAdj Neg Modif Vice |
+FINE#6 	Neg Noun COM Comform ECON Econ* Legal Ngtv | 0% noun: A violator's fee
+FINE#7 	IAV Neg SUPV Exch Hostile Legal Econ* Ngtv Strng Actv | 0% verb: To levy a fee in punishment
+FIRE#1 	DAV Neg SUPV Work Hostile Ngtv Strng Actv | 6% verb: To discharge a weapon, shoot, apply fire to
+FIRE#2 	DAV Neg SUPV Econ* Hostile Ngtv Strng Actv Exch | 8% verb: To terminate employment
+FIRE#3 	Neg Noun Hostile Ngtv Exert Actv | 5% noun-adj: Gunfire, shooting, attack
+FIST 	Neg Noun Bodypt Hostile Ngtv Strng |
+FIX#5 	Neg Noun Vice Ngtv | 3% noun: "A fix"--a predicament
+FLAGRANT 	IndAdj Neg Modif Eval Qual Ovrst |
+FLAW 	Neg Noun Weak Fail |
+FLED 	IAV Neg SUPV Travl ED Hostile Actv Ngtv Weak | verb: To have run or passed away quickly
+FLEE 	IAV Neg SUPV Actv Travel Weak |
+FLEETING 	IndAdj Neg Modif Travel Time |
+FLIMSY 	IndAdj Neg Modif Weak |
+FLOOR#5 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 2% verb: To provide with a floor; to knock to the floor (0)
+FLOUNDER 	IAV Neg SUPV Fail Weak Psv |
+FOE 	Neg Noun HU Hostile |
+FOIBLE 	Neg Noun Weak Fail |
+FOOL#1 	Neg Noun HU Ngtv Weak Role | 48% noun: Simpleton
+FOOL#2 	IAV Neg SUPV Intrel Hostile Ngtv | 37% verb: To deceive or joke with
+FOOLISH 	Neg Modif Vice EVAL Ngtv Weak | adj: Imprudent, ridiculous
+FOOLISHNESS 	Neg Noun Weak Vice |
+FORBID 	Neg Modif Comform Power Ngtv Strng |
+FORBIDDEN 	Neg Modif Comform Power Ngtv |
+FORCE#3 	IAV Neg SUPV Intrel Power Strng Actv Ngtv | 39% verb: To compel, impose, overcome the resistance of
+FORCE#5 	Neg Modif Power Hostile Ngtv Strng Actv Exert | 3% idiom-adv: "By force"--using physical force, generally against another's will
+FORCE#6 	Neg Modif Power Ngtv Psv Vice Hostile | 4% adj: "Forced"--compulsory, constrained
+FOREBODING 	IndAdj Neg Modif Hostile Percv |
+FOREIGN#2 	Neg Modif Vice EVAL Ngtv | 1% adjective: Strange, unknown, alien, hostile, or irrelevant to a person or matter.
+FORFEIT 	IAV Neg SUPV Fail Ngtv Weak Psv |
+FORGETFULNESS 	Neg Noun Vice Think |
+FORLORN 	IndAdj Neg Modif Emot Pain Weak |
+FORMIDABLE 	Neg Modif Vice Strng Ngtv Power |
+FORSAKE 	IAV Neg SUPV Psv Weak Subm |
+FOUGHT 	DAV Neg SUPV Intrel ED Hostile Ngtv Strng Actv | verb: Past tense of "fight"--engaged in conflict
+FOUNDER#2 	IAV Neg SUPV Fail Ngtv Weak Psv |
+FRACTURE 	IAV Neg SUPV Weak Psv Vice |
+FRAGILE 	IndAdj Neg Modif Weak |
+FRANTIC 	Neg Modif EMOT Pain Ngtv Weak |
+FRANTICALLY 	Neg Modif Ovrst Qual |
+FRAUD 	Neg Noun Weak Comform Fail |
+FRAUDULENT 	IndAdj Neg Modif Weak Comform Fail |
+FRAUGHT 	IndAdj Neg Modif Ovrst Eval Qual |
+FREAK 	Neg Noun HU Qual |
+FRET 	SV Neg SUPV Think Actv Weak |
+FRETFUL 	IndAdj Neg Modif Think Weak |
+FRIGHTEN#1 	IAV Neg SUPV Hostile Ngtv Actv Pain | 19% verb: To scare
+FRIGHTEN#2 	Neg Modif EMOT Pain Ngtv | 62% adjective: "Frightened"--scared, afraid
+FRIGHTEN#3 	Neg Modif EVAL Pain Ngtv Actv | 19% adjective: "Frightening"--scary, terrifying
+FRIGHTFUL 	IndAdj Neg Modif Pain Qual |
+FRIGID 	IndAdj Neg Modif Natpro |
+FRIVOLOUS 	IndAdj Neg Modif Qual Eval |
+FRONT#3 	Neg Noun Vice Ngtv | 4% noun: A facade
+FROWN#1 	Neg Noun Ngtv Psv Comform Hostile |
+FROWN#2 	IAV Neg SUPV Hostile Ngtv Psv Comform |
+FRUITLESS 	Neg Modif Vice EVAL Ngtv Weak |
+FRUSTRATE#1 	IAV Neg SUPV Intrel Hostile Ngtv Strng | 20% verb: To thwart
+FRUSTRATE#2 	Neg Modif EMOT Pain Ngtv Psv | 43% adj: "Frustrated"--vexed, unsatisfied, thwarted
+FRUSTRATE#3 	Neg Modif Pain Ngtv | 37% adj: "Frustrating"--unsatisfying, tending to thwart
+FRUSTRATION 	Neg Noun EMOT Pain Ngtv Psv | noun-adj: A condition producing or resulting from thwarted desires or plans
+FUGITIVE 	Neg Noun HU Travel Legal |
+FUMBLE 	IAV Neg SUPV Actv Weak Fail |
+FUN#2 	SV Neg SUPV Hostile Ngtv Comform | 3% idiom-verb: "Make fun (of)"--to tease, parody
+FURIOUS 	Neg Modif EMOT Hostile Ngtv Ovrst Arousal |
+FURY 	Neg Noun EMOT Hostile Ngtv Pain Arousal Ovrst |
+FUSS 	IAV Neg SUPV Actv Weak Comform |
+FUSSY 	IndAdj Neg Modif Ovrst Vice |
+FUTILITY 	Neg Noun Weak Subm Vice |
+GALL 	Neg Noun Emot Strng Power |
+GAMBLE#1 	Neg Noun Econ* Ngtv Actv Undrst Ritual |
+GAMBLE#2 	IAV Neg SUPV Try Econ* Ngtv Actv Undrst |
+GASH 	Neg Noun Pain Natpro |
+GAUDY 	Neg Modif Qual Ngtv Ovrst |
+GERM 	Neg Noun Object Hostile |
+GET#5 	IAV Neg SUPV Intrel Hostile Actv Ngtv Strng | 1% idiom-verb: "Get rid of"--get free from, destroy
+GHASTLY 	Neg Modif Vice EVAL Ngtv Ovrst |
+GHETTO 	Neg Noun PLACE POLIT ECON Ngtv Region |
+GLARE 	Neg Noun Percv Strng |
+GLOAT 	IAV Neg SUPV Actv Comform Strng |
+GLOOM 	Neg Modif Pain Ngtv Psv |
+GLOOMY 	Neg Modif EMOT Pain Ngtv Psv |
+GLUM 	IndAdj Neg Modif Emot Pain |
+GODDAMN 	Neg Intj Hostile Ngtv |
+GRAB 	DAV Neg SUPV Exert Hostile Ngtv Actv | verb: To seize or clutch.
+GRAPPLE 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+GRATUITOUS 	IndAdj Neg Modif Ovrst Quan |
+GRAVE#1 	Neg Noun Ngtv Relig PLACE Social | 70% noun-adj: Burial place
+GRAVE#2 	Neg Modif Vice EVAL Ngtv Ovrst | 8% adjective: Serious
+GRAVE#3 	Neg Modif Vice EVAL Ngtv Ovrst | 3% adjective: "Graver"--more serious--comparative of sense 2
+GRAVE#4 	Neg Modif Vice EVAL Ngtv Ovrst | 3% adverb: "Gravely"--seriously
+GRAVE#5 	Neg Modif Vice EVAL Ngtv Ovrst | 0% adjective: "Gravest"--most serious
+GRIEF 	Neg Noun EMOT Pain Ngtv Weak Psv Affil |
+GRIEVANCE 	Neg Noun Comform Pain |
+GRIEVE 	SV Neg SUPV Actv Emot Pain Comform |
+GRIM 	IndAdj Neg Modif EVAL Vice Ngtv |
+GRIZZLY 	IndAdj Neg Modif Eval Pain |
+GROTESQUE 	Neg Modif Vice EVAL Ngtv Ovrst |
+GROWL 	IAV Neg SUPV Comform Actv |
+GRUDGE 	Neg Noun Hostile Ngtv Pain |
+GRUFF 	IndAdj Neg Modif Qual Strng |
+GRUMBLE 	IAV Neg SUPV Hostile Ngtv Comform |
+GUERRILLA 	Neg Noun HU POLIT Hostile Milit Ngtv Strng Actv |
+GUILT 	Neg Noun EMOT Pain Ngtv Psv |
+GUILTY 	IndAdj Neg Modif Vice EVAL Legal Ngtv Psv Causal Weak | adj: Culpable
+GUISE 	Neg Noun Object Percv |
+GULLIBLE 	IPadj Neg Modif Weak Think Qual |
+GUN 	Neg Noun Object Tool Hostile Milit Strng Ngtv | noun: A firearm
+GUNMEN 	Neg Noun HU MALE S Hostile Strng Ngtv Role |
+HACK 	Neg Noun Vice HU Weak |
+HACKNEY 	IndAdj Neg Modif Qual Eval |
+HAG 	Neg Noun HU Female |
+HAGGARD 	IndAdj Neg Modif Weak |
+HAMPER 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv Power |
+HAND#6 	Neg Modif Vice Ngtv Strng | 1% idiom-adj: "Out of hand"--out of control
+HANDICAP 	Neg Noun Weak Vice |
+HANG#3 	IAV Neg SUPV Intrel Hostile Ngtv | 3% verb: To suspend by the throat (transitive)
+HANG#6 	IAV Neg SUPV Stay Ngtv Psv | 6% idiom-verb: 'hang around'--linger
+HAPHAZARD 	Neg Modif Ngtv FREQ |
+HAPLESS 	IndAdj Neg Modif Weak Subm Vice Psv |
+HARASS 	IAV Neg SUPV Actv Hostile Other Exert |
+HARASSMENT 	Neg Noun Other Hostile Intrel Exert |
+HARD#1 	Neg Modif Vice EVAL Ngtv Strng | 47% adj: Difficult, trying, severe (especially of people)
+HARD#5 	Neg Modif Pain Ngtv Psv Weak | 1% idiom-adj: 'hard up'
+HARDSHIP 	Neg Noun Vice Ngtv |
+HARM#1 	Neg Noun Hostile Ngtv Strng Psv Vice | 33% noun: Injury, damage, hurt
+HARM#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 67% verb: To injure, damage, or hurt
+HARMFUL 	Neg Modif Vice Ngtv Strng |
+HARSH 	Neg Modif Vice EVAL Hostile Ngtv Strng |
+HASSLE 	Neg Noun Hostile Work |
+HATE#1 	SV Neg SUPV Hostile Ngtv Psv Arousal | 80% verb: To dislike passionately, to detest
+HATE#2 	Neg Noun EMOT Hostile Ngtv Psv Arousal | 19% noun: Intense dislike, aversion, hostility
+HATE#3 	Neg Modif EVAL EMOT Hostile Ngtv Psv Arousal | 0% adj: 'hated'-loathed--'the hated dictator'
+HATER 	Neg Noun HU Ngtv Psv Hostile Role |
+HATRED 	Neg Noun EMOT Hostile Ngtv Psv Arousal |
+HAUGHTY 	IndAdj Neg Modif Emot Strng Power |
+HAUNT 	IAV Neg SUPV Intrel Hostile Ngtv Power Actv |
+HAVOC 	Neg Noun Vice Ovrst |
+HAZARD#1 	Neg Noun Vice Ngtv |
+HAZARD#2 	IAV Neg SUPV Try Ngtv Actv |
+HAZARDOUS 	Neg Modif Vice Ngtv |
+HAZINESS 	Neg Noun Ngtv Weak Percv Undrst |
+HAZY 	IndAdj Neg Modif Percv |
+HEADACHE 	Neg Noun Ngtv Vice |
+HEARTLESS 	IndAdj Neg Modif Emot Hostile |
+HECTIC 	IndAdj Neg Modif Vice Ovrst |
+HEDGE 	IAV Neg SUPV Intrel Hostile Ngtv Weak |
+HEDONISTIC 	IndAdj Neg Modif Vice Need |
+HEEDLESS 	IndAdj Neg Modif Comform |
+HEINOUS 	IndAdj Neg Modif Hostile |
+HELL 	Neg Noun PLACE Social Relig Ngtv |
+HELP#3 	IAV Neg SUPV Need Subm Passive Ngtv Weak Psv | 3% verb: To avoid or refrain from--"i can't help but . . . ," "not if i can help it"
+HELPLESS 	Neg Modif EVAL Subm Ngtv Weak Psv Fail |
+HELPLESSNESS 	Neg Noun Weak Subm Vice |
+HIDEOUS 	Neg Modif Vice EVAL Ngtv Ovrst |
+HINDER 	IAV Neg SUPV Intrel Ngtv Strng Hostile |
+HINDRANCE 	Neg Noun Ngtv Hostile Vice |
+HIT#1 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv PFREQ | verb: To strike or collide against, present and past tense
+HIT#4 	Neg Modif Vary Ngtv Psv | 1% idiom-adj: "Hit or miss"--haphazard
+HOARD 	IAV Neg SUPV Fetch Incr |
+HOBBLE 	IAV Neg SUPV Weak Move Actv |
+HOLE#2 	Neg Modif Vice Econ* Ngtv Weak | 2% idiom-adj: "In the hole"--in the red, suffering a deficit
+HOLE#3 	Neg Noun ABS Abs* Vice Ngtv Weak Psv | 2% idiom-adj: "In a hole"--in a tough spot, difficult situation--not handled
+HOLLOW 	Neg Modif Qual Ngtv Weak |
+HOMELY 	Neg Modif Vice EVAL Ngtv |
+HOPELESS 	Neg Modif Pain Ngtv Weak Psv Ovrst |
+HORDE 	Neg Noun Coll |
+HORN#3 	Neg LY Vice Ngtv | 3% idiom-noun: "The horns of a dilemma"
+HORRIBLE 	Neg Modif Vice EVAL Ngtv PFREQ | adj: Frightful, unpleasant
+HORRID 	IndAdj Neg Modif Eval Vice |
+HORRIFY 	IAV Neg SUPV Actv Hostile Other |
+HORROR 	Neg Noun EMOT Pain Ngtv Hostile |
+HOSTILE 	Neg Modif EMOT Hostile Ngtv Pain Arousal |
+HOSTILITY 	Neg Noun EMOT Hostile Ngtv Pain Arousal |
+HOT#6 	Neg Modif Ngtv Vice | 0% idiom-adv: "Not so hot"--not too well
+HUMILIATE 	IAV Neg SUPV Actv Hostile Other |
+HUMILIATION 	Neg Noun Emot Pain |
+HUNG#3 	Neg Modif Pain Ngtv Psv | 22% idiom-adj-adv: 'hung up'--impeded by, caught up in
+HUNGER 	Neg Noun Ngtv Natpro |
+HUNGRY 	Neg Modif Ngtv Natpro | adj: Desirous of food
+HUNT#1 	Neg Noun Ngtv Hostile Actv Exert | 1% noun: A chasing and killing of animals; a searching out (0)
+HUNT#2 	IAV Neg SUPV Ngtv Actv Hostile PFREQ Exert | 94% verb: To chase and kill animals; to search out (14)
+HUNT#3 	Neg Modif Ngtv Actv Exert | 5% adj: "Hunting"--related to searching out
+HUNTER 	Neg Noun HU Exprs Hostile Ngtv Actv Role | noun: One who chases and kills animals
+HURT#1 	IAV Neg SUPV Intrel Hostile Strng Actv Ngtv PFREQ | 89% verb: To injure or harm, to cause or experience pain or distress
+HURT#2 	Neg Noun EMOT Pain Ngtv Psv | 11% noun-adj: Injury or pain, injured
+HURTFUL 	IPadj Neg Modif Vice Emot Pain |
+HUSTLE 	IAV Neg SUPV Comform Hostile Econ |
+HUSTLER 	Neg Noun HU Role Hostile Comform Econ |
+HYPOCRISY 	Neg Noun Vice Comform |
+HYPOCRITE 	Neg Noun Comform Vice |
+HYSTERIA 	Neg Noun Vice Emot Pain |
+HYSTERICAL 	Neg Modif EMOT Pain Ngtv Weak Psv |
+IDIOT 	Neg Noun Vice Eval |
+IDIOTIC 	IndAdj Neg Modif Eval Vice |
+IDLENESS 	Neg Noun Stay Work Vice |
+IGNOBLE 	IndAdj Neg Modif Vice Eval |
+IGNORANCE 	Neg Noun Vice Ngtv Weak |
+IGNORANT 	Neg Modif Vice EVAL Ngtv Weak |
+ILL#1 	Neg Modif Ngtv Weak Psv Vice | 59% adj: Of unsound physical or mental health, sick
+ILL#2 	Neg LY Vice Ngtv | 28% adj-adv: Objectionable, unsatisfactory, bad, adverse, poorly
+ILL#3 	Neg Noun Ngtv Vice | 7% noun: Evil, harm, injury, disease
+ILL#4 	Neg Modif Pain Ngtv Psv | 7% adj-idiom: "Ill at ease"--uncomfortable
+ILLEGAL 	IndAdj Neg Modif Legal Vice Eval |
+ILLEGALITY 	Neg Noun Vice Eval Legal |
+ILLITERATE 	IndAdj Neg Modif Weak Fail |
+ILLNESS 	Neg Noun Ngtv Weak Psv Vice | noun: Sickness of the body or mind
+ILLOGICAL 	IndAdj Neg Modif Weak Fail |
+IMMATURE 	IndAdj Neg Modif Nonadlt Weak |
+IMMOBILITY 	Neg Noun Stay |
+IMMORAL 	IndAdj Neg Modif Vice Eval Doctr |
+IMMORALITY 	Neg Noun Vice Eval Doctr |
+IMMOVABLE 	IndAdj Neg Modif Stay Strng |
+IMPAIR 	IAV Neg SUPV Intrel Ngtv Strng Actv Hostile Power |
+IMPASSE 	Neg Noun Stay Comform Intrel |
+IMPATIENCE 	Neg Noun Negate Ngtv Psv Arousal Hostile |
+IMPATIENT 	IndAdj Neg Modif Vice Need |
+IMPEDE 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+IMPEDIMENT 	Neg Noun Hostile Ngtv Vice |
+IMPERFECT 	IndAdj Neg Modif Vice Fail |
+IMPERSONAL 	Neg Modif Vice Ngtv |
+IMPETUOUS 	IndAdj Neg Modif Think Vary Vice |
+IMPLICATE 	IAV Neg SUPV Comform Hostile Causal Other Actv |
+IMPLORE 	IAV Neg SUPV Need Weak Subm Actv |
+IMPOSE 	IAV Neg SUPV Intrel Power Ngtv Strng Actv |
+IMPRECISION 	IndAdj Neg Modif Ovrst |
+IMPRISON 	IAV Neg SUPV Actv Other Power Legal |
+IMPRISONMENT 	Neg Noun Weak Subm Legal |
+IMPROPER 	IndAdj Neg Modif Eval Vice |
+IMPULSIVE 	IndAdj Neg Modif Eval Vice Think Vary |
+IMPURE 	IndAdj Neg Modif Eval Vice |
+IMPURITY 	Neg Noun Eval Vice Fail |
+INABILITY 	Neg Noun Negate Ngtv Weak Psv Vice |
+INACCESSIBLE 	IPadj Neg Modif Negate Eval Vice |
+INACCURACY 	Neg Noun Fail Eval |
+INADEQUATE 	IndAdj Neg Modif Vice EVAL Negate Ngtv Weak Subm Psv |
+INANE 	IndAdj Neg Modif Eval Vice |
+INCAPABLE 	Neg Modif Vice EVAL Ngtv Weak Psv Subm Negate |
+INCESSANT 	Neg Modif Ngtv Strng Ovrst Persist |
+INCOMPATIBILITY 	Neg Noun Negate Ngtv Vice |
+INCOMPATIBLE 	Neg Modif Negate Ngtv Vice |
+INCOMPETENCE 	Neg Noun Fail Eval |
+INCOMPETENT 	IndAdj Neg Modif Fail Eval |
+INCONSISTENCY 	Neg Noun Ovrst |
+INCONVENIENT 	IndAdj Neg Modif Eval Qual |
+INCORRECT 	Neg Modif Negate Ngtv Weak Vice Undrst |
+INCREDIBLE 	Neg Modif EVAL Negate Ngtv Ovrst Know |
+INCURABLE 	IndAdj Neg Modif Fail Stay |
+INDECENT 	IndAdj Neg Modif Eval Vice |
+INDEFINITE 	Neg Modif Negate Ngtv Psv Undrst Vice |
+INDETERMINABLE 	IndAdj Neg Modif Percv Ovrst |
+INDETERMINATE 	IndAdj Neg Modif Percv Ovrst |
+INDICTMENT 	Neg Noun COM Comform POLIT Hostile Legal Ngtv |
+INDIFFERENCE 	Neg Noun EMOT Ngtv Psv Arousal |
+INDIFFERENT 	IndAdj Neg Modif Emot Negate |
+INDIGNATION 	Neg Noun Emot Pain Hostile |
+INDULGE 	IAV Neg SUPV Try Ngtv Actv |
+INEFFECTIVE 	IndAdj Neg Modif Stay Fail |
+INEFFECTIVENESS 	Neg Noun Stay Fail |
+INEFFECTUAL 	IndAdj Neg Modif Stay Fail |
+INEFFECTUALNESS 	Neg Noun Stay Fail |
+INEFFICIENCY 	Neg Noun Stay Fail Work |
+INEQUALITY 	Neg Noun Eval Intrel Qual |
+INEXACT 	Neg Modif Negate Vice Ngtv Undrst |
+INEXPLICABLE 	Neg Modif Causal Negate Ngtv |
+INFAMOUS 	IndAdj Neg Modif Vice |
+INFECT 	IAV Neg SUPV Actv Hostile Change |
+INFECTION 	Neg Noun Hostile Change |
+INFERIOR 	Neg Modif Vice EVAL Ngtv Weak |
+INFERIORITY 	Neg Noun Weak Subm |
+INFEST 	IAV Neg SUPV Actv Coll Travel |
+INFILTRATION 	Neg Noun Hostile Ngtv Strng Actv Vice |
+INFLAME 	IAV Neg SUPV Actv Hostile Change |
+INFLATION 	Neg Noun Econ Incr |
+INFLICT 	IAV Neg SUPV Actv Other Exert |
+INFRACTION 	Neg Noun Legal |
+INFRINGEMENT 	Neg Noun Hostile Ngtv Strng Actv Legal Vice |
+INFURIATE 	IAV Neg SUPV Actv Other Hostile |
+INGRATITUDE 	Neg Noun Vice |
+INHIBIT 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+INHIBITION 	Neg Noun Hostile Ngtv Strng Psv Vice |
+INHUMANE 	IndAdj Neg Modif Hostile Vice Eval |
+INJUNCTION 	Neg Noun COM Comform Hostile Legal Ngtv Strng |
+INJURE 	IAV Neg SUPV Psv Pain Fail |
+INJURIOUS 	Neg Modif Vice Ngtv Weak Hostile |
+INJURY 	Neg Noun Vice Ngtv Weak Hostile |
+INSANE 	IndAdj Neg Modif Think Fail Vice |
+INSECURE 	Neg Modif Negate Ngtv Weak Psv Vice Undrst |
+INSECURITY 	Neg Noun Negate Ngtv Weak Psv Vice Undrst |
+INSENSIBLE 	IndAdj Neg Modif Think Fail |
+INSIDIOUS 	Neg Modif Ngtv Vice |
+INSIGNIFICANT 	Neg Modif Negate Ngtv Weak EVAL Undrst Vice |
+INSINUATE 	IAV Neg SUPV Actv Comform |
+INSOLENCE 	Neg Noun Hostile Intrel |
+INSOLENT 	IndAdj Neg Modif Hostile Intrel |
+INSTABILITY 	Neg Noun Negate Vice Ngtv Weak Psv |
+INSTABLE 	Neg Modif Negate Vice Ngtv Weak Psv |
+INSUFFICIENCY 	Neg Noun Fail Decr Weak |
+INSUFFICIENT 	Neg Modif Vice EVAL Ngtv Weak Negate |
+INSULT 	IAV Neg SUPV Actv Comform Other |
+INTERFERE 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+INTERFERENCE 	Neg Noun Hostile Ngtv Strng Actv Vice |
+INTERRUPT 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+INTERRUPTION 	Neg Noun COM Comform Hostile Ngtv |
+INTERVENTION 	Neg Noun ECON POLIT Milit Ngtv Strng Actv Vice |
+INTIMIDATE 	IAV Neg SUPV Actv Strng Power Other |
+INTOLERABLE 	IPadj Neg Modif Emot Pain Weak |
+INTOXICATE 	IAV Neg SUPV Natpro Think Fail Actv |
+INTRUDE 	IAV Neg SUPV Actv Move Intrel |
+INTRUDER 	Neg Noun HU Role Intrel Move |
+INTRUSION 	Neg Noun Hostile Intrel |
+INUNDATE 	IAV Neg SUPV Actv Incr Strng |
+INUNDATED 	IndAdj Neg Modif Incr Work |
+INVADE 	IAV Neg SUPV Travel Affil Polit |
+INVALID 	IndAdj Neg Modif Eval Vice |
+INVISIBLE 	IndAdj Neg Modif Percv Negate |
+INVOLUNTARY 	IndAdj Neg Modif Feel Negate |
+INVOLVE#5 	Neg Modif Vice Ngtv | 4% adj-adv: 'involved'--complicated
+IRK 	IAV Neg SUPV Psv Pain Hostile |
+IRON#3 	Neg Modif Doctr POLIT Hostile Polit* Ngtv | 3% idiom: The 'iron curtain'
+IRON#5 	Neg Noun Object Tool Hostile Strng Ngtv | 0% noun: "Irons"--chains, shackles
+IRONIC 	Neg Modif Vice Ngtv Undrst |
+IRONY 	Neg Noun Vice Ngtv Undrst |
+IRRATIONAL 	Neg Modif Vice EVAL Ngtv Psv |
+IRREGULAR 	Neg Modif Negate Ngtv Vary |
+IRREGULARITY 	Neg Noun Qual Negate Ngtv |
+IRRESPONSIBLE 	Neg Modif Vice EVAL Negate Ngtv Weak |
+IRRITABLE 	Neg Modif EMOT Pain Ngtv Psv Hostile |
+IRRITATION 	Neg Noun Hostile Pain Ngtv Psv |
+ISOLATE#1 	Neg Modif Space Ngtv |
+ISOLATE#2 	IAV Neg SUPV Rel Ngtv Strng Actv |
+JAIL#1 	Neg Noun PLACE Social POLIT Legal Ngtv PFREQ | 96% noun: Prison
+JAIL#2 	DAV Neg SUPV Intrel Hostile Legal Power Ngtv Strng Actv | 4% verb: To imprison
+JAR#2 	IAV Neg SUPV Exert Ngtv Actv Strng |
+JEER 	IAV Neg SUPV Actv Comform Hostile |
+JEOPARDIZE 	IAV Neg SUPV Intrel Hostile Ngtv |
+JEOPARDY 	Neg Noun |
+JERK#1 	Neg Noun HU Ngtv Role |
+JERK#2 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+JITTERY 	IndAdj Neg Modif Emot Pain |
+JOBLESS 	IndAdj Neg Modif Econ Work Fail |
+JUMPY 	IndAdj Neg Modif Vary Move |
+JUNK 	Neg Noun Eval Qual |
+KICK#1 	DAV Neg SUPV Exert Hostile Strng Actv Ngtv | 75% verb: To strike with one's foot
+KICK#3 	Neg Noun Strng Actv Hostile Ngtv Exert | 3% noun: The act of, or the blow from kicking
+KICK#4 	IAV Neg SUPV Intrel Hostile Strng Actv Ngtv | 6% verb-idiom: 'kick out'--eject, expel
+KIDNAP 	IAV Neg SUPV Legal Hostile Fetch Other Actv |
+KILL#1 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv PFREQ | 98% verb: To deprive of life; figuratively
+KILL#2 	Neg Noun Hostile Ngtv Strng Actv Intrel | 2% noun: "Kill," "killing"--slaying, murder
+KILLER 	Neg Noun HU Hostile Ngtv Strng Actv Role |
+KNIFE#2 	DAV Neg SUPV Exert Hostile Ngtv Strng | 3% verb: To stab
+KNOCK#1 	DAV Neg SUPV Intrel Hostile Ngtv Actv Strng | 36% verb: To strike, rap, collide, rattle, to criticize (1)
+KNOCK#2 	Neg Noun Hostile Ngtv Actv Strng Exert | 21% noun: A blow, rap, rattling, beating, or rapping; criticism (0)
+KNOCK#3 	IAV Neg SUPV Fall Ngtv Strng Actv | 39% verb: To knock down, over or out--to topple, dislodge, defeat, make unconscious
+LACK#1 	Neg Noun Ngtv Weak Psv Vice | 70% noun: Dearth, need, absence, deficit
+LACK#2 	IAV Neg SUPV Need Ngtv Weak Psv | 11% verb: To need, be deficient in
+LACK#3 	Neg Modif Vice Ngtv Weak Psv | 19% adj: "Lacking"--wanting, absent, deficient (in)
+LAG 	IAV Neg SUPV Fail Weak Psv |
+LAID#2 	IAV Neg SUPV Intrel Econ* Power Hostile Ngtv | 28% idiom-verb: "Laid off"--discharged employees
+LAME 	IndAdj Neg Modif Weak Fail |
+LAMENT 	SV Neg SUPV Actv Think Emot Pain |
+LAMENTABLE 	IndAdj Neg Modif Emot Pain |
+LANGUISH 	SV Neg SUPV Psv Fail Weak Decr |
+LAPSE 	Neg Noun Fail |
+LAUGH#3 	IAV Neg SUPV Hostile Ngtv Actv Comform | 10% verb-idiom: "Laugh at" - ridicule, deride
+LAWLESS 	IndAdj Neg Modif Legal Hostile |
+LAY#3 	IAV Neg SUPV Intrel Econ* Hostile Power Ngtv Strng Actv | 1% idiom-verb: "Lay off"--discharge employees
+LAZILY 	Neg Modif Weak Fail |
+LAZY 	Neg Modif Vice Ngtv Weak Psv |
+LEAK 	IAV Neg SUPV Psv Fail Comform |
+LEAKAGE 	Neg Noun Decr |
+LET#3 	IAV Neg SUPV Fail Ngtv | 1% idiom-verb: "Let down"--to disappoint or be disappointed
+LIABILITY 	Neg Noun Causal Weak |
+LIABLE 	IndAdj Neg Modif Causal |
+LIAR 	Neg Noun HU Hostile Ngtv Role |
+LIE#2 	DAV Neg SUPV Hostile Ngtv Comform | 20% verb: To tell falsehoods
+LIE#3 	Neg Noun COM Comform Hostile Ngtv | 9% noun: A falsehood
+LIFELESS 	IndAdj Neg Modif Natpro Weak |
+LIMIT#2 	IAV Neg SUPV Intrel Hostile Strng Actv Ngtv | 19% verb: To restrict by or confine within limits
+LIMIT#3 	Neg Modif Space Psv Weak Undrst Ngtv | 37% adj: "Limited"--confined within limits, circumscribed or narrow
+LIMIT#4 	Neg Modif Power Actv Vice Ngtv | 2% adj: "Limiting"--restricting
+LIMITATION 	Neg Noun Ngtv Vice |
+LIMP 	IndAdj Neg Modif Weak |
+LIQUIDATE 	IAV Neg SUPV Intrel Ngtv Strng Actv Econ* Hostile |
+LIQUIDATION 	Neg Noun Ngtv Strng Actv ECON Econ* Hostile Vice |
+LITTER 	Neg Noun Ngtv Vice |
+LOAD#3 	Neg Modif Vice EVAL Ngtv | 15% adj: "Loaded"--biased (loaded question, dice)
+LONE#1 	Neg Modif Affil Pain Weak Ngtv Psv PFREQ | 97% adj: "Lonely" - sad and alone
+LONELINESS 	Neg Noun Affil Pain Ngtv Weak Psv |
+LONELY 	Neg Modif Affil Pain Ngtv Weak Psv |
+LONER 	Neg Noun HU Affil Role Ngtv Weak Psv |
+LONESOME 	IPadj Neg Modif Emot Pain Other |
+LOOM 	IAV Neg SUPV Psv Percv |
+LOSE#1 	DAV Neg SUPV Fetch Ngtv Weak Psv | 77% verb: To come to be without
+LOSE#2 	DAV Neg SUPV Fail Ngtv Weak | 20% verb: To be defeated, to fail
+LOSER 	Neg Noun HU Ngtv Weak Role |
+LOSS 	Neg Noun Vice Ngtv Weak | noun: Detriment or disadvantage from failure to keep, have, or get- or that which is lost
+LOST#1 	DAV Neg SUPV ED Ngtv Weak Psv Fetch | 59% verb-adj: Past tense of "lose"--came to be without, no longer owned by-- "we lost our jobs," "we are lost"
+LOST#2 	DAV Neg SUPV ED Ngtv Weak Fail Psv | 6% verb: Past tense of "lose"--failed, was defeated
+LOST#3 	Neg Modif Vice Ngtv Weak Psv | 31% adj: Missing, confused, immersed, without knowledge of where one is (of people)--"i am lost"--"he was lost in thought"
+LOST#4 	Neg Modif Ngtv Weak Finish | 0% adj: "Lost on (someone)"--wasted, without effect
+LOVELESS 	Neg Modif Vice Affil Ngtv Psv |
+LOW#1 	Neg Modif POS DIM Space Ngtv Weak | 84% adv-adj: Of little height, value or extent, not refined, below average
+LOW#2 	Neg Modif POS DIM Space Ngtv Weak | 14% adv-adj: 'lowest'--superlative of sense 1.
+LOWER#1 	Neg Modif Comp ER POS Space Ngtv Weak | 60% adj-adv: Of less height, value, or extent, less refined (comparative of "low")
+LOWLY 	IndAdj Neg Modif Weak Subm |
+LUDICROUS 	IndAdj Neg Modif Eval Vice |
+LULL 	Neg Noun Stay Work Negate |
+LUNATIC 	Neg Noun HU Role Eval Vice |
+LURE 	IAV Neg SUPV Actv Other Fetch |
+LURK 	IAV Neg SUPV Actv Travel |
+LYING#2 	DAV Neg SUPV Hostile Ngtv ING Actv Comform | 6% verb: To tell a falsehood
+LYING#3 	Neg Noun COM Comform Hostile Ngtv Actv | 6% noun: The act of telling a falsehood
+MAD#1 	Neg Modif EMOT Hostile Ngtv Psv PFREQ Arousal | 85% adj: Angry or annoyed
+MAD#2 	Neg Modif Ngtv Weak Psv Vice | 10% adj-noun: Insane, crazy, those who are insane or crazy
+MADMAN 	Neg Noun HU Role Vice |
+MADNESS 	Neg Noun Eval Vice |
+MAKE#2 	IAV Neg SUPV Intrel Hostile Power Strng Actv Ngtv | 12% verb: Coerce, force to, cause to--"make him go"
+MALADJUSTED 	Neg Modif Vice Ngtv Weak |
+MALADJUSTMENT 	Neg Noun Vice Ngtv Weak |
+MALADY 	Neg Noun Natpro Weak |
+MALICE 	Neg Noun Hostile Pain |
+MALICIOUS 	IPadj Neg Modif Hostile Pain Other |
+MALIGNANT 	IndAdj Neg Modif Hostile |
+MANGLE 	IAV Neg SUPV Actv Exert Hostile Other |
+MANIPULATE 	IAV Neg SUPV Intrel Ngtv Strng Actv Power |
+MANIPULATION 	Neg Noun Other Percv Comform |
+MANSLAUGHTER 	Neg Noun Hostile Legal Ngtv Vice |
+MAR#1 	Neg Noun Vice Ngtv Strng Actv |
+MAR#2 	Neg SUPV Exert Hostile Ngtv Strng Actv |
+MARGINAL 	Neg Modif Space Ngtv |
+MASSACRE 	IAV Neg SUPV Finish Hostile Actv Exert |
+MATTER#5 	Neg Modif Vice EVAL Ngtv | 7% adj: "(be) the matter (with)"--amiss with
+MEAGER 	IndAdj Neg Modif Undrst Quan Ngtv Weak |
+MEAN#2 	Neg Modif Vice EVAL Ngtv | 3% adj: Base, despicable, selfish, common
+MEANINGLESS 	Neg Modif Vice EVAL Ngtv Weak |
+MEDDLE 	IAV Neg SUPV Actv Intrel Comform |
+MEDIOCRE 	IndAdj Neg Modif Weak |
+MEEK 	IndAdj Neg Modif Weak Subm |
+MELANCHOLY 	IndAdj Neg Modif Emot Pain |
+MELODRAMATIC 	Neg Modif Comform Exprs Ngtv |
+MENACE 	Neg Noun Ngtv Strng Actv Vice |
+MENIAL 	IndAdj Neg Modif Weak Subm |
+MERCILESS 	IPadj Neg Modif Power Strng Hostile |
+MESS#1 	Neg Noun Vice Ngtv | 81% noun: A shambles, a jumble, a state of trouble; a place for meals (0)
+MESS#2 	IAV Neg SUPV Fail Ngtv | 10% verb: Make a mess of
+MIND#9 	IAV Neg SUPV Fail Ngtv Weak Psv | 0% idiom-verb: "Lose (one's) mind"--lose one's sanity
+MINE#3 	Neg Noun Object Tool Hostile Milit Ngtv Strng | 5% noun: An explosive charge
+MISBEHAVE 	IAV Neg SUPV Actv Hostile |
+MISBEHAVIOR 	Neg Noun Vice Ngtv Actv |
+MISCHIEF 	Neg Noun Actv |
+MISCHIEVOUS 	IndAdj Neg Modif Qual Actv |
+MISER 	Neg Noun HU Role Econ Fetch |
+MISERABLE 	Neg Modif EVAL EMOT Pain Ngtv Weak Psv |
+MISERY 	Neg Noun Pain Ngtv Weak Psv |
+MISFORTUNE 	Neg Noun Vice Ngtv Weak Psv |
+MISHANDLE 	IAV Neg SUPV Actv Fail |
+MISHAP 	Neg Noun Fail |
+MISINFORM 	IAV Neg SUPV Actv Comform Fail Undrst |
+MISINFORMED 	IndAdj Neg Modif Comform Fail Undrst |
+MISLEAD 	IAV Neg SUPV Intrel Ngtv Hostile Actv |
+MISREPRESENT 	IAV Neg SUPV Actv Comform Fail Undrst |
+MISS#1 	IAV Neg SUPV Fail Ngtv Weak | 80% verb: To fail to do or take advantage of, to escape, to notice or regret the absence of
+MISTAKE#1 	Neg Noun Vice Ngtv Psv PFREQ | 93% noun: An error
+MISTAKE#2 	Neg LY Ngtv Psv Vice | 3% idiom-adverb: "By mistake," accidentally
+MISTAKE#3 	IAV Neg SUPV Ngtv Psv Solve | 3% verb: To 'mistake' one thing for another --to confuse
+MISTAKEN 	IAV Neg SUPV Actv Percv Fail Undrst |
+MISTRUST 	IAV Neg SUPV Actv Percv Fail Undrst |
+MISUNDERSTAND 	IAV Neg SUPV Ngtv Psv Solve |
+MISUNDERSTANDING 	Neg Noun Comform Fail Undrst |
+MISUNDERSTOOD 	IAV Neg SUPV Ngtv Psv Solve |
+MISUSE 	Neg Noun Fail Vice |
+MIX#3 	Neg Modif EMOT Vice Ngtv Weak Psv | 33% idiom-adj: "Mixed up"--mentally confused
+MOAN 	DAV Neg SUPV Actv Comform Pain |
+MOCK 	IAV Neg SUPV Actv Comform Other Power |
+MOCKERY 	Neg Noun Comform Other Power |
+MOLEST 	IAV Neg SUPV Actv Other Hostile |
+MONOTONOUS 	IndAdj Neg Modif Eval Vice |
+MONOTONY 	Neg Noun Eval Vice |
+MONSTER 	Neg Noun ANI Ngtv Strng Hostile | noun: A grotesque or unusually large animate or inanimate object
+MONSTROUS 	Neg Modif Vice Ovrst Ngtv Strng Hostile |
+MOODY 	IndAdj Neg Modif Emot Vary |
+MORTIFY 	IAV Neg SUPV Psv Emot Pain |
+MOTIONLESS 	IndAdj Neg Modif Stay |
+MOTLEY 	Neg Modif Qual Ngtv |
+MOURN#1 	Neg Noun Affil Pain Ngtv Psv Weak |
+MOURN#2 	IAV Neg SUPV Affil Ngtv Psv Weak Pain |
+MOURNER 	Neg Noun HU Role Emot Pain |
+MUDDLE 	IAV Neg SUPV Try Actv |
+MUDDY 	IndAdj Neg Modif Percv Undrst |
+MUMBLE 	DAV Neg SUPV Comform Undrst |
+MUNDANE 	IndAdj Neg Modif Eval Vice |
+MURDER#1 	Neg Noun Hostile Ngtv Strng Actv Vice |
+MURDER#2 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+MURDEROUS 	IPadj Neg Modif Hostile |
+MURKY 	IndAdj Neg Modif Percv Undrst |
+MUTTER 	DAV Neg SUPV Hostile Ngtv Weak Comform |
+MYSELF>#3 	Neg Modif EMOT Pain Ngtv Weak Psv | 0% idiom-adj: "Beside myself"--almost out of one's senses with fear or other emotion
+NAG#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+NAIVE 	Neg Modif Vice EVAL Ngtv Weak Psv |
+NASTY 	IndAdj Neg Modif Hostile |
+NAUGHTY 	IndAdj Neg Modif Hostile |
+NEBULOUS 	IndAdj Neg Modif Undrst Percv |
+NEED#1 	SV Neg SUPV Need Weak Psv Ngtv | 67% verb: To want, lack, require, have (to)
+NEED#2 	Neg Noun ABS Abs* Ngtv Weak Need Psv | 29% noun: Lack of something wanted, requirement, exigency
+NEED#3 	Neg Modif Need Psv Ngtv | 3% adj: "Needed"--wanted, requisite
+NEEDLE#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+NEEDY 	IndAdj Neg Modif Weak Need |
+NEGATE 	IAV Neg SUPV Negate Ngtv Intrel Hostile |
+NEGATION 	Neg Noun Ngtv Negate Vice |
+NEGATIVE 	Neg Modif Ngtv Vice |
+NEGLECT#1 	Neg Noun Means Ngtv Hostile |
+NEGLECT#2 	IAV Neg SUPV Fail Ngtv Hostile |
+NEGLIGENCE 	Neg Noun Causal Eval Legal Vice |
+NEGLIGENT 	IndAdj Neg Modif Causal Legal Eval Vice |
+NERVOUS 	Neg Modif EMOT Pain Ngtv Weak Psv | adj: Uneasy, excitable; pertaining to the nerves (1)
+NERVOUSNESS 	Neg Noun Weak Emot Pain |
+NEUROTIC 	IndAdj Neg Modif Emot Pain |
+NEUTRALIZE 	IAV Neg SUPV Actv Other Power Strng |
+NIGHTMARE 	Neg Noun Hostile Fail |
+NIX 	IAV Neg SUPV Finish Power |
+NOISE 	Neg Noun Qual Ngtv | noun: Sound, usually discordant
+NONCHALANT 	IndAdj Neg Modif Strng |
+NONSENSE 	Neg Noun Vice Ngtv |
+NOSEY 	IPadj Neg Modif Intrel Comform |
+NOTORIOUS 	IndAdj Neg Modif Eval Qual Ovrst Vice |
+NOVICE 	IndAdj Neg Modif Weak |
+NUISANCE 	Neg Noun Vice |
+NULLIFICATION 	Neg Noun Finish Negate |
+NULLIFY 	IAV Neg SUPV Negate Finish |
+NUMB 	IndAdj Neg Modif Emot Pain |
+NUTS 	Neg Intrj |
+OBJECT#3 	IAV Neg SUPV Hostile Ngtv Actv Comform | 19% verb: To voice aversion
+OBJECTION 	Neg Noun Comform Feel |
+OBLIQUE 	IndAdj Neg Modif Undrst Percv |
+OBLITERATE 	IAV Neg SUPV Finish Power Hostile |
+OBNOXIOUS 	Neg Modif Vice EVAL Ngtv Hostile |
+OBSCURE 	Neg Modif Ngtv Percv Undrst |
+OBSOLETE 	IndAdj Neg Modif Weak |
+OBSTACLE 	Neg Noun Ngtv Strng Object Natobj |
+OBSTINATE 	IndAdj Neg Modif Hostile Feel Stay |
+OBSTRUCT 	IAV Neg SUPV Intrel Ngtv Strng Actv Hostile |
+OBSTRUCTION 	Neg Noun Stay Object |
+ODD 	Neg Modif Vice EVAL Ngtv |
+ODDITY 	Neg Noun Eval Qual |
+OFFEND 	IAV Neg SUPV Actv Eval Hostile Other |
+OFFENDER 	Neg Noun HU Causal Hostile |
+OFFENSIVE 	IndAdj Neg Modif Vice Hostile Ngtv Strng Actv Eval | noun-adj: Characterized by attack, physically or on the sensibilities
+OMINOUS 	Neg Modif Vice Ngtv Strng Hostile |
+OMISSION 	Neg Noun Means Ngtv Weak Psv |
+OMIT 	IAV Neg SUPV Fail Ngtv Weak Psv |
+OPINIONATED 	IndAdj Neg Modif Feel Think |
+OPPONENT 	Neg Noun HU POLIT Hostile Ngtv Role | noun: Adversary
+OPPOSE#1 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 41% verb: To resist, combat, place opposite
+OPPOSE#2 	Neg Modif Doctr Ngtv Strng | 47% adj: "Opposed", against, contrary
+OPPOSE#3 	Neg Modif Rel Ngtv Strng Actv | 13% adj: "Opposing", contending, opposite
+OPPOSITION 	Neg Noun Doctr POLIT Hostile Ngtv | noun-adj: Anything that opposes
+OPPRESS 	IAV Neg SUPV Power Actv Hostile Other |
+OPPRESSION 	Neg Noun Power Hostile Subm Intrel |
+OPPRESSIVE 	IndAdj Neg Modif Emot Pain Power Subm |
+ORDEAL 	Neg Noun Eval Vice |
+ORDER#8 	IAV Neg SUPV Fail Weak Psv Ngtv | 1% idiom-adj: "Out of order"--not functioning, disabled
+ORPHAN 	Neg Noun HU Role Ovrst |
+OSTRACIZE 	IAV Neg SUPV Ovrst Hostile Affil Other Actv |
+OUST 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+OUTBREAK 	Neg Noun Travel |
+OUTBURST 	Neg Noun Comform |
+OUTCAST 	Neg Noun Ovrst Affil Other |
+OUTCRY 	Neg Noun Comform Feel |
+OUTLAW 	Neg Noun HU Legal Hostile |
+OUTRAGE 	Neg Noun Emot Pain Hostile |
+OUTRAGEOUS 	IndAdj Neg Modif Eval Vice |
+OUTSIDER 	Neg Noun HU Ngtv Role |
+OVERBEARING 	IndAdj Neg Modif Intrel Power |
+OVERFLOW 	IAV Neg SUPV Psv Incr |
+OVERLOOK 	IAV Neg SUPV Percv Psv Ngtv |
+OVERPOWER 	IAV Neg SUPV Actv Other Power Strng Exert |
+OVERRUN 	IAV Neg SUPV Actv Other Power Strng Exert |
+OVERSIGHT 	Neg Noun Percv Fail Vice |
+OVERTHROW 	IAV Neg SUPV Actv Other Power Strng Exert |
+OVERTURN 	IAV Neg SUPV Actv Think Legal Change |
+OVERWHELMING 	IndAdj Neg Modif Incr Power |
+OVERWORKED 	IndAdj Neg Modif Work Try Weak |
+OWE 	IAV Neg SUPV Exch Econ* Ngtv Weak |
+PAIN 	Neg Noun Pain Ngtv | noun: Bodily or psychological suffering
+PAINFUL 	Neg Modif Vice Ngtv |
+PALTRY 	IndAdj Neg Modif Weak |
+PANDEMONIUM 	Neg Noun Vary Ngtv Strng |
+PANIC 	Neg Noun EMOT Pain Ngtv Weak Psv |
+PARALYSIS 	Neg Noun Weak Stay |
+PARALYZED 	IndAdj Neg Modif Weak Stay |
+PARANOID 	IndAdj Neg Modif Weak Emot Pain Undrst Percv |
+PARASITE 	Neg Noun Hostile Fetch Other |
+PARTICULAR#2 	Neg Modif Ngtv Vice | 1% adj: Fussy, choosy
+PARTITION 	IAV Neg SUPV Change |
+PASS#8 	IAV Neg SUPV Ngtv Weak Psv Natpro | 3% verb: "Pass away"--to die
+PASS#_10 	IAV Neg SUPV Intrel Ngtv Actv | 1% verb: "Pass off"--to take place, be accepted or cause to be accepted as genuine
+PASS#_13 	Neg Noun Natpro Ngtv Weak Psv | 1% noun: "Passing"--disappearance, death
+PASSE 	IndAdj Neg Modif Weak |
+PATHETIC 	IndAdj Neg Modif Weak |
+PATRONIZE 	IAV Neg SUPV Power Actv Other |
+PECULIAR 	Neg Modif Vice EVAL Ngtv |
+PERIL 	Neg Noun Eval Qual |
+PERILOUS 	IndAdj Neg Modif Vice EVAL Ngtv |
+PERISH 	IAV Neg SUPV Natpro Finish |
+PERPLEX 	IAV Neg SUPV Ngtv Weak Solve Undrst |
+PERPLEXITY 	Neg Noun Think Fail |
+PERSECUTE 	IAV Neg SUPV Actv Other Hostile |
+PERSECUTION 	Neg Noun Intrel Hostile |
+PERTURB 	IAV Neg SUPV Ngtv Pain |
+PERVERSE 	IndAdj Neg Modif Eval Vice |
+PERVERT 	Neg Noun HU Vice |
+PESSIMISM 	Neg Noun Think |
+PESSIMISTIC 	IndAdj Neg Modif Think |
+PEST 	Neg Noun Vice Intrel |
+PETTY 	IndAdj Neg Modif Vice |
+PHOBIA 	Neg Noun Emot Pain Weak |
+PICK#3 	IAV Neg SUPV Intrel Hostile Power Actv Strng Ngtv | 9% idiom-verb: "(to) pick on, a fight"--to tease, bully, encourage a fight
+PIECE#4 	IAV Neg SUPV Ngtv Weak Psv Fail | 1% verb: "Go to pieces"--suffer a breakdown
+PINCH#1 	Neg Noun Vice Ngtv |
+PINCH#2 	DAV Neg SUPV Exert Hostile Ngtv Actv |
+PITIFUL 	IPadj Neg Modif Weak |
+PITILESS 	IPadj Neg Modif Strng Power |
+PLAGUE#1 	Neg Noun Ngtv Strng Vice |
+PLAGUE#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng |
+PLAINTIFF 	Neg Noun Legal Comform |
+PLIGHT 	Neg Noun Hostile Emot Pain |
+PLOD 	IAV Neg SUPV Travel Weak Actv |
+PLOT#2 	IAV Neg SUPV Ngtv Actv Strng Solve |
+POINT#6 	Neg Modif Hostile Ngtv Strng Know Ovrst | 1% adj: "Pointed"--incisive, penetrating, cutting
+POINTLESS 	IndAdj Neg Modif Weak Undrst |
+POISON 	Neg Noun Object |
+POISONOUS 	IPadj Neg Modif Hostile |
+POLLUTE 	IAV Neg SUPV Actv Legal Hostile |
+POLLUTION 	Neg Noun ECON POLIT Ngtv Vice |
+POMPOUS 	IndAdj Neg Modif Power |
+POOR#1 	Neg Modif Vice EVAL ECON Ngtv Weak Psv | 44% adj: Destitute of some normal or desirable quality, unfortunate
+POOR#2 	Neg Modif Vice Ngtv Weak Econ* Psv | 30% adj: Lacking material goods
+POOR#3 	Neg Modif Vice EVAL Econ* Ngtv Weak Psv | 3% adj: "Poorer"--comparative of senses 1 and 2
+POOR#4 	Neg Modif Vice EVAL Econ* Ngtv Weak Psv | 0% adj: "Poorest"--superlative of senses 1 and 2
+POOR#5 	Neg Noun HU COLL POLIT ECON Weak Psv Ngtv | 8% noun: Those wanting in material goods
+POOR#6 	Neg LY Vice Ngtv | 8% adv: "Poorly"--badly, in an unsatisfactory manner
+POUND#2 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv | 27% verb: To strike heavily or repeatedly, pommel
+POUT 	SV Neg SUPV Emot Pain Comform |
+POVERTY 	Neg Noun Vice Econ* ECON POLIT Ngtv Weak Psv | noun: Quality or state of being poor--need, destitution
+POWERLESS 	IndAdj Neg Modif Weak Subm |
+PRECARIOUS 	Neg Modif Ngtv Weak Psv Vice Undrst |
+PRECIPITATE 	IAV Neg SUPV Causal |
+PREDICAMENT 	Neg Noun Eval Vice |
+PREJUDICE 	Neg Noun EMOT Hostile Race Ngtv Arousal |
+PREJUDICIAL 	IndAdj Neg Modif Causal Feel |
+PREPOSTEROUS 	IndAdj Neg Modif Eval Vice |
+PRESS#4 	Neg Modif Pain Ngtv Weak Psv | 8% adj: "Pressed"--under pressure, strained
+PRESUMPTUOUS 	Neg Modif Vice Ngtv |
+PRETEND 	IAV Neg SUPV Actv Comform Hostile Ngtv | verb: To hold out the appearance of being, doing, having, feeling, etc., feign.
+PRETENSE 	Neg Noun Comform Fail Hostile |
+PRETENTIOUS 	IndAdj Neg Modif Eval Vice |
+PRISON#1 	Neg Noun PLACE Social POLIT Legal Ngtv PFREQ | 90% noun-adjective: A place for punitive confinement
+PRISON#2 	Neg Noun PLACE Social POLIT Ngtv Legal | 10% idiom-noun-adj: "Prison camp"--a place for military confinement of enemy armed forces
+PRISONER 	Neg Noun HU Legal Subm Ngtv Weak Psv Role |
+PROBLEM 	Neg Noun Know Ngtv | noun: A question or matter involving doubt or difficulty, a question proposed for discussion or solution
+PROCRASTINATE 	IAV Neg SUPV Weak Stay Work Actv |
+PROCRASTINATION 	Neg Noun Weak Stay Work |
+PROD 	IAV Neg SUPV Strng Comform |
+PROHIBIT 	IAV Neg SUPV Power Ngtv Strng Actv Intrel Legal |
+PROHIBITION 	Neg Noun Doctr POLIT Power Ngtv Strng Actv Legal |
+PROHIBITIVE 	Neg Modif Power Ngtv Strng Ovrst Vice |
+PROPAGANDA 	Neg Noun COM Comform POLIT Polit* Ngtv |
+PROSECUTION 	Neg Noun Hostile Legal Ngtv Actv Strng Comform |
+PROTEST#1 	Neg Noun Ritual POLIT Hostile Ngtv Actv |
+PROTEST#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+PROVOCATION 	Neg Noun Causal Hostile |
+PROVOKE 	IAV Neg SUPV Intrel Ngtv Strng Actv Hostile |
+PROWL 	IAV Neg SUPV Move Hostile Actv |
+PRY 	IAV Neg SUPV Intrel Comform Exert |
+PUNCH 	IAV Neg SUPV Actv Other Hostile Exert |
+PUNISH 	IAV Neg SUPV Intrel Hostile Power Ngtv Strng Actv |
+PUNY 	Neg Modif Weak Ngtv Undrst Vice |
+PUSH#1 	DAV Neg SUPV Exert Ngtv Strng Actv PFREQ | 89% verb-adj: To exert force or pressure on something (or someone) in order to move it (them)
+PUSH#2 	Neg Modif Ngtv Strng Actv Exert | 5% noun: A shove, or the act of shoving ("pushing")
+PUSH#3 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 6% idiom-verb: "Push around"--to bully
+PUZZLEMENT 	Neg Noun Ngtv Weak Psv Arousal Undrst |
+QUALM 	Neg Noun Feel |
+QUANDARY 	Neg Noun Arousal Undrst Ngtv Weak Psv |
+QUARREL#1 	Neg Noun COM Comform Hostile Ngtv Actv |
+QUARREL#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+QUARRELSOME 	IPadj Neg Modif Hostile Intrel |
+QUEER 	IndAdj Neg Modif Ovrst Vice |
+QUESTIONABLE 	Neg Modif Vice Ngtv Undrst |
+QUIBBLE 	IAV Neg SUPV Actv Comform Hostile |
+QUIT 	IAV Neg SUPV Finish Ngtv Weak Psv Subm | verb: To stop, cease, give up; to leave (2)
+QUITTER 	Neg Noun HU Fail Weak |
+RACE#4 	Neg Noun Ritual ECON Ngtv Actv | 2% idiom-noun: 'rat race'--the normal life situation of western man
+RADICAL 	Neg Modif ECON POLIT Polit* Ngtv Strng Actv Vice |
+RAGE 	Neg Noun EMOT Hostile Ngtv Strng Arousal |
+RAID 	IAV Neg SUPV Intrel Ngtv Strng Actv Hostile |
+RAISE#5 	Neg Noun Ritual Hostile Actv Ngtv | 3% idiom-verb: "Raise hell," "raise hob,"--to cause trouble, make things difficult
+RAMBLE 	IAV Neg SUPV Actv Comform |
+RAMPANT 	Neg Modif Vice Ngtv Strng |
+RASCAL 	Neg Noun HU Vice |
+RASH 	IndAdj Neg Modif Think Fail Vice |
+RAT 	Neg Noun HU Comform Vice |
+RATION 	IAV Neg SUPV Decr Actv |
+RATTLE#2 	IAV Neg SUPV Exert Ngtv Strng |
+RAVAGE 	IAV Neg SUPV Actv Hostile Fetch |
+REACTIONARY 	Neg Modif Doctr POLIT Polit* Ngtv Psv |
+REACTIVE 	IPadj Neg Modif Actv Hostile |
+REBEL#1 	Neg Noun HU POLIT Hostile Ngtv Strng Actv Role |
+REBEL#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+REBELLION 	Neg Noun POLIT Ritual Hostile Milit Ngtv Strng |
+REBELLIOUS 	IPadj Neg Modif Hostile Polit Affil Ovrst |
+REBUFF 	IAV Neg SUPV Actv Other Hostile Comform |
+REBUKE 	IAV Neg SUPV Actv Other Hostile Comform |
+REBUT 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+RECALCITRANT 	IndAdj Neg Modif Hostile Vice |
+RECEDE 	IAV Neg SUPV Psv Decr |
+RECESSION 	Neg Noun Decr Econ |
+RECKLESS 	Neg Modif Vice EVAL Ngtv |
+RECKLESSNESS 	Neg Noun Vice |
+RECOIL 	IAV Neg SUPV Subm Weak Actv |
+REDUNDANCY 	Neg Noun Eval Vice |
+REDUNDANT 	IndAdj Neg Modif Eval Vice |
+REFRAIN 	IAV Neg SUPV Actv Stay |
+REFUGEE 	Neg Noun HU Weak Polit |
+REFUSAL 	Neg Noun COM Comform Hostile Ngtv |
+REFUSE#1 	DAV Neg SUPV Hostile Ngtv PFREQ | 97% verb: To decline, to reject, to deny
+REGARDLESS 	IndAdj Neg Modif Undrst |
+REGRESS 	IAV Neg SUPV Fail Ngtv Weak Psv |
+REGRESSION 	Neg Noun Ngtv Weak Psv Vice |
+REGRET#1 	SV Neg SUPV Ngtv Weak Psv Pain | 79% verb: To feel sorry about
+REGRET#2 	Neg Noun EMOT Ngtv Weak Psv Pain | 21% noun: A sense of loss, sorrow, dismay, disappointment
+REGRETTABLE 	IndAdj Neg Modif Emot Pain Vice |
+REJECT 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | verb: To refuse, cast off, rebuff
+REJECTION 	Neg Noun Hostile Ngtv Strng Vice Actv |
+RELAPSE 	IAV Neg SUPV Psv Weak Subm |
+RELUCTANT 	IndAdj Neg Modif Ngtv Weak Psv Arousal |
+REMORSE 	Neg Noun Emot Pain |
+RENOUNCE 	IAV Neg SUPV Actv Other Comform Hostile |
+RENUNCIATION 	Neg Noun Intrel Comform Hostile |
+REPEAL 	IAV Neg SUPV Legal Comform Change |
+REPREHENSIBLE 	IPadj Neg Modif Eval Vice |
+REPRESS 	IAV Neg SUPV Power Actv Feel |
+REPROACH 	IAV Neg SUPV Other Actv Hostile Comform |
+REPUDIATE 	IAV Neg SUPV Actv Comform Strng |
+REPUGNANT 	IndAdj Neg Modif Eval Vice |
+REPULSE 	IAV Neg SUPV Intrel Ngtv Strng Actv Power Hostile |
+REPULSIVE 	Neg Modif Vice EVAL Ngtv |
+RESENT 	IAV Neg SUPV Intrel Hostile Ngtv Psv | verb: To react with displeasure or indignation from a sense of injury, especially towards someone
+RESENTFUL 	IndAdj Neg Modif Emot Pain Hostile |
+RESENTMENT 	Neg Modif EMOT Pain Ngtv Psv Hostile |
+RESIGNATION 	Neg Noun Fail Affil |
+RESTLESS 	IndAdj Neg Modif Ngtv Arousal Emot |
+RESTLESSNESS 	Neg Noun Emot Pain |
+RESTRICT#1 	IAV Neg SUPV Intrel Hostile Power Strng Actv PFREQ Ngtv | 96% verb: To confine or limit
+RESTRICT#2 	Neg Modif Space Power Ngtv Weak Psv | 4% adj: "Restricted", confined, limited
+RESTRICT#3 	Neg Modif Vice Ngtv Strng | 0% adj: "Restricting", tending to limit
+RESTRICTION 	Neg Noun Stay Legal |
+RETALIATE 	IAV Neg SUPV Actv Hostile Intrel Exert |
+RETARD 	IAV Neg SUPV Actv Hostile Exert |
+RETIRE 	IAV Neg SUPV Actv Compl Work |
+RETREAT#1 	Neg Noun Ritual Ngtv Weak Actv |
+RETREAT#2 	IAV Neg SUPV Travl Milit Ngtv Weak Actv |
+REVENGE 	Neg Noun Intrel Hostile |
+REVERT 	IAV Neg SUPV Actv Weak |
+REVOKE 	IAV Neg SUPV Actv Change Fetch |
+REVOLT 	IAV Neg SUPV Actv Hostile Polit Affil |
+REVOLUTION 	Neg Noun POLIT Ritual Hostile Polit* Ngtv Strn | noun: Overthrow and replacement of a system
+RID 	IAV Neg SUPV Actv Hostile Decr |
+RIDE#3 	IAV Neg SUPV Hostile Ngtv Actv Comform | 5% verb: To ridicule or harass
+RIDICULE#1 	Neg Noun COM Comform Hostile Ngtv Actv |
+RIDICULE#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+RIDICULOUS 	Neg Modif Vice EVAL Ngtv Weak Ovrst |
+RIGID 	IndAdj Neg Modif Stay Feel Vice |
+RIGOR 	Neg Noun Work |
+RIGOROUS 	IndAdj Neg Modif Work Vice |
+RIP#1 	Neg Modif Qual Ngtv |
+RIP#2 	DAV Neg SUPV Ngtv Strng Actv Exert Hostile |
+RISKY 	IndAdj Neg Modif Vice |
+RIVAL#1 	Neg Noun HU Hostile Ngtv Strng Role |
+RIVAL#2 	IAV Neg SUPV Try Ngtv Strng |
+RIVALRY 	Neg Noun Intrel Hostile |
+ROBBER 	Neg Noun HU Fetch Hostile Legal |
+ROBBERY 	Neg Noun Fetch Hostile Legal |
+ROGUE 	Neg Noun HU Hostile Ngtv Role |
+ROOT#4 	IAV Neg SUPV Hostile Ngtv Strng Actv Exert | 0% idiom-verb: To "root out", to extirpate
+ROT 	DAV Neg SUPV Psv Natpro Decr |
+ROTTEN 	IndAdj Neg Modif Natpro Vice |
+ROUGH#1 	Neg Modif Qual EVAL Ngtv PFREQ | 85% adj: Coarse, uneven, difficult; approximate (2)
+ROUGHNESS 	IndAdj Neg Modif Strng Vice |
+ROUNDABOUT 	IndAdj Neg Modif Undrst Vice |
+RUBBISH 	Neg Noun Object |
+RUDE 	IPadj Neg Modif Eval Vice |
+RUE 	SV Neg SUPV Ngtv Pain |
+RUFFIAN 	Neg Noun HU Hostile |
+RUIN#1 	Neg Noun Vice ECON Ngtv Weak | 20% noun: Downfall, destruction
+RUIN#2 	IAV Neg SUPV Fail Ngtv Strng Actv | 65% verb: To destroy or spoil
+RUIN#3 	Neg Modif Vice Ngtv Weak Psv | 0% adj: "Ruined," destroyed
+RUIN#4 	Neg Noun PLACE Social Ngtv | 15% noun: "Ruins"--remains
+RUINOUS 	IndAdj Neg Modif Hostile Vice |
+RUMOR 	Neg Noun Comform |
+RUMPLE 	IAV Neg SUPV Actv Hostile |
+RUN#4 	IAV Neg SUPV Intrel Hostile Actv Ngtv | 2% verb: "Run down"--to defame or speak ill of (4), destroy or injure (2), wear down (2)
+RUN#5 	IAV Neg SUPV Finish Weak Ngtv Psv | 1% verb: 'run out'--to become depleted
+RUNAWAY 	Neg Noun HU Nonadlt Travel Weak |
+RUPTURE#1 	Neg Noun Ngtv Vice |
+RUPTURE#2 	DAV Neg SUPV Hostile Ngtv Weak Exert |
+RUSTY 	IndAdj Neg Modif Weak |
+RUTHLESS 	IndAdj Neg Modif Hostile |
+RUTHLESSNESS 	Neg Noun Hostile |
+SABOTAGE 	IAV Neg SUPV Actv Hostile Other Exert |
+SAD 	Neg Modif EMOT Ngtv Psv Pain PFREQ | adj: Unhappy
+SADNESS 	Neg Noun EMOT Pain Ngtv Psv |
+SAG 	IAV Neg SUPV Psv Weak Subm |
+SANK 	DAV Neg SUPV Fall ED Ngtv Weak |
+SAP 	Neg Noun HU Weak Subm |
+SARCASM 	Neg Noun Comform Hostile |
+SARCASTIC 	IPadj Neg Modif Comform Hostile |
+SAVAGE 	IndAdj Neg Modif Hostile |
+SCALD 	IAV Neg SUPV Psv Pain |
+SCANDAL 	Neg Noun Object |
+SCANDALOUS 	IndAdj Neg Modif Hostile |
+SCAPEGOAT 	Neg Noun HU Weak |
+SCAR 	Neg Noun Bodypt Ngtv Weak Psv |
+SCARCITY 	Neg Noun Decr Need |
+SCARE#1 	IAV Neg SUPV Ngtv Strng Intrel Hostile Actv | 83% verb: To frighten
+SCARE#2 	Neg Noun EMOT Pain Ngtv Psv Subm Weak | 17% noun: A sudden or prolonged fright
+SCARED#1 	Neg Modif EMOT Pain Subm Ngtv Weak Psv PFREQ | 96% adj: Frightened, afraid
+SCARED#2 	IAV Neg SUPV Intrel ED Hostile Ngtv Strng | 4% verb: To frighten (past tense)
+SCARY 	IndAdj Neg Modif Emot Pain |
+SCHEME#1 	Neg Noun Means Ngtv |
+SCHEME#2 	IAV Neg SUPV Ngtv Solve |
+SCOFF 	IAV Neg SUPV Comform Power |
+SCOLD#1 	DAV Neg SUPV Hostile Ngtv Actv PFREQ Comform | 95% verb: Admonish
+SCOLD#2 	Neg Noun COM Comform Hostile Ngtv Actv | 5% noun: "Scolding" - verbal rebuke
+SCORCH 	IAV Neg SUPV Hostile Exert Actv |
+SCORN 	Neg Noun Hostile Emot |
+SCORNFUL 	IPadj Neg Modif Hostile Emot |
+SCOUNDREL 	Neg Noun Hostile Vice HU |
+SCOWL 	IAV Neg SUPV Comform Hostile Actv |
+SCRAPE 	IAV Neg SUPV Actv Pain |
+SCREAM#1 	Neg Noun COM Comform Ngtv | 3% noun: A sharp, piercing cry
+SCREAM#2 	DAV Neg SUPV Ngtv PFREQ Comform | 97% verb: To utter a sharp, piercing cry, to utter words in such a way
+SCREECH#1 	Neg Noun COM Comform Ngtv |
+SCREECH#2 	DAV Neg SUPV Comform Ngtv |
+SCREW#2 	IAV Neg SUPV Intrel Hostile Actv Ngtv |
+SCRUTINIZE 	IAV Neg SUPV Percv Think Actv |
+SCUFFLE 	Neg Noun Intrel Hostile Exert |
+SCUM 	Neg Noun Vice |
+SECEDE 	IAV Neg SUPV Polit Travel Affil |
+SECESSION 	Neg Noun Polit Affil Travel |
+SECRECY 	Neg Noun Comform |
+SECRET 	Neg Noun COM Comform Ngtv | noun-adj: Something hidden or not generally known
+SEDENTARY 	IndAdj Neg Modif Stay |
+SEETHE 	SV Neg SUPV Comform Hostile Actv |
+SEGREGATION 	Neg Noun ECON POLIT Race Doctr Hostile Ngtv | noun-adj: Separation of races
+SEIZE 	IAV Neg SUPV Hostile Ngtv Strng Actv Fetch | verb: To take possession or control of
+SELFISH 	Neg Modif Vice Ngtv |
+SELFISHNESS 	IPadj Neg Modif Need Fetch Feel |
+SENILE 	IndAdj Neg Modif Think Fail |
+SENSELESS 	IndAdj Neg Modif Think Fail |
+SENTENCE#2 	DAV Neg SUPV Legal Power Ngtv Strng Actv Comform |
+SEQUESTER 	IAV Neg SUPV Stay Power Legal |
+SERVE#4 	IAV Neg SUPV Comform Hostile Ngtv | 1% idiom-verb: "Serve notice"--give warning
+SERVICE#3 	IAV Neg SUPV Intrel Hostile Subm Ngtv Weak | 2% idiom: "Lip service" - insincere expression of support
+SERVITUDE 	Neg Noun Weak Subm Intrel |
+SEVER 	IndAdj Neg Modif Hostile |
+SEVERE 	Neg Modif Vice EVAL Ngtv Strng Ovrst |
+SEVERITY 	Neg Noun Vice Ngtv Strng |
+SHABBY 	IndAdj Neg Modif Weak |
+SHADOW#2 	IAV Neg SUPV Intrel Hostile Actv Ngtv |
+SHADY 	IndAdj Neg Modif Undrst Vice |
+SHAGGY 	IndAdj Neg Modif Vice |
+SHAKE#1 	DAV Neg SUPV Exert Ngtv Actv PFREQ | 86% verb: To rapidly move back and forth; abstract--to loosen, weaken, disrupt, upset (2)
+SHALLOW 	Neg Noun Space Ngtv Weak |
+SHAME 	Neg Noun EMOT Pain Ngtv Psv |
+SHAMEFUL 	IPadj Neg Modif Emot Pain Feel |
+SHAMELESS 	IPadj Neg Modif Emot Power Vice |
+SHARK 	Neg Noun Animal |
+SHELL#2 	Neg Noun Object Tool Hostile Milit Strng Ngtv | 5% noun: Artillery warhead
+SHELL#3 	DAV Neg SUPV Intrel Hostile Milit Strng Ngtv Actv | 5% verb: To use (an) artillery warhead(s)
+SHIPWRECK 	Neg Noun Object |
+SHIRK 	IAV Neg SUPV Fail Weak Actv |
+SHIVER 	IAV Neg SUPV Psv Pain |
+SHOCK#1 	Neg Noun Pain Ngtv Strng | 40% noun-adj: Sudden disturbance of mental equilibrium; less frequently, of physical equilibrium (1)
+SHOCK#2 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 29% verb: To jar with intense surprise, horror, disgust
+SHOCK#3 	Neg Modif EMOT Ngtv Weak Pain Psv | 29% adj: "Shocked"--jarred with intense surprise, etc.
+SHOCK#4 	Neg Modif Pain Ngtv Strng | 2% adj: "Shocking"--having a disturbing, surprising, etc., effect
+SHOCK#5 	Neg LY Ovrst Ngtv Strng Pain | 0% adv: "Shockingly"
+SHODDY 	IndAdj Neg Modif Weak Fail |
+SHOOT#1 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv | 68% verb: To send forth or discharge a projectile, generally with a gun, in order to hit or damage some object; to take pictures (0)
+SHOOT#3 	Neg Noun Hostile Ngtv Strng Actv Vice | 6% noun-adj: "Shooting"--the harming of a person by a projectile or weapon; pertaining to a rapidly moving object (0)
+SHOOT#6 	IAV Neg SUPV Hostile Ngtv Comform | 4% idiom-verb: "Shoot...mouth off"--to talk indiscreetly
+SHORT#5 	Neg PREP Vice Ngtv Weak | 6% idiom-prep: "Short of" - lacking, less than, except for
+SHORTAGE 	Neg Noun ECON Ngtv Weak Quan |
+SHORTCOMING 	Neg Noun Vice Ngtv |
+SHORTSIGHTED 	IndAdj Neg Modif Percv Weak |
+SHOT#1 	DAV Neg SUPV ED Exert Hostile Ngtv Strng Actv | 81% verb: Past participle of "shoot"--to launch or discharge a projectile;
+SHOT#3 	Neg Noun Object Tool Hostile Ngtv Strng Actv | 7% noun: A projectile or the process of launching a projectile; anything sudden and/or forceful (2)
+SHOVE 	DAV Neg SUPV Actv Hostile Exert |
+SHOW#4 	IAV Neg SUPV Actv Ngtv Comform | 0% idiom-verb: "Show off"--to display ostentatiously
+SHRED 	IAV Neg SUPV Actv Hostile Exert Decr |
+SHREW 	Neg Noun HU Hostile Female |
+SHRIEK 	DAV Neg SUPV Comform Strng Pain |
+SHRILL 	IndAdj Neg Modif Pain Comform |
+SHRIVEL 	IAV Neg SUPV Decr |
+SHROUD 	Neg Noun Object |
+SHRUG#1 	Neg Noun Comform Hostile Ngtv |
+SHRUG#2 	DAV Neg SUPV Comform Hostile Ngtv |
+SHUN 	IAV Neg SUPV Actv Affil Ovrst Hostile Other |
+SHYNESS 	Neg Noun Weak |
+SICK#1 	Neg Modif Ngtv Weak Psv PFREQ Vice | 94% adj: Unhealthy
+SICK#2 	Neg Modif Ngtv Weak Psv Vice | 0% adj: "Sicker"--comparative of sense 1
+SICK#3 	Neg Modif Ngtv Weak Psv Vice | 1% adj: "Sickest"--superlative of sense 1
+SICK#4 	Neg Modif Vice EMOT Ngtv Psv Hostile | 5% idiom-adj: "Sick of"--be disgusted with, tired of
+SICKLY 	Neg Modif Ngtv Weak Psv Vice |
+SICKNESS 	Neg Noun Ngtv Weak Psv Vice | noun: Illness, disease
+SIEGE 	Neg Noun Hostile Polit Intrel |
+SILLY 	Neg Modif Vice EVAL Ngtv Weak |
+SIMPLISTIC 	IndAdj Neg Modif Weak |
+SIN#1 	Neg Noun Relig Ngtv Vice |
+SIN#2 	IAV Neg SUPV Relig Ngtv Vice |
+SINFUL 	IndAdj Neg Modif Doctr Fail |
+SINISTER 	Neg Modif Vice EVAL Ngtv Hostile |
+SKEPTICAL 	Neg Modif Ngtv Vice |
+SKETCHY 	IndAdj Neg Modif Undrst Vice |
+SKIRMISH 	Neg Noun Hostile Intrel Exert |
+SKULK 	IAV Neg SUPV Move |
+SLAM 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+SLANDER 	IAV Neg SUPV Comform Hostile Other Actv |
+SLANDERER 	Neg Noun HU Hostile Ngtv Actv Role |
+SLANDEROUS 	IPadj Neg Modif Comform Hostile Other |
+SLAP 	DAV Neg SUPV Actv Exert Hostile |
+SLASH 	DAV Neg SUPV Hostile Ngtv Strng Actv Exert |
+SLAUGHTER 	IAV Neg SUPV Natpro Finish Hostile Exert Actv |
+SLAYER 	Neg Noun HU Hostile Ngtv Strng Actv Role |
+SLEAZY 	IndAdj Neg Modif Weak Hostile |
+SLEEPLESS 	IndAdj Neg Modif Natpro Negate |
+SLIGHT#2 	Neg Modif Know Ngtv Weak Undrst | 19% adj: "Slightest" - least, tiniest, most insignificant
+SLIGHT#3 	Neg LY Ngtv Weak Undrst Quan | 57% adv: "Slightly" - a bit, somewhat
+SLIGHT#4 	IAV Neg SUPV Intrel Hostile Ngtv Actv | 8% verb: To malign or insult
+SLIGHT#5 	Neg Noun COM Comform Hostile Ngtv | 3% noun: An insult
+SLIME 	Neg Noun Object |
+SLOPPY 	IndAdj Neg Modif Weak |
+SLOTH 	Neg Noun Weak Animal Vice |
+SLOTHFUL 	IndAdj Neg Modif Weak Vice Stay |
+SLUG 	Neg Noun Animal Weak Vice |
+SLUGGISH 	IndAdj Neg Modif Weak Stay Vice |
+SLUMP 	DAV Neg SUPV Fall Ngtv Psv |
+SLY 	Neg Modif Vice EVAL Hostile Ngtv |
+SMACK 	IAV Neg SUPV Actv Hostile Exert |
+SMASH#1 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv PFREQ | 85% verb: To strike violently, shatter, destroy
+SMASH#2 	Neg Noun Hostile Ngtv Strng Actv Exert | 10% noun: A violent blow, a crash
+SMEAR 	IAV Neg SUPV Comform Hostile Actv |
+SMOTHER 	IAV Neg SUPV Actv Power Intrel Compl |
+SMUGGLE 	IAV Neg SUPV Actv Fetch |
+SNARE 	Neg Noun Fetch Object |
+SNARL 	DAV Neg SUPV Hostile Ngtv Comform |
+SNATCH 	DAV Neg SUPV Fetch Hostile Ngtv Strng Actv |
+SNEAK 	IAV Neg SUPV Actv Move |
+SNEER 	IAV Neg SUPV Actv Comform |
+SNORE 	DAV Neg SUPV Actv |
+SOB 	DAV Neg SUPV Actv Emot Pain |
+SOMBER 	IndAdj Neg Modif Emot Pain |
+SORE 	IndAdj Neg Modif Emot Pain |
+SORENESS 	Neg Noun Emot Pain |
+SORROW 	Neg Noun EMOT Pain Ngtv Affil Weak Psv | noun: Sadness, grief
+SORROWFUL 	IndAdj Neg Modif Emot Pain |
+SORRY#1 	Neg Modif EMOT Ngtv Weak Psv Pain PFREQ | 98% adj: Feeling regret or sorrow
+SORRY#2 	Neg Modif EVAL Ngtv Weak Psv Vice | 2% noun-adj: Wretched, poor, useless, pitiful
+SORT#3 	Neg Modif Vice Undrst Ngtv | 5% idiom-adj: "Of sorts"--of a mediocre or poor kind
+SOUR 	IndAdj Neg Modif Vice |
+SPANK 	DAV Neg SUPV Actv Exert Hostile |
+SPEAR#2 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv | 12% verb: To lance someone, or something
+SPILL 	IAV Neg SUPV Actv Fail |
+SPINSTER 	Neg Noun HU Female Role |
+SPITE#2 	Neg Noun EMOT Hostile Ngtv Arousal | 4% noun: Malicious anger
+SPITEFUL 	IPadj Neg Modif Hostile Emot |
+SPLIT#3 	Neg Modif Qual Ngtv | 4% adj-noun: "Splitting" - (splitting headache)
+SPOIL 	IAV Neg SUPV Ngtv Exert Hostile |
+SPOT#5 	Neg Modif Vice Ngtv | 4% adj: "On the spot"--in a difficult or embarrassing situation
+SPRAIN 	IAV Neg SUPV Psv Pain |
+SPUTTER 	IAV Neg SUPV Actv Comform |
+SQUANDER 	IAV Neg SUPV Econ Actv Exch |
+STAB 	DAV Neg SUPV Actv Hostile Exert Try |
+STAGNANT 	IndAdj Neg Modif Stay |
+STAIN 	DAV Neg SUPV Psv |
+STALE 	IndAdj Neg Modif Weak Vice |
+STALEMATE 	Neg Noun Stay Comform Intrel |
+STAMMER 	DAV Neg SUPV Actv Comform |
+STAMP#2 	DAV Neg SUPV Exert Hostile Ngtv Strng Actv |
+STANDSTILL 	Neg Noun Stay Intrel Comform |
+STARK 	Neg Modif Qual Ovrst Ngtv |
+STARTLE 	IAV Neg SUPV Intrel Hostile Ngtv Psv |
+STARVATION 	Neg Noun Need Weak Natpro |
+STARVE 	IAV Neg SUPV Psv Need Weak Natpro |
+STATIC 	IndAdj Neg Modif Stay Vice |
+STEAL#1 	DAV Neg SUPV Intrel Hostile Ngtv Legal Actv | 60% verb: To rob, thieve
+STEAL#2 	Neg Noun Vice ECON Ngtv Actv Hostile | 40% noun: "Stealing" - theft, thievery
+STERN 	IndAdj Neg Modif Hostile Strng |
+STICK#6 	Neg Modif Vice Ngtv | 1% idiom-adj: "Stuck up"--conceited
+STIFLE 	IAV Neg SUPV Intrel Ngtv Strng Power Hostile Actv |
+STIGMA 	Neg Noun Percv Vice |
+STING 	IAV Neg SUPV Actv Pain Hostile Exert |
+STINK 	IAV Neg SUPV Percv Pain |
+STOLE 	DAV Neg SUPV Intrel ED Hostile Ngtv Actv Legal | verb: Past tense of steal
+STOLEN#1 	Neg Modif Ngtv Legal Vice |
+STOLEN#2 	IAV Neg SUPV Intrel ED Hostile Ngtv Legal |
+STORM#2 	IAV Neg SUPV Exert Hostile Ngtv Strng Actv | 7% verb: To rush, attack, rage
+STORMY 	IndAdj Neg Modif Hostile Vary |
+STRAGGLE 	IAV Neg SUPV Move Weak Actv |
+STRAGGLER 	Neg Noun Weak |
+STRAIN#1 	Neg Noun Ngtv Pain |
+STRAIN#2 	IAV Neg SUPV Exert Ngtv Actv |
+STRANGLE 	DAV Neg SUPV Hostile Exert Actv Other |
+STRAY 	IAV Neg SUPV Move |
+STRESS#1 	Neg Noun Ngtv Pain |
+STRESS#2 	IAV Neg SUPV Ngtv Actv Solve |
+STRICKEN 	IndAdj Neg Modif Weak Pain |
+STRICT#1 	Neg Modif Power Ngtv Strng Vice | 52% adj: Exact, severe, rigorous, punctilious
+STRICT#2 	Neg LY Ovrst Ngtv Strng Vice | 39% adv: "Strictly" - adverb form of sense 1
+STRICT#3 	Neg Modif Power Ngtv Strng Vice | 9% adj: "Stricter" - comparative form of sense 1
+STRIFE 	Neg Noun Vice Ngtv Weak Actv Hostile |
+STRIKE#1 	DAV Neg SUPV Exert Ngtv Actv Hostile Strng | 56% verb: To attack, injure, hit (generally in retaliation and with speed), hit upon and remove, move sharply, make an (physical) impact
+STRIKE#5 	Neg Noun Vice Ngtv | 5% noun: A liability, derived from baseball - "two strikes against me"
+STRINGENT 	IndAdj Neg Modif Strng Hostile |
+STRUCK#1 	DAV Neg SUPV Exert ED Ngtv Hostile Actv Strng | 82% verb: Hit, hit upon, made an impact, attacked
+STRUGGLE#1 	Neg Noun Hostile Ngtv Actv Intrel | 55% noun: A fight, contention, effort
+STRUGGLE#2 	IAV Neg SUPV Intrel Hostile Ngtv Actv | 36% verb: To contend, fight
+STRUGGLE#3 	Neg Noun Ngtv Actv Intrel Hostile | 9% noun-adj: "Struggling"--contending or fighting
+STUBBORN 	Neg Modif Vice EVAL Ngtv Strng Hostile |
+STUBBORNLY 	IndAdj Neg Modif Stay Hostile Strng |
+STUBBORNNESS 	Neg Noun Stay Strng Hostile |
+STUDY#3 	Neg Modif Actv Vice Ngtv Actv | 1% adj: "Studied"--not spontaneous or natural
+STUFFY 	Neg Modif Vice Ngtv |
+STUNT 	Neg Noun Vice |
+STUPID#1 	Neg Modif Vice EVAL Ngtv PFREQ | 97% adj: Dull, insipid, witless
+STUPID#2 	Neg Modif Vice EVAL Ngtv | 3% adj: "Stupider", "stupidest" - comparatives of sense 1
+STUPID#3 	Neg LY Ngtv Vice | 0% adv: "Stupidly" - adverb form of sense 1
+STUPIDITY 	Neg Noun Vice Ngtv |
+STUPOR 	Neg Noun Think Fail |
+SUBJECTION 	Neg Noun Subm Weak |
+SUBJUGATE 	IAV Neg SUPV Weak Subm Intrel Psv |
+SUBJUGATION 	Neg Noun Weak Subm Intrel |
+SUBMISSIVE 	IPadj Neg Modif Weak Subm Intrel |
+SUBSERVIENCE 	Neg Noun Weak Subm Intrel |
+SUBSIDE 	IAV Neg SUPV Actv Decr Compl |
+SUBSTITUTION 	Neg Noun Change |
+SUBTRACT 	IAV Neg SUPV Actv Decr |
+SUBVERSION 	Neg Noun Power Hostile Exert Intrel |
+SUBVERT 	IAV Neg SUPV Actv Power Hostile Exert Intrel |
+SUCCUMB 	IAV Neg SUPV Psv Weak Subm |
+SUCKER 	Neg Noun Weak Subm HU |
+SUFFER#1 	IAV Neg SUPV Subm Ngtv Weak Psv Pain | 69% verb: To experience or tolerate physical or psychological pain or other unpleasantness
+SUFFER#3 	Neg Modif EMOT Pain Ngtv Weak Psv Weak | 30% noun-adj: "Suffering"
+SUFFERER 	Neg Noun HU Subm Weak Psv Role Ngtv |
+SUFFOCATE 	IAV Neg SUPV Psv Weak Need |
+SULLEN 	IndAdj Neg Modif Pain |
+SUNDER 	IAV Neg SUPV Hostile Change Decr Actv |
+SUPERFICIAL 	Neg Modif Vice Ngtv Weak Undrst |
+SUPERFICIALITY 	Neg Noun Eval Vice |
+SUPERFLUOUS 	IndAdj Neg Modif Eval Ovrst |
+SUPERSTITION 	Neg Noun Vice Percv Feel |
+SUPERSTITIOUS 	IndAdj Neg Modif Vice Percv Feel |
+SUPPRESS 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+SUPPRESSION 	Neg Noun Ngtv Strng Actv Power Hostile Intrel |
+SUSCEPTIBLE 	IPadj Neg Modif Weak |
+SUSPECT#1 	Neg Noun HU Legal Ngtv Role Hostile |
+SUSPECT#2 	IAV Neg SUPV Ngtv Solve Hostile |
+SUSPEND 	IAV Neg SUPV Actv Stay Compl |
+SUSPENSION 	Neg Noun Stay Compl |
+SUSPICION 	Neg Noun EMOT Hostile Ngtv Arousal Undrst |
+SUSPICIOUS 	Neg Modif EVAL Hostile Ngtv Arousal Undrst |
+SWEAR 	DAV Neg SUPV Hostile Ngtv Comform |
+SWORE 	DAV Neg SUPV ED Hostile Ngtv Comform |
+SYMPTOM 	Neg Noun Vice Ngtv |
+TABOO 	IndAdj Neg Modif Hostile Percv |
+TAINT 	IAV Neg SUPV Actv Change Hostile |
+TAMPER 	IAV Neg SUPV Actv Change Hostile |
+TANTRUM 	Neg Noun Hostile Exert Comform |
+TARDY 	IndAdj Neg Modif Time Fail |
+TARIFF 	Neg Noun Polit Econ |
+TATTER 	IAV Neg SUPV Actv Decr |
+TAUNT#1 	Neg Noun COM Comform Hostile Ngtv Actv |
+TAUNT#2 	IAV Neg SUPV Hostile Ngtv Actv Comform |
+TAX#2 	IAV Neg SUPV Intrel Hostile Ngtv | 6% verb-adj: To burden or place a strain on, to demand taxes from (1)
+TEAR#1 	DAV Neg SUPV Exert Hostile Ngtv Actv | 59% verb: To rip, destroy, divide
+TEAR#3 	IAV Neg SUPV Travl Ngtv Psv | 10% verb: To race around without apparent control
+TEASE 	IAV Neg SUPV Actv Comform Hostile Other |
+TEDIOUS 	Neg Modif Vice EVAL Ngtv |
+TEMPER#1 	Neg Noun Hostile Ngtv Arousal |
+TEMPER#2 	IAV Neg SUPV Work Ngtv |
+TEMPEST 	Neg Noun Natpro Hostile |
+TEMPORARILY 	IndAdj Neg Modif Vary Time |
+TEMPTATION 	Neg Noun Vice Ngtv |
+TENSE 	IndAdj Neg Modif Emot Pain Hostile |
+TENSION 	Neg Noun EMOT Ngtv Weak Pain | noun: Stress
+TERRIBLE 	Neg Modif Vice EVAL Ngtv Ovrst | adj: Very bad
+TERRIFY 	IAV Neg SUPV Actv Emot Pain Other |
+TERROR 	Neg Noun EMOT Pain Ngtv |
+TERRORISM 	Neg Noun Hostile Exert Other |
+TERRORIZE 	IAV Neg SUPV Actv Hostile Exert Other |
+THEFT 	Neg Noun Hostile Fetch Legal |
+THIEF 	Neg Noun HU Role Hostile Fetch Legal |
+THIRST 	Neg Noun Natpro Need |
+THIRSTY 	IndAdj Neg Modif Natpro Need |
+THORNY 	IndAdj Neg Modif Hostile |
+THOUGHTLESS 	IndAdj Neg Modif Emot Pain Think Fail |
+THRASH 	IAV Neg SUPV Actv Hostile |
+THREAT 	Neg Noun COM Hostile Ngtv Strng Vice | noun: A menace
+THREATEN 	IAV Neg SUPV Intrel Hostile Ngtv Strng | verb: To menace
+THROW#2 	IAV Neg SUPV Fail Ngtv Actv | 1% verb-idiom: "Throw the game" - to arrange to lose
+THROW#3 	IAV Neg SUPV Ngtv Natpro | 1% verb: "Throw up" - to vomit
+THUD 	Neg Noun Percv |
+THWART 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv Power |
+TIMIDITY 	Neg Noun Vice |
+TIRE#2 	IAV Neg SUPV Subm Ngtv Pain | 0% verb: To fatigue
+TIRE#3 	IAV Neg SUPV Hostile Ngtv Weak Psv Pain | 13% verb: To become bored or disinterested--"tire of"
+TIRE#4 	Neg Modif Subm Weak Pain Ngtv Psv | 25% adj: "Tiring"--exhausting
+TIRED#1 	Neg Modif Pain Subm Ngtv Weak Psv | 70% adj: Weary, exhausted, fatigued
+TIRED#2 	Neg Modif Pain Hostile Ngtv Weak Psv | 27% adj: Exhausted in patience or interest, bored--"tired of doing this"
+TIRED#3 	SV Neg SUPV Subm Pain Ngtv Weak Psv | 4% verb: To become weary or exhausted
+TIRED#4 	SV Neg SUPV Hostile Pain Ngtv Weak Psv | 0% verb: To become bored or uninterested
+TIRESOME 	IndAdj Neg Modif Vice |
+TOIL 	IAV Neg SUPV Actv Work |
+TOLERABLE 	IPadj Neg Modif Emot Pain |
+TOO#3 	Neg Modif Vice EVAL Ngtv | 1% adj: 'too bad'--unfortunate
+TOPPLE 	IAV Neg SUPV Fall |
+TORMENT 	IAV Neg SUPV Actv Hostile Exert Other |
+TORRENT 	Neg Noun Fall Ovrst |
+TORTUROUS 	IndAdj Neg Modif Emot Pain |
+TOUCHY 	IndAdj Neg Modif Emot Pain Vice |
+TRAGEDY 	Neg Noun Emot Pain |
+TRAGIC 	IndAdj Neg Modif Vice EVAL Ngtv |
+TRAITOR 	Neg Noun HU Role Fail Hostile Affil Ovrst |
+TRAMP 	Neg Noun HU Role Weak Need |
+TRAMPLE 	IAV Neg SUPV Actv Move Hostile |
+TRANSGRESS 	IAV Neg SUPV Actv Comform Change |
+TRAP#1 	Neg Noun Object Tool Ngtv Strng | 57% noun: Device for capturing or ensnaring
+TRAP#2 	DAV Neg SUPV Intrel Hostile Power Strng Actv Ngtv | 43% verb: To capture or ensnare
+TRAUMA 	Neg Noun Ngtv Psv Vice |
+TRAUMATIC 	IndAdj Neg Modif Emot Pain |
+TREACHEROUS 	Neg Modif Vice Ngtv Hostile |
+TREACHERY 	Neg Noun Hostile |
+TREASON 	Neg Noun Polit Hostile |
+TREASONOUS 	IPadj Neg Modif Polit Hostile |
+TRESPASS 	IAV Neg SUPV Actv Move |
+TRICK#1 	Neg Noun Ngtv Actv Vice Hostile |
+TRICK#2 	IAV Neg SUPV Intrel Hostile Ngtv Actv |
+TRIVIAL 	IndAdj Neg Modif Weak Undrst |
+TROUBLE#1 	Neg Noun Vice Ngtv PFREQ | 90% noun: Difficulty, annoyance, disturbance, malfunction
+TROUBLE#2 	IAV Neg SUPV Ngtv Pain | 5% verb: To disturb or worry
+TROUBLE#3 	Neg Modif EMOT Pain Ngtv Psv | 5% adj: "Troubled"--disturbed
+TROUBLE#4 	Neg Modif Pain Ngtv | 1% adj: "Troubling"--disturbing
+TROUBLESOME 	Neg Modif Vice Ngtv |
+TRUANT 	IndAdj Neg Modif Fail Legal |
+TRUDGE 	IAV Neg SUPV Actv Move Try |
+TRY#4 	IAV Neg SUPV Psv Arousal Ngtv | 0% verb: Put under duress--"that tried my patience"
+TRY#5 	Neg Modif Arousal Ngtv | 0% adj: "Trying"--stressful
+TURBULENT 	IndAdj Neg Modif Vary Hostile |
+TURMOIL 	Neg Noun Ngtv Vice |
+TURN#5 	IAV Neg SUPV Intrel Hostile Actv Ngtv | 1% verb: Become suddenly hostile--to "turn on," "turn upon"
+TURN#8 	IAV Neg SUPV Intrel Hostile Actv Ngtv | 0% verb: "Turn down"--to reject
+TWITCH 	IAV Neg SUPV Psv Move Natpro |
+TYRANNY 	Neg Noun POLIT Polit* Power Ngtv Strng Vice |
+UGLY 	Neg Modif Vice Ngtv | adj: Unattractive, gross, offensive
+ULTIMATUM 	Neg Noun Comform Hostile |
+UNACCUSTOMED 	IndAdj Neg Modif Weak |
+UNARM 	IndAdj Neg Modif Weak |
+UNATTRACTIVE 	IndAdj Neg Modif Eval Vice |
+UNAUTHENTIC 	Neg Modif Negate Vice Ngtv |
+UNAVOIDABLE 	Neg Modif Negate Ngtv Means Ovrst |
+UNBEARABLE 	IPadj Neg Modif Pain |
+UNBELIEVABLE 	Neg Modif Negate Ngtv Ovrst Vice |
+UNCIVIL 	IndAdj Neg Modif Doctr Fail |
+UNCLEAN 	IndAdj Neg Modif Vice |
+UNCLEAR 	Neg Modif Vice Negate Ngtv Undrst |
+UNCOMFORTABLE 	Neg Modif Negate Ngtv Pain EMOT |
+UNCOUTH 	IPadj Neg Modif Vice |
+UNDEPENDABILITY 	Neg Noun Vice Negate Ngtv Weak Undrst |
+UNDEPENDABLE 	Neg Modif Vice Negate Ngtv Weak Undrst |
+UNDERMINE 	IAV Neg SUPV Intrel Hostile Ngtv Strng Actv |
+UNDERWORLD 	Neg Noun Econ Polit |
+UNDESIRABLE 	IndAdj Neg Modif Eval Vice |
+UNDID 	IAV Neg SUPV ED Work Hostile Negate Ngtv Actv |
+UNDIGNIFIED 	IndAdj Neg Modif Eval Vice |
+UNDO 	IAV Neg SUPV Work Hostile Negate Ngtv Actv |
+UNDONE 	IAV Neg SUPV ED Work Hostile Negate Ngtv Psv |
+UNDUE 	Neg Modif Vice EVAL Negate Ngtv |
+UNEASINESS 	Neg Noun Emot Pain |
+UNEASY 	IndAdj Neg Modif EMOT Negate Ngtv Weak Pain |
+UNECONOMICAL 	IndAdj Neg Modif Econ Eval Vice |
+UNEMPLOYED 	IndAdj Neg Modif Econ Weak Vice |
+UNEQUAL 	Neg Modif Quan Negate Ngtv |
+UNEVEN 	Neg Modif Negate Ngtv Qual |
+UNEXPECTEDLY 	Neg Modif Eval Vice |
+UNFAIR 	Neg Modif Vice EVAL Negate Ngtv Hostile |
+UNFAITHFUL 	IPadj Neg Modif Fail Vice Weak |
+UNFAMILIAR 	IndAdj Neg Modif Eval Vice Weak |
+UNFAVORABLE 	Neg Modif Ngtv Vice Negate Undrst |
+UNFEELING 	IndAdj Neg Modif Feel Vice |
+UNFIT 	Neg Modif Vice Negate Ngtv Weak |
+UNFORESEEN 	IndAdj Neg Modif Percv Fail |
+UNFORTUNATE#1 	Neg Modif Vice EVAL Negate Ngtv Weak Undrst | 49% adj: Unlucky, inauspicious
+UNFORTUNATE#2 	Neg LY Vice Negate Ngtv Undrst | 49% adv: "Unfortunately"--inauspiciously
+UNFORTUNATE#3 	Neg Noun HU COLL Negate Ngtv Weak Subm | 3% noun: "Unfortunates" - unlucky people
+UNFRIENDLY 	IPadj Neg Modif Eval Vice |
+UNGRATEFUL 	IPadj Neg Modif Eval Vice |
+UNGUARDED 	IndAdj Neg Modif Weak |
+UNHAPPINESS 	Neg Noun Emot Pain |
+UNHAPPY 	IndAdj Neg Modif EMOT Pain Negate Ngtv | adj: Sad, unfortunate
+UNHEALTHY 	IndAdj Neg Modif Natpro Weak |
+UNIMPORTANT 	Neg Modif Vice EVAL Negate Ngtv Undrst |
+UNINFORMED 	IndAdj Neg Modif Weak |
+UNJUST 	IndAdj Neg Modif Vice EVAL Legal Hostile Ngtv Negate |
+UNJUSTIFIED 	Neg Modif Vice Negate Ngtv Hostile |
+UNKIND 	IPadj Neg Modif Eval Vice |
+UNLAWFUL 	IndAdj Neg Modif Legal Fail |
+UNLUCKY 	Neg Modif Vice Negate Ngtv Weak Undrst |
+UNMOVED 	IndAdj Neg Modif Undrst Feel |
+UNNATURAL 	IndAdj Neg Modif Natpro |
+UNNECESSARY 	Neg Modif EVAL Negate Ngtv Vice Undrst |
+UNNERVE 	IAV Neg SUPV Psv Emot Pain Other |
+UNNOTICED 	IndAdj Neg Modif Percv Fail |
+UNOBSERVED 	IndAdj Neg Modif Percv Fail |
+UNPLEASANT 	Neg Modif Vice EVAL Negate Ngtv Undrst |
+UNPOPULAR 	IPadj Neg Modif Eval Vice |
+UNPROFITABLE 	IndAdj Neg Modif Econ Fail |
+UNQUALIFIED 	Neg Modif Vice Negate Ngtv |
+UNREASONABLE 	IndAdj Neg Modif Think Fail Stay |
+UNRELIABILITY 	Neg Noun Vice Negate Ngtv Weak Undrst |
+UNRELIABLE 	Neg Modif Vice EVAL Negate Ngtv Weak Undrst |
+UNREST 	Neg Noun Vice Vary |
+UNRULY 	IndAdj Neg Modif Hostile |
+UNSAFE 	IndAdj Neg Modif Hostile |
+UNSATISFACTORY 	Neg Modif Vice Negate Ngtv Undrst |
+UNSCRUPULOUS 	IndAdj Neg Modif Vice Weak |
+UNSEEN 	IndAdj Neg Modif Percv Fail |
+UNSETTLING 	IndAdj Neg Modif Emot Pain |
+UNSOUND 	IndAdj Neg Modif Vice Negate Weak Undrst |
+UNSPEAKABLE 	IndAdj Neg Modif Comform Emot Pain |
+UNSTABLE 	Neg Modif EVAL Vice Negate Weak Ngtv |
+UNSTEADINESS 	Neg Noun Qual Negate Weak Ngtv |
+UNSTEADY 	Neg Modif Qual Negate Weak Ngtv |
+UNSUCCESSFUL 	IndAdj Neg Modif Vice Negate Ngtv Weak Subm Fail |
+UNTIMELY 	IndAdj Neg Modif Time Fail |
+UNTRAINED 	IndAdj Neg Modif Weak Fail |
+UNTRUE 	Neg Modif Vice Negate Ngtv Undrst |
+UNTRUSTWORTHY 	Neg Modif Vice Negate Ngtv |
+UNTRUTH 	IndAdj Neg Modif Hostile |
+UNWILLING 	Neg Modif Hostile Negate Ngtv Pain Power Hostile |
+UNWILLINGNESS 	Neg Noun Hostile Negate Ngtv Strng Pain Power |
+UNWISE 	Neg Modif Vice Negate Ngtv |
+UNWORTHY 	IndAdj Neg Modif Eval Vice |
+UPHEAVAL 	Neg Noun Vary Change |
+UPRISING 	Neg Noun Affil Hostile Change |
+UPROAR 	Neg Noun Comform Affil Change |
+UPROOT 	IAV Neg SUPV Actv Travel Intrel |
+UPSET#1 	Neg Modif EMOT Ngtv Weak Pain Psv | 62% adj: "Upset"--disturbed
+UPSET#2 	Neg Noun Hostile Ngtv Weak Vary | 3% noun: Instance of being overturned, overthrown
+UPSET#3 	Neg Modif Pain Ngtv Actv Strng | 8% adj: "Upsetting"--disturbing
+UPSET#4 	IAV Neg SUPV Ngtv Actv Strng Pain | 14% verb: To disturb emotionally (of persons)
+UPSET#5 	IAV Neg SUPV Hostile Ngtv Actv Strng Exert | 9% verb: To disrupt or overturn
+USELESS 	Neg Modif Vice EVAL Ngtv |
+USURP 	IAV Neg SUPV Actv Hostile Polit Fetch Exert Intrel Power |
+UTTERANCE 	Neg Noun Comform |
+VAGABOND 	Neg Noun HU Role Econ Weak Travel |
+VAGRANT 	Neg Noun HU Role Econ Weak Travel |
+VAGUE 	Neg Modif Know Undrst Ngtv Weak |
+VAGUENESS 	Neg Noun Know Ngtv Weak Undrst |
+VAIN 	Neg Modif Vice Ngtv |
+VANISH 	IAV Neg SUPV Actv Percv Decr |
+VANITY 	Neg Noun Vice |
+VEHEMENT 	IndAdj Neg Modif Strng Feel |
+VENGEANCE 	Neg Noun Goal Hostile Ngtv Strng Actv |
+VENOM 	Neg Noun Vice Hostile |
+VENOMOUS 	IndAdj Neg Modif Hostile Comform |
+VETO 	DAV Neg SUPV Actv Comform Finish Power |
+VEX 	IAV Neg SUPV Think Fail Stay |
+VEXATION 	Neg Noun Undrst Think Fail |
+VEXING 	IndAdj Neg Modif Undrst Think Fail |
+VICE#1 	Neg Noun Vice Legal Ngtv | 25% noun: Evil, wickedness, prurient pursuits
+VICIOUS 	Neg Modif Vice EVAL Hostile Ngtv |
+VIE 	IAV Neg SUPV Actv Intrel Hostile Try |
+VILE 	Neg Modif Vice EVAL Ngtv Ovrst |
+VILLAIN 	Neg Noun HU Role Hostile |
+VIOLATE 	IAV Neg SUPV Intrel Hostile Ngtv Actv |
+VIOLATION 	Neg Noun Vice Legal Ngtv Actv Hostile |
+VIOLENCE 	Neg Noun POLIT Hostile Ngtv Strng Actv Vice | noun: Fury, force, conflict
+VIOLENT 	Neg Modif Hostile Ngtv Strng Actv Vice |
+VIPER 	Neg Noun Animal Hostile |
+VOID 	Neg Noun Need Vice |
+VOLATILE 	IndAdj Neg Modif Vary |
+VOLATILITY 	Neg Noun Vary |
+VOMIT 	Neg Noun Natpro |
+VULGAR 	IndAdj Neg Modif Eval Vice |
+WAIL 	IAV Neg SUPV Actv Comform Pain |
+WAIT#4 	Neg Modif Hostile Actv Intrel Ngtv | 1% idiom-adj: "In wait"--in ambush
+WALLOW 	SV Neg SUPV Actv Stay Emot Pain |
+WANE 	IAV Neg SUPV Psv Decr |
+WANTON 	IndAdj Neg Modif Need Weak |
+WAR 	Neg Noun Hostile Exert Polit Means |
+WARFARE 	Neg Noun ECON POLIT Ritual Milit Ngtv Strng Actv |
+WARLIKE 	IPadj Neg Modif Hostile exert Polit Intrel Affil |
+WARP 	IAV Neg SUPV Actv Change |
+WARY 	IndAdj Neg Modif Emot Pain |
+WASTE#1 	Neg Noun ECON Ngtv Econ* Weak Vice | 34% noun-adj: Anything unproductive or improperly utilized
+WASTE#2 	IAV Neg SUPV Work Ngtv Weak Econ* | 66% verb: To use inefficiently or unproductively
+WASTEFUL 	IndAdj Neg Modif Eval Vice |
+WASTEFULNESS 	Neg Noun Eval Vice |
+WAYWARD 	IndAdj Neg Modif Weak |
+WEAKEN 	IAV Neg SUPV Fail Weak Subm Decr |
+WEAR#2 	IAV Neg SUPV Finish Ngtv | 2% verb: To deteriorate, cause to deteriorate
+WEARINESS 	Neg Noun Try Weak |
+WEARISOME 	IndAdj Neg Modif Try Weak |
+WEE 	IndAdj Neg Modif Weak Ovrst |
+WEED 	Neg Noun Object Natpro Hostile |
+WEEP 	IAV Neg SUPV Actv Emot Pain Comform |
+WEIRD 	IndAdj Neg Modif Eval Vice |
+WENCH 	Neg Noun HU Role Female Hostile |
+WHACK 	IAV Neg SUPV Actv Hostile Exert Strng Other |
+WHIMPER 	DAV Neg SUPV Actv Comform Emot Pain |
+WHINE 	DAV Neg SUPV Hostile Subm Ngtv Weak Comform |
+WHIP#1 	Neg Noun Object Tool Hostile Strng Ngtv | 38% noun: Instrument with long strips of leather bound together
+WHIP#2 	Neg Noun Hostile Ngtv Strng Actv Vice | 0% noun-adj: A beating
+WHIP#3 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 50% verb: To hit, beat, drive, vanquish
+WICKED 	IndAdj Neg Modif Hostile |
+WICKEDNESS 	Neg Noun Hostile |
+WILD#1 	Neg Modif Ngtv Strng Qual | 80% adj: Untamed, undomesticated, uncontrolled
+WILD#2 	Neg Modif Ngtv Strng Qual | 7% adj: "Wilder" - comparative of sense 1
+WILD#3 	Neg Modif Ngtv Strng Qual | 2% adj: "Wildest" - superlative of sense 1
+WILD#4 	Neg LY Ovrst Qual Ngtv Strng | 11% adv: "Wildly" - adverbial form of sense 1
+WILT 	IAV Neg SUPV Psv Natpro Compl Decr |
+WILY 	IndAdj Neg Modif Hostile Think Solve |
+WINCE 	IAV Neg SUPV Psv Pain |
+WITCHCRAFT 	Neg Noun Hostile Means |
+WITHHELD 	IAV Neg SUPV Intrel ED Hostile Strng Actv Ngtv |
+WITHHOLD 	IAV Neg SUPV Intrel Hostile Strng Actv Ngtv |
+WOE 	Neg Noun Pain |
+WOEFUL 	IndAdj Neg Modif Emot Pain |
+WORN#2 	IAV Neg SUPV Finish ED Ngtv | 60% verb: Past tense of "wear"--deteriorated, caused to deteriorate
+WORN#3 	Neg Modif Vice Weak Psv Ngtv | 30% adj: Deteriorated
+WORRIER 	Neg Noun HU Role Weak Psv Ngtv |
+WORRY#1 	SV Neg SUPV Ngtv Weak Psv Pain | 49% verb: To feel anxious (includes gerunds--"stop worrying")
+WORRY#2 	Neg Noun EMOT Pain Ngtv | 12% noun: A cause of uneasiness
+WORRY#3 	IAV Neg SUPV Intrel Ngtv Actv Hostile | 10% verb: To cause to feel anxious
+WORRY#4 	Neg Modif EMOT Pain Ngtv Weak Psv | 29% adj: "Worried"--anxious
+WORRY#5 	Neg LY Pain Ngtv Weak Psv | 0% adv: "Worriedly"--in a worried manner
+WORSE 	Neg Modif Comp ER EVAL Vice Ngtv | adj: Comparative of "bad" and "ill"
+WORSEN 	IAV Neg SUPV Psv Decr Weak Subm |
+WORST 	Neg Modif Comp EST EVAL Vice Ngtv Ovrst |
+WORTHLESS 	Neg Modif Ngtv Vice Undrst |
+WOUND#1 	DAV Neg SUPV Intrel Hostile Ngtv Strng Actv | 46% verb: Physically or emotionally injure
+WOUND#3 	Neg Noun Ngtv Weak Actv Vice | 25% noun: A physical or emotional injury
+WOUND#5 	Neg Modif Ngtv Vice Weak Psv | 18% adj: "Wounded"--injured
+WRATH 	Neg Noun Hostile |
+WRECK 	IAV Neg SUPV Actv Hostile Exert Finish Other |
+WRESTLE 	IAV Neg SUPV Actv Hostile Exert Think |
+WRETCH 	IAV Neg SUPV Actv Pain Natpro |
+WRETCHEDNESS 	Neg Noun Pain Eval Vice |
+WRINKLE 	Neg Noun Eval Vice |
+WRITHE 	IAV Neg SUPV Actv Pain |
+WRONG#2 	IAV Neg SUPV Intrel Hostile Ngtv | 1% verb: To injure, malign, treat unfairly
+WRONG#3 	Neg LY Ngtv Vice | 1% adv: "Wrongly"--incorrectly, improperly
+WRONGFUL 	IndAdj Neg Modif Eval Vice |
+WROUGHT 	IndAdj Neg Modif Eval Vice |
+YAWN 	IAV Neg SUPV Psv Comform Natpro |
+YEARN 	IAV Neg SUPV Actv Need Feel |
+YELP 	IAV Neg SUPV Actv Comform Pain |
