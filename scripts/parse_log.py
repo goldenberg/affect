@@ -335,8 +335,9 @@ def parse_wav_timestamp(wav_filename):
     >>> get_wav_timestamp('2009-05-20_09-49-28_l0_.wav')
     datetime.datetime(2009, 5, 20, 9, 49, 28)
     '''
-    basename = os.path.basename(wav_filename)
-    format = '%Y-%m-%d_%H-%M-%S_l0_.wav'
+    basename = os.path.splitext(os.path.basename(wav_filename))[0]
+    
+    format = '%Y-%m-%d_%H-%M-%S_l0_'
     
     return datetime.strptime(basename, format)
 
