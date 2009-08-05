@@ -37,7 +37,7 @@ WORD_LIST_DIR = os.path.expanduser('~/affect/word_data/lists')
 # unweighted output path.
 
 FST_TYPES = ('pos', 'words', 'lemmas', 'lemmastems', 'senti', 'anew', 'lists')
-SIMPLE_FST_TYPES = ('words', 'lemmas', 'pos', 'lemmastems')
+SIMPLE_FST_TYPES = ('words', 'lemmas', 'pos', 'lemmastems', 'lists')
 
 # punctuation that is worth parsing as a separate token. all other punctuation
 # is ignored. ellipses would be nice to parse as a token, but I couldn't figure
@@ -205,6 +205,7 @@ def tag_sentences(sentence_dicts, tag_type):
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
     elif tag_type == 'lists':
         word_lists = read_word_lists(WORD_LIST_DIR)
+        pdb.set_trace()
         tag_sentences(sentence_dicts, 'lemmas')
         [tag_sentence_for_lists(sent, word_lists) for sent in sentence_dicts]
     elif tag_type == 'words':
@@ -426,14 +427,16 @@ def read_word_lists(list_directory):
     
     for list_filename in os.listdir(list_directory):
         if list_filename.endswith('.list'):
-            tag = os.path.splitext[list_filename][0]
+            tag = os.path.splitext(list_filename)[0]
             for word in open(os.path.join(list_directory, list_filename)):
-                word = word.lowercase()
+                word = word.strip().lower()
                 
                 if word not in words:
                     words[word] = [tag]
                 else:
                     words[word].append(tag)
+    
+    return words
 
 def tag_sentence_for_lists(sent_dict, lists_dict):
     '''
