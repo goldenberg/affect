@@ -26,6 +26,7 @@ import os
 import apachelog
 import optparse
 import urlparse
+import cgi
 import logging
 import pdb
 
@@ -51,8 +52,11 @@ def main():
                             dest="use_url_ratings", help="Parses the 'rating' URL parameter"
                             " to classify the recordings.")
     opt_parser.add_option("-b", "--binary", action='store_true', default=False,
-                            dest='Collapse the rating parameter into two classes (plus neutral)'
+                            help='Collapse the rating parameter into two classes (plus neutral)'
                             ' (i.e. group {1,2}, {3}, {4,5})')
+    opt_parser.add_option("-i", "--shortip", dest="short_ip", action="store_true", default=False,
+                            help="Only filter the requests based on the first three"
+                            " bytes of the IP address. (XXX.XXX.XXX.YYY)")
     
     options, arguments = opt_parser.parse_args()
     
@@ -75,6 +79,10 @@ def main():
     
     ip_address = find_first_request(wav_time, log_file)
     logging.info("The IP address of interest is %s" % ip_address)
+    
+    if options.short_ip:
+        ip_address = ip_address[:11]
+        logging.info("We will only filter for %s" % ip_address)
     
     stage_dicts = parse_entire_file(log_file, ip_address, wav_time, delays=delays, classes=classes)
     write_stage_output(stage_dicts, out_filename)
@@ -101,10 +109,14 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
     last_request = ''
     
     for line in log_file:
+        if line.strip() == '':
+            continue
         if is_line_relevant(line, ip_address):
-            (host, log_time, request, referer, user) = parse_line(line)
             logging.debug("The line is relevant: %s" % line)
+            
+            (host, log_time, request, referer, user) = parse_line(line)
             if last_request == '':
+                # first relevant line
                 last_request = request
                 continue
             else:
@@ -114,9 +126,9 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
                 start_time = current_request_dict['time'] - last_request_dict['duration'] - wav_time
                 end_time = current_request_dict['time'] - wav_time
                 
-                stage_dict = { "name" : last_request_dict['name'], 
+                stage_dict = {       "name" : last_request_dict['name'], 
                                "start_time" : start_time,
-                               "end_time" : end_time }
+                                 "end_time" : end_time }
                 
                 if 'rating' in last_request_dict and use_rating_parameter:
                     stage_dict['class'] = last_request_dict['rating']
@@ -126,11 +138,23 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
                 output_dicts.append(stage_dict)
                 
                 last_request = request
+                
+                if stage_dict['name'] == 'videoRecall':
+                    # we've reached the end
+                    break
     
     # deal with last request, which should be the video recall stage
     # assume that the request is served instantly
-    final_request_dict = parse_request(last_request, delays=delays)
     
+    if last_request == '':
+        logging.error("There were no relevant lines.")
+        return []
+    try:
+        final_request_dict = parse_request(last_request, delays=delays)
+    except ValueError:
+        # there was a problem parsing. hopefully this line wasn't supposed to 
+        # be relevant...
+        pass
     start_time = final_request_dict['time'] - wav_time
     end_time = final_request_dict['time'] - wav_time + final_request_dict['duration']
     
@@ -166,8 +190,8 @@ def read_delays_file(filename):
 
 def read_classes_file(filename):
     '''
-    Reads a TSV file with two columns: slide name and duration in seconds. 
-    Returns a dictionary of timedelta objects keyed by slide names (with no 
+    Reads a TSV file with two columns: slide name and a classification 
+    Returns a dictionary of integers keyed by slide names (with no 
     file extensions).
     '''
     
@@ -179,7 +203,7 @@ def read_classes_file(filename):
     
     return classes
 
-def find_first_request(wav_time, log_file, window=3000):
+def find_first_request(wav_time, log_file, window=300):
     '''
     Finds the first request for http://www.csee.ogi.edu/~zak/sesdc/ within a
     specified number of seconds of the wav_time. log_file should be a file-like
@@ -201,23 +225,28 @@ def find_first_request(wav_time, log_file, window=3000):
             elif log_time - wav_time > time_window:
                 logging.warning("I found a request to index2.html, but it "
                                 "occured at %s which was outside the time window of %s"
-                                % (log_time, time_window))    
+                                % (log_time, time_window))  
     logging.error('Could not find a request to index2.html within %i seconds of %s' % (window, wav_time))
     
 def is_line_relevant(line, ip):
     '''
     Determines whether a line in the log file is relevant to the current ip.
     '''
+    if line.strip() == '':
+        logging.warning('Trying to parse an empty line.')
+        return False
+    
     (host, log_time, request, referer, user) = parse_line(line)
     
-    if host != ip:
-        logging.debug("The hosts don't match. The request host was %s" % host)
-        return False
-    else:
-        url_components = urlparse.urlparse(request.split(' ')[1])
-        query_params = urlparse.parse_qs(url_components.query)
-        
-        return ('client_time' in query_params and 'show_param' in query_params)
+    url_components = urlparse.urlparse(request.split(' ')[1])
+    query_params = parse_url_query(url_components.query)
+    
+    return ('client_time' in query_params and 
+            'show_param' in query_params and
+            '/~zak/sesdc/' in url_components.path and
+            host.startswith(ip) and
+            request.strip() != '')
+
 
 def parse_line(line):
     '''
@@ -250,7 +279,7 @@ def parse_request(request, delays={}, date=None):
     
     if request.strip() == '':
         logging.error("Trying to parse an empty request.")
-        return
+        raise ValueError
     
     result = {}
     
@@ -271,9 +300,9 @@ def parse_request(request, delays={}, date=None):
     result['name'] = stage_name
     
     
-    query_params = urlparse.parse_qs(url_components.query)
+    query_params = parse_url_query(url_components.query)
     
-    result['time'] = datetime.strptime(query_params['client_time'][0], '%H:%M:%S:%f')
+    result['time'] = str2datetime(query_params['client_time'][0])
     
     if pagename in delays:
         result['duration'] = delays[pagename]
@@ -358,6 +387,20 @@ def format_timedelta(td):
     '''
     
     return '%i.%03i' % (td.seconds, td.microseconds // 1000)
+
+def parse_url_query(query):
+    try:
+        return urlparse.parse_qs(query)
+    except AttributeError, e:
+        # python 2.5 moved parse_qs to urlparse from cgi
+        return cgi.parse_qs(query)
+
+def str2datetime(s):
+    # replace last colon with dot
+    parts = s.split(':')
+    hours_mins_secs = ':'.join(parts[:3])
+    dt = datetime.strptime(hours_mins_secs, "%H:%M:%S")
+    return dt.replace(microsecond=int(parts[3]))
 
 if __name__ == '__main__':
     main()
