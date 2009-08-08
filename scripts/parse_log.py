@@ -108,6 +108,9 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
     
     last_request = ''
     
+    # sometimes it's ne
+    next_rating = -1
+    
     for line in log_file:
         if line.strip() == '':
             continue
@@ -130,8 +133,19 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
                                "start_time" : start_time,
                                  "end_time" : end_time }
                 
+                if next_rating and stage_dict['name'].startswith('slides'):
+                    # use the old rating and then reset it
+                    stage_dict['class'] = next_rating
+                    next_rating = None
+                
                 if 'rating' in last_request_dict and use_rating_parameter:
-                    stage_dict['class'] = last_request_dict['rating']
+                    if stage_dict['name'].startswith('slide'):
+                        stage_dict['class'] = last_request_dict['rating']
+                    else:
+                        # store the rating until it can be used later
+                        # this needs to be done at the picRating stage
+                        # otherwise, the rating gets lost
+                        next_rating = last_request_dict['rating']
                 elif last_request_dict['name'] in classes:
                     stage_dict["class"] = classes[last_request_dict['name']]
                 

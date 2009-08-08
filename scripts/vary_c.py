@@ -80,8 +80,19 @@ def init_drmaa_job_templates(session, svmtrain_path, c_values, kernel_path, svmi
     for c in c_values:
         job_template = session.createJobTemplate()
         job_template.remoteCommand = svmtrain_path
-        job_template.args = ['-c', '%f' % c, '-k', 'openkernel', '-K', kernel_path, '-v', '10', svmin_path]
         
+        if cross_val:
+            job_template.args = ['-c', '%f' % c, 
+                                 '-k', 'openkernel', 
+                                 '-K', kernel_path, 
+                                 '-v', cross_val, 
+                                 svmin_path]
+        else:
+            job_template.args = ['-c', '%f' % c, 
+                                 '-k', 'openkernel', 
+                                 '-K', kernel_path, 
+                                 svmin_path]
+            
         job_template.workingDirectory = os.getcwd()
         job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c%s.svmout' % str(c))
         job_template.errorPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, output_folder, 'c%s.svmerr' % str(c))

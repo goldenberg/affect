@@ -129,10 +129,9 @@ def read_agree_sents(filename):
     '''
     Returns a list of dictionaries with 4 keys:
     
-    1) 'id' : sentence id (int)
+    1) 'id' : sentence id
     2) 'emotion' : emotion id (int)
     3) 'words' : the parsed words and interesting punctuation (list of strings)
-    4) 'pos'
     '''
     
     result = []
@@ -171,6 +170,8 @@ def tokenize_sentence(sentence):
     ['he', 'said', ',', '"', 'i', 'am', 'hungry', '.', '"', 'and', 'then', 'he', 'went', 'home', '.']
     
     '''
+    return sentence.split()
+    
     words = [word.lower() for word in nltk.word_tokenize(sentence)]
     stripped_words = []
     

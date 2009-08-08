@@ -36,7 +36,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
 log = logging.getLogger('add_kernels')
 
 def main():
-    usage = """%prog KERNEL1 KERNEL2 OUTPUT_BASENAME [options]
+    usage = """%prog KERNEL1 KERNEL2 SVM_FILE OUTPUT_BASENAME [options]
             """
     
     opt_parser = optparse.OptionParser(usage=usage)
@@ -44,13 +44,28 @@ def main():
     opt_parser.add_option("-l", "--log_level", action="store", 
                        default='debug', dest="log_level")
     
+    opt_parser.add_option("-v", "--cross_validate", action="store", type=int,
+                       help="Specify n for n-fold cross-validation")
+    
+    opt_parser.add_option("-t", "--svm_test_file", action="store",
+                       help="If not cross-validating, specify a test dataset.")
+    
     options, arguments = opt_parser.parse_args()
+    
+    
+    
+    if len(arguments) != 4:
+        opt_parser.error("You must specify all four arguments (and -v or -t)")
+    if options.svm_test_file == options.cross_validate == None:
+        opt_parser.error("You must either specify cross-validation using -v or"
+                         " a test data set using -t")
     
     kernel1 = arguments[0]
     kernel2 = arguments[1]
+    svm_train_file = arguments[2]
+    output_basename = arguments[3]
     
     # create output folder
-    output_basename = arguments[2]
     if os.path.exists(output_basename):
         shutil.rmtree(output_basename)
     
@@ -62,12 +77,16 @@ def main():
     drmaa_session = drmaa.Session()
     
     sum_all_kernels(None, kernel1, kernel2, weight_range, output_basename)
-    run_svms(drmaa_session, output_basename, '/g/reu09/goldenbe/affect/alm_data/consolidated/sentences.all')
     
+    if options.cross_validate:
+        run_svms(drmaa_session, output_basename, svm_train_file, cross_val=options.cross_validate)
+    else:
+        run_svms(drmaa_session, output_basename, svm_train_file, test_file=options.svm_test_file)
+        
     data_points = read_all_accuracies(output_basename)
     save_accuracies(data_points, output_basename)
 
-def run_svms(session, kernel_directory, svmin_path):    
+def run_svm_training(session, kernel_directory, svmin_path, cross_val=None):    
     '''
     Runs distributed SVMs across a DRMAA cluster. JobTemplates are created by
     vary_c.init_drmaa_job_templates. The following directory structure is used:
@@ -100,7 +119,8 @@ def run_svms(session, kernel_directory, svmin_path):
         
         
         job_templates = vary_c.init_drmaa_job_templates(session, svm_train, 
-                                    c_values, kernel_path, svmin_path, output_directory)
+                                    c_values, kernel_path, svmin_path, output_directory,
+                                    cross_val=cross_val)
         
         all_job_templates.extend(job_templates)
     
@@ -111,15 +131,7 @@ def run_svms(session, kernel_directory, svmin_path):
     session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
     
     log.info('All SVM jobs have been synchronized')
-    
-            #data_points.append( {'weight1' : 1-weight, 
-            #                     'weight2' : weight, 
-            #                     'accuracy' : accuracy,
-            #                     'c' : c,
-            #                    } )
 
-    #save_accuracies(data_points, basename)
-    #plot_accuracies(data_points, basename)
 
 def read_all_accuracies(root_directory):
     '''
