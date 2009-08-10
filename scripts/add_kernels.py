@@ -50,15 +50,20 @@ def main():
     opt_parser.add_option("-t", "--svm_test_file", action="store",
                        help="If not cross-validating, specify a test dataset.")
     
+    opt_parser.add_option("-l", "--leave_one_out", action="store_true",
+                       help="Perform leave one out cross validation using "
+                       "leave_one_out_svm.py")
+
     options, arguments = opt_parser.parse_args()
     
     
     
     if len(arguments) != 4:
-        opt_parser.error("You must specify all four arguments (and -v or -t)")
-    if options.svm_test_file == options.cross_validate == None:
+        opt_parser.error("You must specify all four arguments (-v, -l or -t)")
+    if options.svm_test_file == options.cross_validate 
+                             == options.leave_one_out == None:
         opt_parser.error("You must either specify cross-validation using -v or"
-                         " a test data set using -t")
+                         " -l or a test data set using -t")
     
     kernel1 = arguments[0]
     kernel2 = arguments[1]
@@ -103,7 +108,6 @@ def run_svm_training(session, kernel_directory, svmin_path, cross_val=None):
     
     all_job_templates = []
     for kernel_filename in os.listdir(kernel_directory):
-        #pdb.set_trace()
         if not kernel_filename.endswith('.kar'):
             log.debug('found kernel: %s' % kernel_filename)
             continue
