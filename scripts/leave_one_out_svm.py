@@ -22,16 +22,9 @@ LOG_LEVELS = {'debug': logging.DEBUG,
 log = logging.getLogger(__name__)
 
 def main():
-    usage = """%prog INPUT_FILE SVM_ARGS [options]
+    usage = """%prog INPUT_FILE SVM_ARGS
             """
     
-    #opt_parser = optparse.OptionParser(usage=usage)
-    
-    #opt_parser.add_option("-l", "--log_level", action="store_true", 
-    #                   default='warning', dest="log_level")
-    
-    #options, arguments = opt_parser.parse_args()
-    #log.setLevel(LOG_LEVELS[options.log_level])
     
     dataset_file = sys.argv[1]
     svm_args = sys.argv[2:]
