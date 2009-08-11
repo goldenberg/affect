@@ -36,6 +36,9 @@ def main():
     temp_dir = sys.argv[2]
     svm_args = sys.argv[3:]
     
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)
+    
     output_basename = os.path.join(temp_dir, os.path.split(dataset_file)[1])
     # read lines and filter out any whitespace lines
     lines = open(dataset_file).readlines()    
@@ -47,7 +50,7 @@ def main():
     # run all svms
     successes = sum([run_svm(output_basename, i, svm_args) for i in range(1, len(lines)+1)])
     
-    print '%i successes (%.2f%% accuracy)' % (successes, successes * 100.0 / len(lines))
+    print '%i/%i successes (%.2f%% accuracy)' % (successes, len(lines), successes * 100.0 / len(lines))
 
 def run_svm(output_basename, index, svm_args):
     """
@@ -81,12 +84,12 @@ def parse_accuracy(stdout):
     # match numerator and denominator
     regex = re.compile('Accuracy = \d*.*\d*% \((\d*)/(\d*)\)')
     
-    matches = regex.findall(stdout)[0] 
+    all_matches = regex.findall(stdout)
     
-    if len(matches) != 2:
+    if len(all_matches) >= 1 and len(all_matches[0]) != 2:
         log.error("Couldn't parse the accuracy for output: %s" % stdout)
     else:
-        correct, possible = matches
+        correct, possible = all_matches[0]
         return float(correct) / float(possible)
 
 def split_data(lines, index, output_basename):
