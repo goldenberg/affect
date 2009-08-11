@@ -20,6 +20,7 @@ import shutil
 import drmaa
 
 import pdb
+from svm_job import SVMJob
 
 LOG_LEVELS = {'debug': logging.DEBUG,
                'info': logging.INFO,
@@ -50,7 +51,7 @@ def main():
     opt_parser.add_option("-t", "--svm_test_file", action="store",
                        help="If not cross-validating, specify a test dataset.")
     
-    opt_parser.add_option("-l", "--leave_one_out", action="store_true",
+    opt_parser.add_option("-o", "--leave_one_out", action="store_true",
                        help="Perform leave one out cross validation using "
                        "leave_one_out_svm.py")
 
@@ -59,9 +60,8 @@ def main():
     
     
     if len(arguments) != 4:
-        opt_parser.error("You must specify all four arguments (-v, -l or -t)")
-    if options.svm_test_file == options.cross_validate 
-                             == options.leave_one_out == None:
+        opt_parser.error("You must specify all four arguments (-v, -o or -t)")
+    if options.svm_test_file == options.cross_validate == options.leave_one_out == None:
         opt_parser.error("You must either specify cross-validation using -v or"
                          " -l or a test data set using -t")
     
@@ -79,19 +79,30 @@ def main():
     log.setLevel(LOG_LEVELS[options.log_level])
     
     weight_range = drange(Decimal('0.0'), Decimal('1.0'), Decimal('0.1'))
-    drmaa_session = drmaa.Session()
+    session = drmaa.Session()
     
     sum_all_kernels(None, kernel1, kernel2, weight_range, output_basename)
     
     if options.cross_validate:
-        run_svms(drmaa_session, output_basename, svm_train_file, cross_val=options.cross_validate)
-    else:
-        run_svms(drmaa_session, output_basename, svm_train_file, test_file=options.svm_test_file)
+        cross_val_option = options.cross_validate
+    elif options.leave_one_out:
         
+        cross_val_option = SVMJob.LEAVE_ONE_OUT_CV
+    else:
+        cross_val_option = None
+    
+    svm_jobs = create_svm_jobs(session, output_basename, svm_train_file, cross_val_option)
+    job_templates = [sj.setup_drmaa_job(session) for sj in svm_jobs]
+    job_ids = [session.runJob(jt) for jt in job_templates]
+    
+    log.info('SVM jobs submitted')
+    session.synchronize(job_ids)
+    log.info('All SVM jobs synchronized')
+    
     data_points = read_all_accuracies(output_basename)
     save_accuracies(data_points, output_basename)
 
-def run_svm_training(session, kernel_directory, svmin_path, cross_val=None):    
+def create_svm_jobs(session, kernel_directory, svmin_path, cross_val=None):    
     '''
     Runs distributed SVMs across a DRMAA cluster. JobTemplates are created by
     vary_c.init_drmaa_job_templates. The following directory structure is used:
@@ -102,11 +113,10 @@ def run_svm_training(session, kernel_directory, svmin_path, cross_val=None):
     
     c_values = list(drange(Decimal('0.1'), Decimal('6'), Decimal('.1')))
     
-    data_points = []
-    
     svm_train = '/g/reu09/goldenbe/OpenKernel/libsvm-2.82/svm-train'
     
-    all_job_templates = []
+    all_svm_jobs = []
+    
     for kernel_filename in os.listdir(kernel_directory):
         if not kernel_filename.endswith('.kar'):
             log.debug('found kernel: %s' % kernel_filename)
@@ -121,20 +131,19 @@ def run_svm_training(session, kernel_directory, svmin_path, cross_val=None):
         
         os.mkdir(output_directory)
         
-        
-        job_templates = vary_c.init_drmaa_job_templates(session, svm_train, 
-                                    c_values, kernel_path, svmin_path, output_directory,
-                                    cross_val=cross_val)
-        
-        all_job_templates.extend(job_templates)
+        for c in c_values:
+            svm_job = SVMJob()
+            
+            svm_job.c_value = c
+            svm_job.kernel_path = kernel_path
+            svm_job.cross_validation = cross_val
+            svm_job.training_file = svmin_path
+            svm_job.svmtrain_path = svm_train
+            svm_job.output_basename = os.path.join(output_directory, 'c' + str(c))
+            
+            all_svm_jobs.append(svm_job)
     
-    job_ids = [session.runJob(jt) for jt in all_job_templates]
-    
-    log.info('submitted jobs with ids: %s' % job_ids)
-    
-    session.synchronize(job_ids, drmaa.Session.TIMEOUT_WAIT_FOREVER, False)
-    
-    log.info('All SVM jobs have been synchronized')
+    return all_svm_jobs
 
 
 def read_all_accuracies(root_directory):
