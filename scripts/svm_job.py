@@ -27,12 +27,16 @@ class SVMJob:
     leave_one_out_path = property(doc="Path to leave_one_out_svm.py")
     native_specifications = property(doc="Arguments to pass through to SGE")
     
+    metadata = property(doc="Dictionary to store any extra info about the job")
+    
     def __init__(self, c=1, kernel=None, cross_validation=None, training_file=None, output_basename=None):
         self.c_value = c
         self.kernel_path = kernel
         self.cross_validation = cross_validation
         self.training_file = training_file
         self.output_basename = output_basename
+        
+        self.metadata = {}
         
         self.svmtrain_path = 'svm-train'
         self.svmpredict_path = 'svm-predict'
@@ -51,10 +55,9 @@ class SVMJob:
         
         args.insert(0, self.svmtrain_path)
         
-        output_path = self.output_basename + '.svmout'
-        error_path = self.output_basename + '.svmerr'
         
-        process = subprocess.Popen(arguments, stdout=open(output_path), stderr=open(error_path))
+        process = subprocess.Popen(arguments, stdout=open(self.stdout_path), 
+                                              stderr=open(self.stderr_path))
         (stdout, stderr) = process.communicate()
     
     def setup_drmaa_job(self, session):
@@ -80,8 +83,8 @@ class SVMJob:
         job_template.args = self.generate_train_args()
         
         job_template.workingDirectory = os.getcwd()
-        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, self.output_basename + '.svmout')
-        job_template.errorPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, self.output_basename + '.svmerr')
+        job_template.outputPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, self.stdout_path)
+        job_template.errorPath = ':' + os.path.join(drmaa.JobTemplate.WORKING_DIRECTORY, self.stderr_path)
         
         job_template.nativeSpecification = self.native_specifications
         job_template.environment = self.job_environment
@@ -103,8 +106,8 @@ class SVMJob:
             raise ValueError('c, training_file and kernel path must all be set.')
         
         if self.cross_validation == self.LEAVE_ONE_OUT_CV:
-            temp_dir = self.output_basename + '.tmp'
-            return [self.training_file, '-c', str(self.c_value),
+            return [self.training_file, self.temp_directory,
+                                        '-c', str(self.c_value),
                                         '-k', 'openkernel',
                                         '-K', self.kernel_path]
         elif type(self.cross_validation) == int:
@@ -127,16 +130,48 @@ class SVMJob:
         '''
         
         if self.cross_validation == self.LEAVE_ONE_OUT_CV:
-            lines = open(self.output_basename + '.svmout').readlines()
+            lines = open(self.stdout_path).readlines()
             
             regex = re.compile('\((\d*\.\d*)% accuracy\)')
             
             accuracy_str = regex.findall('\n'.join(lines))[0]
             return float(accuracy_str)
         elif self.cross_validation:
-            svmout_file = open(self.output_basename + '.svmout')
+            svmout_file = open(self.stdout_path)
             
             for line in open(svmout_file):
                 if line.startswith('Cross Validation Accuracy'):
                     return float(line.split(' ')[-1][:-1])
         
+    
+    @property
+    def temp_directory(self):
+        '''
+        Returns a path to a directory that can be used for temp storage for 
+        data related to this job.
+        '''
+        path = self.output_basename + '.tmp'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        
+        return path
+    
+    @property
+    def stdout_path(self):
+        '''
+        Returns the path where the SVM stdout should be stored.
+        '''
+        if not self.output_basename:
+            raise ValueError('The output_basename must be set before using the stderr path.')
+        
+        return self.output_basename + '.svmout'
+    
+    @property
+    def stderr_path(self):
+        '''
+        Returns the path where the SVM stderr should be written.
+        '''
+        if not self.output_basename:
+            raise ValueError('The output_basename must be set before using the stderr path.')
+        
+        return self.output_basename + '.svmerr'
