@@ -7,6 +7,7 @@ Created by Benjamin Goldenberg on 2009-08-07.
 Copyright (c) 2009. All rights reserved.
 """
 
+import os
 import sys
 import optparse
 import logging
