@@ -9,8 +9,8 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 
 import sys
 import os
-import unittest
 import logging
+import re
 
 log = logging.getLogger('svm_job')
 
@@ -137,11 +137,10 @@ class SVMJob:
             accuracy_str = regex.findall('\n'.join(lines))[0]
             return float(accuracy_str)
         elif self.cross_validation:
-            svmout_file = open(self.stdout_path)
             
-            for line in open(svmout_file):
+            for line in open(self.stdout_path):
                 if line.startswith('Cross Validation Accuracy'):
-                    return float(line.split(' ')[-1][:-1])
+                    return float(line.split(' ')[-1][:-2])
         
     
     @property
