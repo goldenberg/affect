@@ -10,13 +10,12 @@ Copyright (c) 2009. All rights reserved.
 import sys
 import optparse
 import logging
-import vary_c
 import make_kernels
 from decimal import Decimal
 import os
 import subprocess
 import shutil
-
+import re
 import drmaa
 
 import pdb
@@ -99,9 +98,12 @@ def main():
     session.synchronize(job_ids)
     log.info('All SVM jobs synchronized')
     
-    data_points = read_all_accuracies(output_basename)
+    data_points = convert_jobs_to_datapoints(svm_jobs)
     save_accuracies(data_points, output_basename)
-
+    
+    best_point = max(data_points, key=lambda x: x['accuracy'])
+    print 'Best accuracy: %(accuracy)s when c=%(c)s and weight=%(weight2)s' % best_point
+    
 def create_svm_jobs(session, kernel_directory, svmin_path, cross_val=None):    
     '''
     Runs distributed SVMs across a DRMAA cluster. JobTemplates are created by
@@ -111,7 +113,7 @@ def create_svm_jobs(session, kernel_directory, svmin_path, cross_val=None):
                  /c=x.xx.svmerr
     '''
     
-    c_values = list(drange(Decimal('0.1'), Decimal('6'), Decimal('.1')))
+    c_values = list(drange(Decimal('0.1'), Decimal('8'), Decimal('.1')))
     
     svm_train = '/g/reu09/goldenbe/OpenKernel/libsvm-2.82/svm-train'
     
@@ -141,10 +143,38 @@ def create_svm_jobs(session, kernel_directory, svmin_path, cross_val=None):
             svm_job.svmtrain_path = svm_train
             svm_job.output_basename = os.path.join(output_directory, 'c' + str(c))
             
+            svm_job.metadata['weight'] = parse_weight_from_kernel_filename(kernel_filename)
+            
             all_svm_jobs.append(svm_job)
     
     return all_svm_jobs
 
+def parse_weight_from_kernel_filename(filename):
+    '''
+    Returns the weight parsed from the kernel filename.
+    
+    >> parse_weight_from_kernel_filename('weight0.4.kar')
+    0.4
+    '''
+    regex = re.compile(r'weight(\d*.\d*).kar')
+    
+    return float(regex.findall(filename)[0])
+    
+
+def convert_jobs_to_datapoints(svm_jobs):
+    '''
+    Converts SVMJob objects to data point dicts with keys: weight1, weight2,
+    accuracy, c.
+    '''
+    data_points = []
+    
+    for job in svm_jobs:
+        data_points.append({'weight1' : 1 - job.metadata['weight'],
+                            'weight2' : job.metadata['weight'],
+                            'accuracy' : job.get_accuracy(),
+                            'c' : job.c_value})
+    
+    return data_points
 
 def read_all_accuracies(root_directory):
     '''
@@ -160,7 +190,7 @@ def read_all_accuracies(root_directory):
                 if svmout_filename.startswith('c') and svmout_filename.endswith('.svmout'):
                     svmout_path = os.path.join(dirpath, svmout_filename)
                     svmoutput = ''.join(open(svmout_path).readlines())
-                    accuracy = vary_c.find_cv_accuracy(svmoutput)
+                    #accuracy = vary_c.find_cv_accuracy(svmoutput)
                     weight = float(dir_name[6:])
                     c = float(svmout_filename[1:-7])
                     
@@ -295,9 +325,14 @@ def read_accuracies(data_points, filename):
                              'accuracy' : Decimal(fields[3])})
     
     return data_points
+
 def drange(start, stop, step):
-     r = start
-     while r < stop:
+    '''
+    Yields value from start up to and incuding stop (unlike builtin range())
+    Should work for any object with + and < defined
+    '''
+    r = start
+    while r <= stop:
         yield r
         r += step
 
