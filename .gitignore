@@ -1,4 +1,6 @@
 *.pyc
+._*
+.DS_Store
 /data/*
 /alm_data/consolidated-stemmed
 /alm_data/consolidated-pos
