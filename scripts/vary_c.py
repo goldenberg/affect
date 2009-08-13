@@ -48,8 +48,8 @@ def run_svms(c_begin, c_end, c_step, svm_args, output_basename):
     max_accuracy, max_c = max(zip(accuracies, c_values))
     print 'best accuracy = %.2f when c = %.3f' % (max_accuracy, max_c)
     
-    plot_accuracies(c_values, accuracies, output_basename)
     save_accuracies(c_values, accuracies, output_basename)
+    plot_accuracies(c_values, accuracies, output_basename)
     
     return max_c, max_accuracy
 
@@ -61,7 +61,7 @@ def run_svmtrain(svm_args, c):
     arguments = ["svm-train", "-c", "%f" % c]
     arguments.extend(svm_args)
     
-    process = subprocess.Popen(arguments, stdout=subprocess.PIPE)
+    process = subprocess.Popen(arguments, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdout, stderr) = process.communicate()
     
     return stdout
