@@ -45,6 +45,9 @@ SIMPLE_FST_TYPES = ('words', 'lemmas', 'pos', 'lemmastems', 'lists')
 
 SPECIAL_PUNCTUATION = ['?', '!', '&']
 
+# symbols to ignore from the input sentences
+SYMBOLS_TO_IGNORE = ('"')
+
 WORDNET_POS = { 'a' : ['JJ', 'JJR', 'JJS'], #adjectives
                 'r' : ['RB', 'RBR', 'RBS'],
                 'n' : ['NN', 'NNS', 'NNP', 'NNPS'],
@@ -145,6 +148,8 @@ def read_agree_sents(filename):
                 emotion = int(fields[1])
                 words = tokenize_sentence(fields[2])
                 
+                words = filter(lambda x: x not in SYMBOLS_TO_IGNORE, words)
+                
                 sent_dict = {      'id' : sentence_id,
                               'emotion' : emotion,
                                 'words' : words
@@ -170,17 +175,15 @@ def tokenize_sentence(sentence):
     ['he', 'said', ',', '"', 'i', 'am', 'hungry', '.', '"', 'and', 'then', 'he', 'went', 'home', '.']
     
     '''
-    return sentence.split()
     
     words = [word.lower() for word in nltk.word_tokenize(sentence)]
     stripped_words = []
     
     # strip periods that the tokenizer left on
     for word in words:
-        if word[-1] in ('.', ',') and len(word) > 1:
-            stripped_words.extend([word[:-1], word[-1]])
-        else:
-            stripped_words.append(word)
+        if word not in SYMBOLS_TO_IGNORE:
+            for symbol in SYMBOLS_TO_IGNORE:
+                stripped_words.append(word.replace(symbol, ''))
     
     return stripped_words
 
@@ -206,7 +209,6 @@ def tag_sentences(sentence_dicts, tag_type):
         [tag_swn_sentence(sent, sentiwordnet) for sent in sentence_dicts]
     elif tag_type == 'lists':
         word_lists = read_word_lists(WORD_LIST_DIR)
-        pdb.set_trace()
         tag_sentences(sentence_dicts, 'lemmas')
         [tag_sentence_for_lists(sent, word_lists) for sent in sentence_dicts]
     elif tag_type == 'words':
@@ -450,6 +452,8 @@ def tag_sentence_for_lists(sent_dict, lists_dict):
             sent_dict['lists'].extend(lists_dict[word])
         elif lemma in lists_dict:
             sent_dict['lists'].extend(lists_dict[lemma])
+        else:
+            sent_dict['lists'].append('none')
     
 
 def read_pos_sentence(sentence_id, story, pos_directory):
@@ -568,7 +572,7 @@ def write_many_multipath_fsts(sent_dicts, key, weight_range=None, split_values=F
     '''
     Writes a list of fsts to a directory. First creates a directory by
     appending key to basepath and writes over any existing directory.
-    Then, writes a symbol file. Then, calls write_simple_fst for each 
+    Then, writes a symbol file. Then, calls write_multipath_fst for each 
     sentence. Finally creates an FST list file.
     '''
     fst_directory = os.path.join(basepath + key, 'fsts')
