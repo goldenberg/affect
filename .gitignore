@@ -1,5 +1,10 @@
 *.pyc
 ._*
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+paper.log
 .DS_Store
 /data/*
 /alm_data/consolidated-stemmed
