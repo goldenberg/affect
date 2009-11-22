@@ -1,0 +1,92 @@
+% Template for ICASSP-2009 paper; to be used with:
+%          spconf.sty  - ICASSP/ICIP LaTeX style file, and
+%          IEEEbib.bst - IEEE bibliography style file.
+% --------------------------------------------------------------------------
+\documentclass{article}
+\usepackage{spconf,amsmath,epsfig}
+
+% Example definitions.
+% --------------------
+\def\x{{\mathbf x}}
+\def\L{{\cal L}}
+
+% Title.
+% ------
+\title{AFFECT CLASSIFICATION}
+%
+% Single address.
+% ---------------
+\name{Authors\thanks{Thanks to National Science Foundation.}}
+\address{Oregon Health and Sciences University \\ Center for Spoken Language Understanding\\ 20000 N.W. Walker Road, Beaverton, Oregon 97006}
+%
+% For example:
+% ------------
+%\address{School\\
+%	Department\\
+%	Address}
+%
+% Two addresses (uncomment and modify for two-address case).
+% ----------------------------------------------------------
+%\twoauthors
+%  {A. Author-one, B. Author-two\sthanks{Thanks to XYZ agency for funding.}}
+%	{School A-B\\
+%	Department A-B\\
+%	Address A-B}
+%  {C. Author-three, D. Author-four\sthanks{The fourth author performed the work
+%	while at ...}}
+%	{School C-D\\
+%	Department C-D\\
+%	Address C-D}
+%
+\begin{document}
+%\ninept
+%
+\maketitle
+%
+\begin{abstract}
+The Social Engagement Meter is a project to determine emotion in vocal recordings of the elderly. Subjects are shown slides meant to evoke either a positive or negative emotion, and asked to describe what they see for twenty seconds. We have built a pipeline to use both acoustic mesaures and kernel-based string measures to train Support Vector Machines to classify the recordings. This presentation will cover our efforts to reproduce Cecilia Alm's text classification work and our preliminary results with the Social Engagement Meter. \cite{Alm:2002}
+\end{abstract}
+%
+\begin{keywords}
+Speech analyis, Speech processing, Pattern classification
+\end{keywords}
+%
+\section{Introduction}
+\label{sec:intro}
+
+\section{Experiment}
+
+\section{Kernel Methods}
+
+\section{Feature Extraction}
+
+The OpenKernel library can create n-gram kernels from Finite State Transducers (FSTs). We transform the text from automated speech recognition (ASR), or in the case of the storyteller data, the raw sentences into FSTs. Each arc is labelled with a word and all arcs are assigned weight 1. Word-specific features are also represented using FSTs. FSTs are also generated for the lemmatized words, and parts of speech for each word.
+
+Part-of-speech tagging is done with the NLTK default tagger and lemmatization is done with the WordNet tagger, also available in the NLTK Python package. \cite{NLTK} 
+
+After we perform lemmatization and POS tagging, we search for the word and its lemma in the Affective Norms for English Words (ANEW) and SentiWordNet datasets. The ANEW has been ``developed to provide a set of normative emotional ratings for a large number of words,'' to complement the International Affective Picture System (which were used for the Social Engagement Meter). Each word is rated according to three metrics: ``valence, ranging from pleasant to unpleasant, arousal, ranging from calm to excited and dominance'' ranging from dominated to in control. \cite{Bradley:1999} The dataset is relatively sparse, with 9303 words and all word tenses are conflated into one entry.
+
+Unlike ANEW, SentiWordNet is indexed based on WordNet synsets. Each synset $s$ has three associated metrics, $Neg(s)$, $Pos(s)$ and $Obj(s)$. Each score ranges from 0.0 to 1.0 and the three scores always sum to 1.0. \cite{Esuli} After the words have been lemmatized, we look up possible synsets in WordNet. Then we take a weighted average of the scores of all possible synsets, according to their popularity to obtain a set of scores for each word.
+
+For both ANEW and SentiWordNet, we construct FSTs with multiple parallel paths for each score. If the word or lemma is found in the dataset, we assign an arc label for each dimension (e.g. ``positive'', ``negative'' or ``dominance'') Scores are normalized to be in the range [0, 1] and assigned as arc weights. If the word is not found, a ``none'' label is used and we assign weight 0. See Figure X. 
+
+
+
+\section{Replicating Cecilia's work}
+
+\section{Applying to our data}
+
+% To start a new column (but not a new page) and help balance the last-page
+% column length use \vfill\pagebreak.
+% -------------------------------------------------------------------------
+\vfill
+\pagebreak
+
+% References should be produced using the bibtex program from suitable
+% BiBTeX files (here: strings, refs, manuals). The IEEEbib.bst bibliography
+% style file from IEEE produces unsorted bibliography list.
+% -------------------------------------------------------------------------
+\bibliographystyle{IEEEbib}
+\bibliography{../references/references}
+
+\end{document}

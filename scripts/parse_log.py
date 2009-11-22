@@ -57,6 +57,8 @@ def main():
     opt_parser.add_option("-i", "--shortip", dest="short_ip", action="store_true", default=False,
                             help="Only filter the requests based on the first three"
                             " bytes of the IP address. (XXX.XXX.XXX.YYY)")
+    opt_parser.add_option("-w", "--timewindow", action="store", type=int, default=300,
+                            help="Window for matching HTTP request to timestamp in filename in seconds. Default 300s")
     
     options, arguments = opt_parser.parse_args()
     
@@ -77,7 +79,7 @@ def main():
     else:
         classes = {}
     
-    ip_address = find_first_request(wav_time, log_file)
+    ip_address = find_first_request(wav_time, log_file, options.timewindow)
     logging.info("The IP address of interest is %s" % ip_address)
     
     if options.short_ip:
@@ -85,6 +87,7 @@ def main():
         logging.info("We will only filter for %s" % ip_address)
     
     stage_dicts = parse_entire_file(log_file, ip_address, wav_time, delays=delays, classes=classes)
+    pdb.set_trace()
     write_stage_output(stage_dicts, out_filename)
     
     if options.svm_output:
@@ -93,6 +96,8 @@ def main():
         else:
             svm_filename = os.path.splitext(wav_filename)[0] + '.svmin'
             write_svm_output(stage_dicts, wav_filename, svm_filename)
+    
+    print_summary_statistics(stage_dicts)
 
 def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True, delays={}, classes={}):
     '''
@@ -168,7 +173,8 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
     except ValueError:
         # there was a problem parsing. hopefully this line wasn't supposed to 
         # be relevant...
-        pass
+        log.warning("There was a problem parsing the last line: %s" % last_request)
+    
     start_time = final_request_dict['time'] - wav_time
     end_time = final_request_dict['time'] - wav_time + final_request_dict['duration']
     
@@ -240,6 +246,7 @@ def find_first_request(wav_time, log_file, window=300):
                 logging.warning("I found a request to index2.html, but it "
                                 "occured at %s which was outside the time window of %s"
                                 % (log_time, time_window))  
+    
     logging.error('Could not find a request to index2.html within %i seconds of %s' % (window, wav_time))
     
 def is_line_relevant(line, ip):
@@ -281,7 +288,8 @@ def parse_request(request, delays={}, date=None):
     Returns a dictionary:
     
     'name'     : the stage name. e.g. recall, slide7009, rating
-    'time'     : the client time as a datetime object. the date portion is a dummy date
+    'time'     : the client time as a datetime object. the date portion is a dummy date,
+                 because time objects are a pain to work with.
     'duration' : the stage duration (from the show_param parameter) as a timedelta object
     'rating'   : the rating parameter (as an int, if present)
     
@@ -370,6 +378,22 @@ def write_svm_output(stage_dicts, wav_filename, out_filename):
     
     f.close()
 
+def print_summary_statistics(stage_dicts):
+    '''
+    Prints summary statistics to stdout, including number of stages, time period,
+    start time.
+    '''
+    start_time = stage_dicts[0]['start_time']
+    end_time = stage_dicts[-1]['end_time']
+    duration = end_time - start_time
+    
+    slide_count = len(filter(lambda stage: stage['name'].startswith('slide'), stage_dicts))
+
+    print 'First stage start: %s\nInterview Duration: %s\n# of Slides: %i' % (
+        format_timedelta_as_time(start_time), 
+        format_timedelta_as_time(duration), slide_count)
+    
+    
 def parse_wav_timestamp(wav_filename):
     '''
     Returns a datetime object extracted from the wav filename. Should 
@@ -399,14 +423,21 @@ def format_timedelta(td):
     Formats a timedelta object as a real valued number of seconds, with three
     decimal places of precision.
     '''
-    
     return '%i.%03i' % (td.seconds, td.microseconds // 1000)
 
+def format_timedelta_as_time(td):
+    '''
+    Formats a timedelta as MM:SS:MMM.
+    '''
+    return '%i:%i.%03i' % (td.seconds // 60, td.seconds % 60, td.microseconds // 1000)
+    
 def parse_url_query(query):
     try:
         return urlparse.parse_qs(query)
     except AttributeError, e:
         # python 2.5 moved parse_qs to urlparse from cgi
+        # there's probably a clean way to check whether we're using 2.5 or 2.6
+        # but this seems to work for now.
         return cgi.parse_qs(query)
 
 def str2datetime(s):
