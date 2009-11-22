@@ -78,22 +78,14 @@ def main():
         InterviewStage.read_classes_file(options.classes_filename)
         
     all_requests = parse_file(log_filename)
+    filtered_requests = filter_requests(wav_time, all_requests, short_ip=options.short_ip)    
+    stages = construct_stages(wav_time, filtered_requests)
     
-    ip_address = find_first_request(wav_time, all_requests)
-    logging.info("The IP address of interest is %s" % ip_address)
+    pdb.set_trace()
+    #stats = format_summary_statistics(stage_dicts, ip_address)
+    #print stats
     
-    if not ip_address:
-        exit()
-    
-    if options.short_ip:
-        ip_address = ip_address[:11]
-        logging.info("We will only filter for %s" % ip_address)
-    
-    
-    stats = format_summary_statistics(stage_dicts, ip_address)
-    print stats
-    
-    write_stage_output(stage_dicts, out_filename, stats)
+    write_stage_output(stages, out_filename)
     
     if options.svm_output:
         if not options.classes_filename:
@@ -198,7 +190,6 @@ def parse_entire_file(log_file, ip_address, wav_time, use_rating_parameter=True,
     
     return output_dicts
 
-
 def parse_file(log_filename):
     '''
     Reads the entire file into a list of request objects. This function will
@@ -221,13 +212,12 @@ def find_first_request(wav_time, requests):
     wav_time should be a datetime object and window is the number of
     seconds within which to locate the request.
     
-    Returns the IP address the request originated from. Returns None if there was
-    no matching request within the time window.
+    Returns the closest_request. Returns None if there was no matching request
     ''' 
     closest_request = None
        
     for current_request in requests:
-        if current_request.url.endswith('/~zak/sesdc/index2.html'):
+        if current_request.url_components.path.endswith('/~zak/sesdc/index2.html'):
             logging.debug("I found a request to index2.html at time %s" % current_request.time)
             
             # if we haven't found a request to index2.html yet, set closest=current
@@ -244,8 +234,79 @@ def find_first_request(wav_time, requests):
         logging.info('Found a request to ~zak/sesdc/index2.html at %s, which is %s after the wav time.'
                         % (closest_request.time, closest_request.time - wav_time))
     
+    return closest_request
+    
 
-def write_stage_output(stage_dicts, out_filename, stats=None):
+def filter_requests(wav_time, requests, short_ip=False):
+    '''
+    Finds the first request and then filters the rest of the requests for 
+    only those with matching IP address and to relevant paths, etc.
+    '''
+    
+    first_request = find_first_request(wav_time, requests)
+    first_request_index = requests.index(first_request)
+    ip_address = first_request.host
+    
+    if short_ip:
+        # chop off the last component of the IP address
+        ip_address = '.'.join(ip_address.split('.')[:-1])
+    
+    filtered_requests = []
+    
+    for request in requests[first_request_index:]:
+        if request.is_request_relevant(ip_address):
+            filtered_requests.append(request)
+    
+    return filtered_requests
+
+def construct_stages(wav_time, requests):
+    '''
+    Builds a list of interview stages from the filtered HTTPRequests. 
+    '''
+    stages = []
+    
+    previous_request = requests[0]
+    previous_stage = InterviewStage(previous_request)
+    next_rating = None
+    
+    for request in requests[1:]:
+        current_stage = InterviewStage(request)
+        
+        # we only set the start_time because the duration was parsed out of the
+        # request and end_time is a computed property
+        previous_stage.start_time = current_stage.client_time - previous_stage.duration - wav_time
+        
+        if next_rating and current_stage.is_slide(): 
+            # if there's a stored rating and the currentstage is a slide
+            # use the old rating and then reset it
+            current_stage.rating = next_rating
+            next_rating = None
+        
+        if 'rating' in current_request.url_args:
+            if previous_stage.is_slide():
+                previous_stage.rating = current_request.url_args['rating'][0]
+            else:
+                # store the rating until it can be used later
+                # this needs to be done at the picRating stage
+                # otherwise, the rating gets lost
+                next_rating = previous_request.url_args['rating'][0]
+        
+        stages.append(previous_stage)
+        
+        previous_stage = current_stage
+        previous_request = request
+        
+        if current_stage.name == 'videoRecall':
+            # we've reached the end of the interview
+            # we have to assume that the request was served instantly since there will
+            # be no following stage with a start time.
+            current_stage.start_time = str2datetime(request.url_args['client_time'][0]) - wav_time
+            stages.append(current_stage)
+            break
+   
+    return stages
+
+def write_stage_output(stages, out_filename, stats=None):
     '''
     Writes a the stage dictionaries to a file, separated by newlines.
     '''
@@ -257,10 +318,10 @@ def write_stage_output(stage_dicts, out_filename, stats=None):
         for line in stats_lines:
             f.write('# %s\n' % line)
         
-    for stage in stage_dicts:
-        fields = [stage['name'], format_timedelta(stage['start_time']), format_timedelta(stage['end_time'])]
-        if 'class' in stage:
-            fields.append('%+i' % stage['class'])
+    for stage in stages:
+        fields = [stage.name, format_timedelta(stage.start_time), format_timedelta(stage.end_time)]
+        #if stage.has_rating():
+        #    fields.append('%+i' % stage.rating)
         
         f.write('%s\n' % '\t'.join(fields))
     
@@ -339,13 +400,17 @@ def format_timedelta(td):
     Formats a timedelta object as a real valued number of seconds, with three
     decimal places of precision.
     '''
-    return '%i.%03i' % (td.seconds, td.microseconds // 1000)
+    try:
+        return '%i.%03i' % (td.seconds, td.microseconds // 1000)
+    except Exception, e:
+        pdb.set_trace()
+        raise e
 
 def format_timedelta_as_time(td):
     '''
     Formats a timedelta as MM:SS.MMM.
     '''
-    return '%2i:%02i.%03i' % (td.seconds // 60, td.seconds % 60, td.microseconds // 1000)
+    return '%02i:%02i.%03i' % (td.seconds // 60, td.seconds % 60, td.microseconds // 1000)
 
 def str2datetime(s):
     # replace last colon with dot
@@ -355,7 +420,7 @@ def str2datetime(s):
     return dt.replace(microsecond=int(parts[3]))
 
 class HTTPRequest(object):
-    """Represents a single request to the server. Created from log lin"""
+    """Represents a single request to the server. Created from log line"""
     def __init__(self, line):
         super(HTTPRequest, self).__init__()
         data = apache_parser.parse(line)
@@ -386,7 +451,7 @@ class HTTPRequest(object):
             # but this seems to work for now.
             self.url_args = cgi.parse_qs(self.url.url_components.query)
     
-    def is_request_relevant(ip):
+    def is_request_relevant(self, ip):
         '''
         Determines whether the request is relevant to the interview. Should match
         the IP address, have the appropriate url arguments, and be a request
@@ -397,6 +462,7 @@ class HTTPRequest(object):
                 'show_param' in self.url_args and
                 '/~zak/sesdc/' in self.url_components.path and
                 self.host.startswith(ip) )
+    
     @property
     def page_name(self):
         '''
@@ -410,17 +476,47 @@ class InterviewStage(object):
         super(InterviewStage, self).__init__()
         
         self.set_stage_name(request.page_name)
-        self.client_time = str2datetime(request.url_args['client_time'])
+        self.client_time = str2datetime(request.url_args['client_time'][0])
         
-        if request.page_name in delays:
-            self.duration = delays[request.page_name]
+        if request.page_name in InterviewStage.delays:
+            self.duration = InterviewStage.delays[request.page_name]
         else:
             self.duration = timedelta(seconds=int(request.url_args['show_param'][0]))
         
-        if 'rating' in request.url_args:
-            self.rating = int(request.url_args['rating'][0])
+    def __repr__(self):
+        '''
+        Returns a simple representation of the interview: "slideXYZ 1:23 to 2:34 rating 4"
+        '''
+        representation = '%s %s to %s' % (self.name, format_timedelta_as_time(self.start_time),
+                                format_timedelta_as_time(self.end_time))
+        
+        if hasattr(self, 'rating'):
+            representation += ' rating %s' % self.rating
+        
+        return representation
     
-    def set_stage_name(pagename):
+    @property
+    def end_time(self):
+        '''
+        Returns start_time + duration
+        '''
+        if hasattr(self, 'duration'):
+            return self.start_time + self.duration
+        else:
+            return None
+    
+    @end_time.setter
+    def end_time(self, value):
+        """
+        Sets duration to end_time - start_time. Raises a ValueError if start_time
+        is None
+        """
+        if self.start_time:
+            self.duration = value - self.start_time
+        else:
+            raise ValueError("start_time must be set before setting end_time")
+    
+    def set_stage_name(self, pagename):
         '''
         Sets self.name from the pagename. sam1 -> picRating, sam2 -> vidRating,
         1234 -> slide1234.
@@ -435,6 +531,36 @@ class InterviewStage(object):
         else:
             self.name = 'slide' + pagename
     
+    def is_slide(self):
+        '''
+        Returns true if the name of the stage starts with 'slide'
+        '''
+        return self.name.startswith('slide')
+    
+    @property
+    def rating(self):
+        '''
+        Returns the rating
+        '''
+        return self._rating
+    
+    @rating.setter
+    def rating(self, value):
+        """Casts value to an int and sets the rating"""
+        self._rating = int(value)
+        
+        
+    def has_rating(self):
+        '''
+        True if the stage has an associated rating. False otherwise.
+        '''
+        try:
+            self._rating
+            return True
+        except AttributeError, e:
+            return False
+        
+        
     @classmethod
     def read_delays_file(cls,filename):
         '''
@@ -442,12 +568,11 @@ class InterviewStage(object):
         Returns a dictionary of timedelta objects keyed by slide names (with no 
         file extensions).
         '''
-        if not self.delays:
-            self.delays = {}
+        cls.delays = {}
         
         for line in open(filename):
             fields = line.split('\t')
-            self.delays[fields[0]] = timedelta(seconds=int(fields[1]))
+            cls.delays[fields[0]] = timedelta(seconds=int(fields[1]))
     
     @classmethod
     def read_classes_file(cls, filename):
@@ -456,12 +581,11 @@ class InterviewStage(object):
         Returns a dictionary of integers keyed by slide names (with no 
         file extensions).
         '''
-        if not self.classes:
-            self.classes = {}
+        cls.classes = {}
         
         for line in open(filename):
             fields = line.split('\t')
-            self.classes[fields[0]] = int(fields[1])
+            cls.classes[fields[0]] = int(fields[1])
     
 if __name__ == '__main__':
     main()
