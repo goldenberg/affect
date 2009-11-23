@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.6
 # encoding: utf-8
 help_message = """%prog WAV_FILENAME LOG_FILENAME [options]
 This script parses an Apache web server log for requests for the SESDC
