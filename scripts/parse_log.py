@@ -276,20 +276,20 @@ def construct_stages(wav_time, requests):
         # request and end_time is a computed property
         previous_stage.start_time = current_stage.client_time - previous_stage.duration - wav_time
         
-        if next_rating and current_stage.is_slide(): 
+        #if next_rating and current_stage.is_slide(): 
             # if there's a stored rating and the currentstage is a slide
             # use the old rating and then reset it
-            current_stage.rating = next_rating
-            next_rating = None
+        #    current_stage.rating = next_rating
+        #    next_rating = None
         
-        if 'rating' in current_request.url_args:
-            if previous_stage.is_slide():
-                previous_stage.rating = current_request.url_args['rating'][0]
-            else:
+        #if 'rating' in current_request.url_args:
+        #    if previous_stage.is_slide():
+        #        previous_stage.rating = current_request.url_args['rating'][0]
+        #    else:
                 # store the rating until it can be used later
                 # this needs to be done at the picRating stage
                 # otherwise, the rating gets lost
-                next_rating = previous_request.url_args['rating'][0]
+        #        next_rating = previous_request.url_args['rating'][0]
         
         stages.append(previous_stage)
         
